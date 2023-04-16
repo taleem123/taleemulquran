@@ -1,0 +1,13 @@
+home page in urdu completly ...
+
+coming soon label on both formats and surahs
+
+about us page in urdu
+
+download button fix
+
+redirection issue fix
+
+homepage cards to buttons ... ...
+list of audios headers set ... ...
+loader on surah List ... ...

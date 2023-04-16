@@ -1,0 +1,125 @@
+/*===================================================
+#4.2 service-section
+=====================================================*/
+
+.service-single-item {
+    box-shadow: 0px 5px 9.8px 0.2px rgb(156, 156, 156);
+    text-align:center;
+    margin: 15px;
+    padding: 20px;
+    background: #b3dbfcb3;
+}
+
+.service-single-item:hover {
+  box-shadow: 0px 5px 9.8px 0.2px rgb(93, 93, 93);
+  text-align:center;
+  margin: 15px;
+  padding: 20px;
+  background: #b0d9fa;
+}
+.service-text {
+    padding: 20px;
+}
+
+.service-text h2 {
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.service-text h2 a {
+    color: #242f6c;
+}
+
+.service-text h2 a:hover {
+    color: #029ca5;
+}
+
+.service-single-img img {
+    width: 50%;
+}
+
+.service-area-2 {
+    margin-bottom: 70px;
+}
+
+.wpo-event-area-2 {
+    background: #fff;
+    border-bottom: 1px solid #f9f9fc;
+}
+
+.urdu-font {
+  font-family: 'Noto Nastaliq Urdu', sans-serif;
+  line-height: normal;
+}
+
+.service-area-3 {
+    padding-bottom: 70px;
+}
+
+.service-area-2.s2{
+    padding-top: 100px;
+}
+
+.service-single-img img{
+  width: 100px;
+  height: 100px;
+}
+
+@media(max-width: 767px){
+    .service-text h2 {
+        font-size: 15px;
+    }
+    .service-single-item {
+      margin: 5px;
+      padding: 8px;
+    }
+    .service-area-2 {
+        margin-bottom: 50px;
+        padding: 35px;
+    }
+}
+
+@media(max-width: 580px){
+  .service-text h2 {
+      font-size: 15px;
+  }
+  .service-single-item {
+    margin: 5px;
+    padding: 8px;
+  }
+  .service-area-2 {
+      margin-bottom: 50px;
+      padding: 25px;
+  }
+}
+.coming-soon-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  text-align: right;
+}
+
+.coming-soon-ribbon span {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 100px;
+  display: block;
+  background: #8B0000;
+  background-color: rgba(139, 0, 0, 0.8);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 25px;
+  right: -25px;
+}
