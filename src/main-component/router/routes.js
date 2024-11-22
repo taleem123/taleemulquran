@@ -3,11 +3,6 @@ import {BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Homepage from '../HomePage'
 import AboutPage from '../AboutPage'
-import ServicePage from '../ServicePage'
-import ServiceSinglePage from '../ServiceSinglePage'
-import EventPage from '../EventPage'
-import EventPageSingle from '../EventPageSingle'
-import DonatePage from '../DonatePage'
 import ErrorPage from '../ErrorPage'  
 import ContactPage from '../ContactPage' 
 import AllSurahs from '../AllSurahs'
@@ -25,11 +20,6 @@ const AllRoute = () => {
             <Route exact path='/' element={<Homepage/>} />
             {/* <Route path='/home' element={<Homepage/>} /> */}
             <Route path='/about' element={<AboutPage/>} />
-            <Route path='/services' element={<ServicePage/>} />
-            <Route path='/service-single' element={<ServiceSinglePage/>} />
-            <Route path='/event' element={<EventPage/>} />
-            <Route path='/event-single' element={<EventPageSingle/>} />
-            <Route path='/donate' element={<DonatePage/>} />
             <Route path='/contact' element={<ContactPage/>} />
             <Route path='/tafseer/:format' element={<AllSurahs/>} />
             <Route path='/tafseer/:format/:surahNumber' element={<SurahDetails/>} />

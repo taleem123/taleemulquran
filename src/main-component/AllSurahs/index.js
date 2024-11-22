@@ -1,11 +1,10 @@
 import React, {Fragment} from 'react';
 import Navbar from '../../components/Navbar'
-// import PageTitle from '../../components/pagetitle'
 import SurahList from '../../components/SurahList'
 import Footer from '../../components/footer'
 import Scrollbar from '../../components/scrollbar'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 const AllSurahs =() => {
@@ -18,7 +17,6 @@ const AllSurahs =() => {
     return(
         <Fragment>
             <Navbar/>
-            {/* <PageTitle pageTitle={'Audio Tafseer'} pagesub={'Audio Tafseer'}/>  */}
             <SurahList formate={"Audio"}/>
             <Footer footerClass={'wpo-ne-footer-2'}/>
             <Scrollbar/>

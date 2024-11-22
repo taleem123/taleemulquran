@@ -17,7 +17,7 @@ import './style.css'
 
 
 const SurahDetails = () => {
-  const { format, surahNumber } = useParams();
+  const { surahNumber } = useParams();
   const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     cursor: 'pointer',
@@ -25,7 +25,7 @@ const SurahDetails = () => {
   const [surah, setSurah] = useState('');
   useEffect(() => {
     fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}`).then(resp => resp.json()).then(resp => { setSurah(resp.data) })
-  }, [])
+  }, [surahNumber])
   const dataArray = [
       {
         url: "https://archive.org/download/al-baqarah-by-sheikh-saeed/01%20Al%20Baqarah%20Ayat%2001%20to%2003.mp3",

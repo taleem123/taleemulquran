@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import erimg from '../../images/comming.jpg'
 import './style.css'
 
 const Error = (props) => {
@@ -11,7 +10,6 @@ const Error = (props) => {
                     <div className="col col-xs-12">
                         <div className="content clearfix">
                             <div className="error">
-                                {/* <img src={erimg} alt=""/> */}
                             </div>
                             <div className="error-message">
                                 <h3>Oops! Page Not Found!</h3>
