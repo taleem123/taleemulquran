@@ -9,8 +9,8 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
-import AudioPlayer from 'material-ui-audio-player';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import AudioPlayer from 'material-ui-audio-player';
+import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import './style.css'
@@ -397,7 +397,7 @@ const SurahDetails = () => {
                 <Grid style={{ marginBottom: "10px" }} item xs={12} md={8} key={key}>
                   <Item elevation={3}>
                     <div style={{ justifyContent: "center", marginBottom: "10px" }}>
-                      <AudioPlayer spacing={1} src={item.url} elevation={0} variation={'primary'} />
+                      {/* <AudioPlayer spacing={1} src={item.url} elevation={0} variation={'primary'} /> */}
                       {/* <AudioPlayer src={item.url} elevation={0} getPlayer={_getPlayer} /> */}
                     </div>
                     {/* <span style={{ float: "right", textAlign: "right" }}>

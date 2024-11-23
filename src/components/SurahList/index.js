@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Makka from '../../images/makka.png'
 import Madina from '../../images/madina.png'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const SurahList = (props) => {
   const [data, setData] = useState([]);
@@ -104,12 +104,6 @@ const SurahList = (props) => {
                   <li><Link onClick={ClickHandler} to="/404">Posters and Wallpapers</Link></li>
                 </ul>
               </div>
-              {/* <div className="widget contact-widget">
-                                <div>
-                                    <h4>Request a Call Back</h4>
-                                    <h2>(523) 456-789</h2>
-                                </div>
-                            </div> */}
             </div>
           </div>
         </div>

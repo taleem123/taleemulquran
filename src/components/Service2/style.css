@@ -3,50 +3,55 @@
 =====================================================*/
 
 .service-single-item {
-    box-shadow: 0px 5px 9.8px 0.2px rgb(156, 156, 156);
-    text-align:center;
-    margin: 15px;
-    padding: 20px;
-    background: #b3dbfcb3;
+  position: relative; /* Add relative positioning to the card */
+  box-shadow: 0px 5px 9.8px 0.2px rgb(156, 156, 156);
+  text-align: center;
+  margin: 15px;
+  padding: 20px;
+  background: #b3dbfcb3;
+  transition: all 0.3s ease-in-out;
 }
 
 .service-single-item:hover {
   box-shadow: 0px 5px 9.8px 0.2px rgb(93, 93, 93);
-  text-align:center;
-  margin: 15px;
-  padding: 20px;
   background: #b0d9fa;
+  transform: scale(1.05);
 }
+
 .service-text {
-    padding: 20px;
+  padding: 20px;
 }
 
 .service-text h2 {
-    font-size: 25px;
-    margin-top: 0;
-    margin-bottom: 0;
-    text-align: center;
+  font-size: 25px;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .service-text h2 a {
-    color: #242f6c;
+  color: #242f6c;
 }
 
 .service-text h2 a:hover {
-    color: #029ca5;
+  color: #029ca5;
 }
 
 .service-single-img img {
-    width: 50%;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .service-area-2 {
-    margin-bottom: 70px;
+  margin-bottom: 70px;
 }
 
 .wpo-event-area-2 {
-    background: #fff;
-    border-bottom: 1px solid #f9f9fc;
+  background: #fff;
+  border-bottom: 1px solid #f9f9fc;
 }
 
 .urdu-font {
@@ -55,71 +60,73 @@
 }
 
 .service-area-3 {
-    padding-bottom: 70px;
+  padding-bottom: 70px;
 }
 
-.service-area-2.s2{
-    padding-top: 100px;
+.service-area-2.s2 {
+  padding-top: 100px;
 }
 
-.service-single-img img{
-  width: 100px;
-  height: 100px;
+.coming-soon-ribbon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  background: #8B0000;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px;
+  transform: rotate(-45deg);
+  transform-origin: top left;
+  width: 120px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
 }
 
-@media(max-width: 767px){
-    .service-text h2 {
-        font-size: 15px;
-    }
-    .service-single-item {
-      margin: 5px;
-      padding: 8px;
-    }
-    .service-area-2 {
-        margin-bottom: 50px;
-        padding: 35px;
-    }
+.coming-soon-ribbon span {
+  display: block;
+  line-height: 20px;
+  text-align: center;
 }
 
-@media(max-width: 580px){
+.service-single-item.coming-soon {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+@media(max-width: 767px) {
   .service-text h2 {
-      font-size: 15px;
+    font-size: 18px;
   }
+
+  .service-single-item {
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .service-area-2 {
+    margin-bottom: 50px;
+    padding: 35px;
+  }
+}
+
+@media(max-width: 580px) {
+  .service-text h2 {
+    font-size: 15px;
+  }
+
   .service-single-item {
     margin: 5px;
     padding: 8px;
   }
-  .service-area-2 {
-      margin-bottom: 50px;
-      padding: 25px;
-  }
-}
-.coming-soon-ribbon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  overflow: hidden;
-  width: 150px;
-  height: 150px;
-  text-align: right;
-}
 
-.coming-soon-ribbon span {
-  font-size: 12px;
-  font-weight: bold;
-  color: #fff;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 20px;
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  width: 100px;
-  display: block;
-  background: #8B0000;
-  background-color: rgba(139, 0, 0, 0.8);
-  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
-  position: absolute;
-  top: 25px;
-  right: -25px;
+  .service-area-2 {
+    margin-bottom: 50px;
+    padding: 25px;
+  }
 }

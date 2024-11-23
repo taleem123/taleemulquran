@@ -104,7 +104,6 @@
 }
 
 .service-sidebar .contact-widget {
-    background: url(../../images/contact.jpg) no-repeat center center / cover;
     padding: 55px 35px;
     position: relative;
     z-index: 1;
