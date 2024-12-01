@@ -1,19 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Navbar from '../../components/Navbar'
-import PageTitle from '../../components/pagetitle'
-import Footer from '../../components/footer'
-import Scrollbar from '../../components/scrollbar'
+import Navbar from '../../components/Navbar';
+import PageTitle from '../../components/pagetitle';
+import Footer from '../../components/footer';
+import Scrollbar from '../../components/scrollbar';
 import Box from '@mui/material/Box';
-import { Grid } from '@mui/material';
+import { Grid, Modal, Typography, Button, Stack, Skeleton, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
-// import AudioPlayer from 'material-ui-audio-player';
-import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import './style.css'
 
 
 const SurahDetails = () => {
@@ -22,10 +15,13 @@ const SurahDetails = () => {
     padding: theme.spacing(2),
     cursor: 'pointer',
   }));
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentAudio, setCurrentAudio] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [surah, setSurah] = useState('');
-  useEffect(() => {
-    fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}`).then(resp => resp.json()).then(resp => { setSurah(resp.data) })
-  }, [surahNumber])
+
   const dataArray = [
     {
       url: "https://archive.org/download/al-baqarah-by-sheikh-saeed/01%20Al%20Baqarah%20Ayat%2001%20to%2003.mp3",
@@ -308,45 +304,12 @@ const SurahDetails = () => {
       detail: `Surah Bakara, Ayat 284 to 286`,
     },
   ];
-  // const _getPlayer = (player, dispatcher) => {
-  //   console.log(dispatcher.state)
-  // }
-  // pagination code block start ...
 
   const chaptersPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // Calculate the start and end indexes based on the current page number
   const startIndex = (currentPage - 1) * chaptersPerPage;
   const endIndex = startIndex + chaptersPerPage;
-
-  // Slice the data array to display the chapters for the current page
   const currentChapters = dataArray.slice(startIndex, endIndex);
 
-  // Create a button to navigate to the previous page
-  const handlePrevClick = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  const prevButton = (
-    <Button onClick={handlePrevClick} disabled={currentPage === 1} variant="outlined">Previous</Button>
-  );
-
-  // Create a button to navigate to the next page
-  const handleNextClick = () => {
-    if (currentPage < Math.ceil(dataArray.length / chaptersPerPage)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-  const nextButton = (
-    <Button onClick={handleNextClick} disabled={currentPage === Math.ceil(dataArray.length / chaptersPerPage)} variant="outlined">Next</Button>
-  );
-  // pagination code block end ...
-
-  // preloader for audios ...
-
-  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -355,80 +318,161 @@ const SurahDetails = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (surahNumber) {
+      fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}`)
+        .then((resp) => resp.json())
+        .then((resp) => {
+          setSurah(resp.data);
+        })
+        .catch((err) => console.error("Error fetching Surah data:", err));
+    }
+  }, [surahNumber]); // Dependency array includes surahNumber
+
+
+  const handleOpenModal = (audio) => {
+    setCurrentAudio(audio);
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setCurrentAudio(null);
+    setOpen(false);
+  };
+
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentPage < Math.ceil(dataArray.length / chaptersPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <Fragment>
       <Navbar />
       <PageTitle pageTitle={'تعلیم القرآن ( آڈیوٰ تفسیر )'} pagesub={'Audio Tafseer'} />
-      <Box sx={{ width: '100%' }}>
-        <Grid style={{ justifyContent: "center" }} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid style={{ marginBottom: "20px", marginTop: "20px" }} item xs={12} md={8}>
-            <span style={{ float: "right", textAlign: "right" }}>
-              <Typography component="h2" variant="h5">
-                {surah.name}
-              </Typography>
-              <Typography variant="subtitle1" >
-                Ayaat: {surah.numberOfAyahs}
-              </Typography>
-            </span>
-            <span>
-              <Typography component="h2" variant="h5">
-                {surah.englishName}
-              </Typography>
-              <Typography variant="subtitle1" >
-                {surah.englishNameTranslation}
-              </Typography>
-            </span>
-          </Grid>
+
+      <Box sx={{ width: '100%', padding: 3 }}>
+        <Grid
+          container
+          spacing={6}
+          justifyContent="center"
+          alignItems="center"
+        >
+          {isLoading ? (
+            <>
+              <Skeleton variant="text" width="80%" height={50} />
+              <Skeleton variant="text" width="60%" height={30} />
+            </>
+          ) : (
+            <>
+              <Grid item xs={12} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                <Typography variant="h5">{surah.englishName}</Typography>
+                <Typography variant="subtitle1">{surah.englishNameTranslation}</Typography>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
+                <Typography variant="h5">{surah.name}</Typography>
+                <Typography variant="subtitle1">Ayaat: {surah.numberOfAyahs}</Typography>
+              </Grid>
+            </>
+          )}
         </Grid>
       </Box>
+
+
       {isLoading ? (
-        <div className="loader">
-          <CircularProgress />
-          <Typography variant="h6">Loading...</Typography>
-        </div>
-      ) : (
-        <div></div>
-      )}
-      <Box sx={{ width: '100%' }}>
-        <Grid style={{ justifyContent: "center" }} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {currentChapters.map((item, key) => {
-            return (
-              <>
-                <Grid style={{ marginBottom: "10px" }} item xs={12} md={8} key={key}>
-                  <Item elevation={3}>
-                    <div style={{ justifyContent: "center", marginBottom: "10px" }}>
-                      {/* <AudioPlayer spacing={1} src={item.url} elevation={0} variation={'primary'} /> */}
-                      {/* <AudioPlayer src={item.url} elevation={0} getPlayer={_getPlayer} /> */}
-                    </div>
-                    {/* <span style={{ float: "right", textAlign: "right" }}>
-                      <Typography component="h4" variant="h6">
-                      سبق نمبر 1
-                      </Typography>
-                      <Typography  variant="subtitle1">
-                      سورة بكارة آية 01-03
-                      </Typography>
-                    </span> */}
-                    <span>
-                      <Typography component="h4" variant="h5">
-                        {item.title}
-                      </Typography>
-                      <Typography variant="subtitle1" >
-                        {item.detail}
-                      </Typography>
-                    </span>
-                  </Item>
-                </Grid>
-              </>
-            )
-          })}
+        <Grid container spacing={3} justifyContent="center" style={{ padding: '20px' }}>
+          {[...Array(10)].map((_, index) => (
+            <Grid item xs={12} md={8} key={index}>
+              <Skeleton variant="rectangular" height={100} />
+            </Grid>
+          ))}
         </Grid>
-        <Stack direction="row" spacing={2} style={{ padding: "30px", justifyContent: 'center' }}>
-          {prevButton} {nextButton}
-        </Stack>
-      </Box>
+      ) : (
+        <Box sx={{ width: '100%' }}>
+          <Grid container spacing={3} justifyContent="center" style={{ padding: '20px' }}>
+            {currentChapters.map((item, key) => (
+              <Grid item xs={12} md={8} key={key}>
+                <Item elevation={3} onClick={() => handleOpenModal(item)}>
+                  <Typography component="h4" variant="h5">
+                    {item.title}
+                  </Typography>
+                  <Typography variant="subtitle1">{item.detail}</Typography>
+                </Item>
+              </Grid>
+            ))}
+          </Grid>
+
+          <Stack direction="row" spacing={2} style={{ padding: '30px', justifyContent: 'center' }}>
+            <Button onClick={handlePrevClick} disabled={currentPage === 1} variant="outlined">
+              Previous
+            </Button>
+            <Button
+              onClick={handleNextClick}
+              disabled={currentPage === Math.ceil(dataArray.length / chaptersPerPage)}
+              variant="outlined"
+            >
+              Next
+            </Button>
+          </Stack>
+        </Box>
+      )}
+
+      <Modal open={open} onClose={handleCloseModal}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            width: '90%',
+            maxWidth: 600,
+            borderRadius: '8px',
+            overflow: 'hidden',
+          }}
+        >
+          {currentAudio && (
+            <>
+              <Box
+                sx={{
+                  padding: 2,
+                  borderRadius: '8px 8px 0 0',
+                }}
+              >
+                <Typography variant="h6">{currentAudio.title}</Typography>
+                <Typography variant="body2">{currentAudio.detail}</Typography>
+              </Box>
+              <Box sx={{ padding: 3 }}>
+                <audio controls autoPlay style={{ width: '100%', borderRadius: '8px' }}>
+                  <source src={currentAudio.url} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+                <Button
+                  onClick={handleCloseModal}
+                  variant="contained"
+                  color="warning"
+                  style={{ marginTop: '20px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
+                >
+                  Close
+                </Button>
+              </Box>
+            </>
+          )}
+        </Box>
+      </Modal>
+
       <Footer footerClass={'wpo-ne-footer-2'} />
       <Scrollbar />
     </Fragment>
-  )
+  );
 };
+
 export default SurahDetails;
