@@ -3,7 +3,7 @@
 =====================================================*/
 
 .service-single-item {
-  position: relative; /* Add relative positioning to the card */
+  position: relative;
   box-shadow: 0px 5px 9.8px 0.2px rgb(156, 156, 156);
   text-align: center;
   margin: 15px;
@@ -67,38 +67,43 @@
   padding-top: 100px;
 }
 
-.coming-soon-ribbon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  background: #8B0000;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 10px;
-  transform: rotate(-45deg);
-  transform-origin: top left;
-  width: 120px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+
+.ribbon-top-left {
+  top: -7px;
+  left: -7px;
 }
 
-.coming-soon-ribbon span {
+.ribbon {
+  width: 103px;
+  height: 89px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.ribbon-top-left span {
+  right: -14px;
+  top: 29px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.ribbon span {
+  position: absolute;
   display: block;
-  line-height: 20px;
+  width: 180px;
+  padding: 10px 0;
+  background-color: #3498db;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+  color: #fff;
+  font: 700 9px / 1 Lato, sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  text-transform: uppercase;
   text-align: center;
 }
 
-.service-single-item.coming-soon {
-  pointer-events: none;
-  cursor: not-allowed;
+.box {
+  position: relative;
 }
-
 @media(max-width: 767px) {
   .service-text h2 {
     font-size: 18px;

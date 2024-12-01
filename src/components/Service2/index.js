@@ -12,33 +12,6 @@ const Service2 = (props) => {
     window.scrollTo(10, 0);
   }
 
-  const formats = [
-    {
-      simg: videoImage,
-      title: "تعلیم القرآن ( ویڈیو تفسیر )",
-      link: "/coming-soon",
-      comingSoon: true
-    },
-    {
-      simg: audioImage,
-      title: "تعلیم القرآن ( آڈیوٰ تفسیر )",
-      link: "/tafseer/audios",
-      comingSoon: false
-    },
-    {
-      simg: pdfImage,
-      title: "تعلیم القرآن ( پی ڈی ایف تفسیر )",
-      link: "/coming-soon",
-      comingSoon: true
-    },
-    {
-      simg: shortVideos,
-      title: "تعلیم القرآن ( شارٹ ویڈیوز )",
-      link: "/shorts",
-      comingSoon: false
-    },
-  ];
-
   return (
     <div className={`service-area-2 ${props.serviceClass}`}>
       <div className="container">
@@ -58,36 +31,56 @@ const Service2 = (props) => {
         </div>
         <div className="service-wrap">
           <div className="row">
-            {formats.map((item, i) => (
-              <div className="col-lg-6 col-md-6 col-sm-6 custom-grid col-12" key={i}>
-                {item.comingSoon ? (
-                  <div className="service-single-item coming-soon">
-                    <div className="coming-soon-ribbon"><span>Coming Soon</span></div>
-                    <div className="service-single-img">
-                      <img src={item.simg} alt={item.title} />
-                    </div>
-                    <div className="service-text urdu-font">
-                      <h2>{item.title}</h2>
-                    </div>
+            <div className="col-lg-6 col-md-6 col-sm-6 custom-grid mb-2 col-12">
+              <Link onClick={ClickHandler} to="/tafseer/audios">
+                <div className="service-single-item">
+                  <div className="service-single-img">
+                    <img src={audioImage} alt=" پی ڈی ایف تفسیر " />
                   </div>
-                ) : (
-                  <Link onClick={ClickHandler} to={item.link}>
-                    <div className="service-single-item">
-                      <div className="service-single-img">
-                        <img src={item.simg} alt={item.title} />
-                      </div>
-                      <div className="service-text urdu-font">
-                        <h2>{item.title}</h2>
-                      </div>
-                    </div>
-                  </Link>
-                )}
+                  <div className="service-text urdu-font">
+                    <h2> تعلیم القرآن ( آڈیوٰ تفسیر )</h2>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className="col-lg-6 col-md-6 col-sm-6 custom-grid mb-2 col-12">
+              <Link onClick={ClickHandler} to="/tafseer/audios">
+                <div className="service-single-item">
+                  <div className="service-single-img">
+                    <img src={shortVideos} alt=" پی ڈی ایف تفسیر " />
+                  </div>
+                  <div className="service-text urdu-font">
+                    <h2> تعلیم القرآن ( شارٹ ویڈیوز )</h2>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className="col-lg-6 col-md-6 col-sm-6 custom-grid mb-2 col-12">
+              <div className="service-single-item box">
+                <div className="ribbon ribbon-top-left"><span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Coming Soon</span></div>
+                <div className="service-single-img">
+                  <img src={pdfImage} alt=" پی ڈی ایف تفسیر " />
+                </div>
+                <div className="service-text urdu-font">
+                  <h2>تعلیم القرآن ( پی ڈی ایف تفسیر )</h2>
+                </div>
               </div>
-            ))}
+            </div>
+            <div className="col-lg-6 col-md-6 col-sm-6 custom-grid mb-2 col-12">
+              <div className="service-single-item box">
+                <div className="ribbon ribbon-top-left"><span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Coming Soon</span></div>
+                <div className="service-single-img">
+                  <img src={videoImage} alt=" ویڈیو تفسیر " />
+                </div>
+                <div className="service-text urdu-font">
+                  <h2>تعلیم القرآن ( ویڈیو تفسیر )</h2>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
