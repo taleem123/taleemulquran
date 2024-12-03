@@ -44,7 +44,7 @@ const Service2 = (props) => {
               </Link>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 custom-grid mb-2 col-12">
-              <Link onClick={ClickHandler} to="/tafseer/audios">
+              <Link onClick={ClickHandler} to="/tafseer/shortvideos">
                 <div className="service-single-item">
                   <div className="service-single-img">
                     <img src={shortVideos} alt=" پی ڈی ایف تفسیر " />
