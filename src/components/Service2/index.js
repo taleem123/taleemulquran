@@ -44,8 +44,9 @@ const Service2 = (props) => {
               </Link>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 custom-grid mb-2 col-12">
-              <Link onClick={ClickHandler} to="/tafseer/shortvideos">
+              {/* <Link onClick={ClickHandler} to="/tafseer/shortvideos"> */}
                 <div className="service-single-item">
+                <div className="ribbon ribbon-top-left"><span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Coming Soon</span></div>
                   <div className="service-single-img">
                     <img src={shortVideos} alt=" پی ڈی ایف تفسیر " />
                   </div>
@@ -53,7 +54,7 @@ const Service2 = (props) => {
                     <h2> تعلیم القرآن ( شارٹ ویڈیوز )</h2>
                   </div>
                 </div>
-              </Link>
+              {/* </Link> */}
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 custom-grid mb-2 col-12">
               <div className="service-single-item box">
