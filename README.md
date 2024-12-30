@@ -2,8 +2,8 @@
 ### Setup:
 
 Following versions of node and npm were installed during development:
-### `node: v14.17.3`
-### `npm: 8.5.5`
+### `node: v20.18.1`
+### `npm: 10.8.2`
 
 ## Trial License Key for Islamic Calander:
 ### `ORg4AjUWIQA/Gnt2VVhhQlFac1pJWnxLeEx0RWFbb19xflVGal1VVAciSV9jS3xTcEdlWH5ecXVUQmZdVQ==`
