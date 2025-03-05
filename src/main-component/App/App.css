@@ -98,7 +98,7 @@ ul {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     -o-transition: all 0.2s;

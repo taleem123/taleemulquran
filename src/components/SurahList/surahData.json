@@ -1,5 +1,5 @@
 [
-    {
+      {
         "number": 1,
         "name": "سُورَةُ ٱلْفَاتِحَةِ",
         "englishName": "Al-Faatiha",
@@ -15,7 +15,7 @@
         "englishNameTranslation": "The Cow",
         "numberOfAyahs": 286,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-baqrah-tafseer-taleem"
     },
     {
         "number": 3,
@@ -24,7 +24,7 @@
         "englishNameTranslation": "The Family of Imraan",
         "numberOfAyahs": 200,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-imran-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 4,
@@ -42,7 +42,7 @@
         "englishNameTranslation": "The Table",
         "numberOfAyahs": 120,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-maidah-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 6,
@@ -51,7 +51,7 @@
         "englishNameTranslation": "The Cattle",
         "numberOfAyahs": 165,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-anaam-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 7,
@@ -87,7 +87,7 @@
         "englishNameTranslation": "Jonas",
         "numberOfAyahs": 109,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-yunus-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 11,
@@ -96,7 +96,7 @@
         "englishNameTranslation": "Hud",
         "numberOfAyahs": 123,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-hud-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 12,
@@ -105,7 +105,7 @@
         "englishNameTranslation": "Joseph",
         "numberOfAyahs": 111,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-yousuf-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 13,
@@ -123,7 +123,7 @@
         "englishNameTranslation": "Abraham",
         "numberOfAyahs": 52,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ibrahim-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 15,
@@ -132,7 +132,7 @@
         "englishNameTranslation": "The Rock",
         "numberOfAyahs": 99,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-hijr-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 16,
@@ -150,7 +150,7 @@
         "englishNameTranslation": "The Night Journey",
         "numberOfAyahs": 111,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-isra-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 18,
@@ -159,7 +159,7 @@
         "englishNameTranslation": "The Cave",
         "numberOfAyahs": 110,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-kahf-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 19,
@@ -177,7 +177,7 @@
         "englishNameTranslation": "Taa-Haa",
         "numberOfAyahs": 135,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-taha-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 21,
@@ -186,7 +186,7 @@
         "englishNameTranslation": "The Prophets",
         "numberOfAyahs": 112,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-anbiya-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 22,
@@ -195,7 +195,7 @@
         "englishNameTranslation": "The Pilgrimage",
         "numberOfAyahs": 78,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-hajj-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 23,
@@ -204,7 +204,7 @@
         "englishNameTranslation": "The Believers",
         "numberOfAyahs": 118,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-muminoon-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 24,
@@ -213,7 +213,7 @@
         "englishNameTranslation": "The Light",
         "numberOfAyahs": 64,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nur-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 25,
@@ -222,7 +222,7 @@
         "englishNameTranslation": "The Criterion",
         "numberOfAyahs": 77,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-furqan-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 26,
@@ -231,7 +231,7 @@
         "englishNameTranslation": "The Poets",
         "numberOfAyahs": 227,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ash-shuara-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 27,
@@ -240,7 +240,7 @@
         "englishNameTranslation": "The Ant",
         "numberOfAyahs": 93,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nam-taleem-ul-quran-by-sheikh"
     },
     {
         "number": 28,
@@ -249,7 +249,7 @@
         "englishNameTranslation": "The Stories",
         "numberOfAyahs": 88,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-qasas-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 29,
@@ -258,7 +258,7 @@
         "englishNameTranslation": "The Spider",
         "numberOfAyahs": 69,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-ankabut"
     },
     {
         "number": 30,
@@ -267,7 +267,7 @@
         "englishNameTranslation": "The Romans",
         "numberOfAyahs": 60,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ar-room"
     },
     {
         "number": 31,
@@ -276,7 +276,7 @@
         "englishNameTranslation": "Luqman",
         "numberOfAyahs": 34,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-luqman"
     },
     {
         "number": 32,
@@ -285,7 +285,7 @@
         "englishNameTranslation": "The Prostration",
         "numberOfAyahs": 30,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-as-sajda"
     },
     {
         "number": 33,
@@ -294,7 +294,7 @@
         "englishNameTranslation": "The Clans",
         "numberOfAyahs": 73,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-ahzab"
     },
     {
         "number": 34,
@@ -303,7 +303,7 @@
         "englishNameTranslation": "Sheba",
         "numberOfAyahs": 54,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-saba"
     },
     {
         "number": 35,
@@ -312,7 +312,7 @@
         "englishNameTranslation": "The Originator",
         "numberOfAyahs": 45,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-fatir"
     },
     {
         "number": 36,
@@ -321,7 +321,7 @@
         "englishNameTranslation": "Yaseen",
         "numberOfAyahs": 83,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-yaseen-1"
     },
     {
         "number": 37,
@@ -330,7 +330,7 @@
         "englishNameTranslation": "Those drawn up in Ranks",
         "numberOfAyahs": 182,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-037-as-saffat"
     },
     {
         "number": 38,
@@ -339,7 +339,7 @@
         "englishNameTranslation": "The letter Saad",
         "numberOfAyahs": 88,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-sad"
     },
     {
         "number": 39,
@@ -348,7 +348,7 @@
         "englishNameTranslation": "The Groups",
         "numberOfAyahs": 75,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-az-zumar"
     },
     {
         "number": 40,
@@ -357,7 +357,7 @@
         "englishNameTranslation": "The Forgiver",
         "numberOfAyahs": 85,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ghafiral-mumin"
     },
     {
         "number": 41,
@@ -366,7 +366,7 @@
         "englishNameTranslation": "Explained in detail",
         "numberOfAyahs": 54,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/041-surah-hameem-as-sajdah"
     },
     {
         "number": 42,
@@ -375,7 +375,7 @@
         "englishNameTranslation": "Consultation",
         "numberOfAyahs": 53,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ash-shuara"
     },
     {
         "number": 43,
@@ -384,7 +384,7 @@
         "englishNameTranslation": "Ornaments of gold",
         "numberOfAyahs": 89,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-az-zukhruf"
     },
     {
         "number": 44,
@@ -393,7 +393,7 @@
         "englishNameTranslation": "The Smoke",
         "numberOfAyahs": 59,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ad-dukhan"
     },
     {
         "number": 45,
@@ -402,7 +402,7 @@
         "englishNameTranslation": "Crouching",
         "numberOfAyahs": 37,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/al-jathiya"
     },
     {
         "number": 46,
@@ -411,7 +411,7 @@
         "englishNameTranslation": "The Dunes",
         "numberOfAyahs": 35,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-ahqaf-tafseer-taleem"
     },
     {
         "number": 47,
@@ -420,7 +420,7 @@
         "englishNameTranslation": "Muhammad",
         "numberOfAyahs": 38,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-muhammad-tafseer-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 48,
@@ -429,7 +429,7 @@
         "englishNameTranslation": "The Victory",
         "numberOfAyahs": 29,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-fatah-tafseer-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 49,
@@ -438,7 +438,7 @@
         "englishNameTranslation": "The Inner Apartments",
         "numberOfAyahs": 18,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-hujurat-tafseer-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 50,
@@ -447,7 +447,7 @@
         "englishNameTranslation": "The letter Qaaf",
         "numberOfAyahs": 45,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-qaf-tafseer-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 51,
@@ -456,7 +456,7 @@
         "englishNameTranslation": "The Winnowing Winds",
         "numberOfAyahs": 60,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-adh-dhariyat-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 52,
@@ -465,7 +465,7 @@
         "englishNameTranslation": "The Mount",
         "numberOfAyahs": 49,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-at-tur-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 53,
@@ -474,7 +474,7 @@
         "englishNameTranslation": "The Star",
         "numberOfAyahs": 62,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-najm-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 54,
@@ -492,7 +492,7 @@
         "englishNameTranslation": "The Beneficent",
         "numberOfAyahs": 78,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-rehman-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 56,
@@ -501,7 +501,7 @@
         "englishNameTranslation": "The Inevitable",
         "numberOfAyahs": 96,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-waqiah-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 57,
@@ -510,7 +510,7 @@
         "englishNameTranslation": "The Iron",
         "numberOfAyahs": 29,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-hadid-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 58,
@@ -519,7 +519,7 @@
         "englishNameTranslation": "The Pleading Woman",
         "numberOfAyahs": 22,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-mujadila-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 59,
@@ -528,7 +528,7 @@
         "englishNameTranslation": "The Exile",
         "numberOfAyahs": 24,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-hashr-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 60,
@@ -537,7 +537,7 @@
         "englishNameTranslation": "She that is to be examined",
         "numberOfAyahs": 13,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-mumtahina-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 61,
@@ -546,7 +546,7 @@
         "englishNameTranslation": "The Ranks",
         "numberOfAyahs": 14,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-saf-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 62,
@@ -555,7 +555,7 @@
         "englishNameTranslation": "Friday",
         "numberOfAyahs": 11,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/taleem-ul-quran-by-sheikh"
     },
     {
         "number": 63,
@@ -564,7 +564,7 @@
         "englishNameTranslation": "The Hypocrites",
         "numberOfAyahs": 11,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-munafiqun-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 64,
@@ -573,7 +573,7 @@
         "englishNameTranslation": "Mutual Disillusion",
         "numberOfAyahs": 18,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-taghabun-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 65,
@@ -582,7 +582,7 @@
         "englishNameTranslation": "Divorce",
         "numberOfAyahs": 12,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-talaq-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 66,
@@ -591,7 +591,7 @@
         "englishNameTranslation": "The Prohibition",
         "numberOfAyahs": 12,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-tahrim-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 67,
@@ -600,7 +600,7 @@
         "englishNameTranslation": "The Sovereignty",
         "numberOfAyahs": 30,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-mulk-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 68,
@@ -609,7 +609,7 @@
         "englishNameTranslation": "The Pen",
         "numberOfAyahs": 52,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-qalam-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 69,
@@ -618,7 +618,7 @@
         "englishNameTranslation": "The Reality",
         "numberOfAyahs": 52,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-haqqah-taleem-ul"
     },
     {
         "number": 70,
@@ -627,7 +627,7 @@
         "englishNameTranslation": "The Ascending Stairways",
         "numberOfAyahs": 44,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-maarij-taleem-ul"
     },
     {
         "number": 71,
@@ -636,7 +636,7 @@
         "englishNameTranslation": "Noah",
         "numberOfAyahs": 28,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-nooh-taleem-ul-quran"
     },
     {
         "number": 72,
@@ -645,7 +645,7 @@
         "englishNameTranslation": "The Jinn",
         "numberOfAyahs": 28,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-jin-taleem-ul-quran"
     },
     {
         "number": 73,
@@ -654,7 +654,7 @@
         "englishNameTranslation": "The Enshrouded One",
         "numberOfAyahs": 20,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-muzzammil-taleem-ul"
     },
     {
         "number": 74,
@@ -663,7 +663,7 @@
         "englishNameTranslation": "The Cloaked One",
         "numberOfAyahs": 56,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-muddaththir-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 75,
@@ -672,7 +672,7 @@
         "englishNameTranslation": "The Resurrection",
         "numberOfAyahs": 40,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-qiyamah-taleem-ul"
     },
     {
         "number": 76,
@@ -681,7 +681,7 @@
         "englishNameTranslation": "Man",
         "numberOfAyahs": 31,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-insnan-taleem-ul-quran-by-sheikh-saeed"
     },
     {
         "number": 77,
@@ -690,7 +690,7 @@
         "englishNameTranslation": "The Emissaries",
         "numberOfAyahs": 50,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-mursalat-taleem-ul-2"
     },
     {
         "number": 78,
@@ -699,7 +699,7 @@
         "englishNameTranslation": "The Announcement",
         "numberOfAyahs": 40,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-al-naba-taleem-ul-quran"
     },
     {
         "number": 79,
@@ -708,7 +708,7 @@
         "englishNameTranslation": "Those who drag forth",
         "numberOfAyahs": 46,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-naziaat-taleem-ul"
     },
     {
         "number": 80,
@@ -717,7 +717,7 @@
         "englishNameTranslation": "He frowned",
         "numberOfAyahs": 42,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-abasa-taleem-ul-quran-by"
     },
     {
         "number": 81,
@@ -726,7 +726,7 @@
         "englishNameTranslation": "The Overthrowing",
         "numberOfAyahs": 29,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-takwir-taleem-ul-quran"
     },
     {
         "number": 82,
@@ -735,7 +735,7 @@
         "englishNameTranslation": "The Cleaving",
         "numberOfAyahs": 19,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-infitar-taleem-ul-quran"
     },
     {
         "number": 83,
@@ -744,7 +744,7 @@
         "englishNameTranslation": "Defrauding",
         "numberOfAyahs": 36,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-mutaffifin-taleem-ul"
     },
     {
         "number": 84,
@@ -753,7 +753,7 @@
         "englishNameTranslation": "The Splitting Open",
         "numberOfAyahs": 25,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-inshiqaq-taleem-ul-quran"
     },
     {
         "number": 85,
@@ -762,7 +762,7 @@
         "englishNameTranslation": "The Constellations",
         "numberOfAyahs": 22,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-buruj-taleem-ul-quran-by"
     },
     {
         "number": 86,
@@ -771,7 +771,7 @@
         "englishNameTranslation": "The Morning Star",
         "numberOfAyahs": 17,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-tariq-taleem-ul-quran-by"
     },
     {
         "number": 87,
@@ -780,7 +780,7 @@
         "englishNameTranslation": "The Most High",
         "numberOfAyahs": 19,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-alaa-taleem-ul-quran-by"
     },
     {
         "number": 88,
@@ -789,7 +789,7 @@
         "englishNameTranslation": "The Overwhelming",
         "numberOfAyahs": 26,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ghashiya-taleem-ul-quran"
     },
     {
         "number": 89,
@@ -798,7 +798,7 @@
         "englishNameTranslation": "The Dawn",
         "numberOfAyahs": 30,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-fajar-taleem-ul-quran-by"
     },
     {
         "number": 90,
@@ -807,7 +807,7 @@
         "englishNameTranslation": "The City",
         "numberOfAyahs": 20,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-balad-taleem-ul-quran-by"
     },
     {
         "number": 91,
@@ -816,7 +816,7 @@
         "englishNameTranslation": "The Sun",
         "numberOfAyahs": 15,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-shams-taleem-ul-quran-1"
     },
     {
         "number": 92,
@@ -825,7 +825,7 @@
         "englishNameTranslation": "The Night",
         "numberOfAyahs": 21,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-lail-taleem-ul-quran-by"
     },
     {
         "number": 93,
@@ -834,7 +834,7 @@
         "englishNameTranslation": "The Morning Hours",
         "numberOfAyahs": 11,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-duhaa-taleem-ul-quran-by"
     },
     {
         "number": 94,
@@ -843,7 +843,7 @@
         "englishNameTranslation": "The Consolation",
         "numberOfAyahs": 8,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-sharah-taleem-ul-quran"
     },
     {
         "number": 95,
@@ -852,7 +852,7 @@
         "englishNameTranslation": "The Fig",
         "numberOfAyahs": 8,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-tin-taleem-ul-quran-by"
     },
     {
         "number": 96,
@@ -861,7 +861,7 @@
         "englishNameTranslation": "The Clot",
         "numberOfAyahs": 19,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-alaq-taleem-ul-quran-by"
     },
     {
         "number": 97,
@@ -870,7 +870,7 @@
         "englishNameTranslation": "The Power, Fate",
         "numberOfAyahs": 5,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-qadr-taleem-ul-quran-by"
     },
     {
         "number": 98,
@@ -879,7 +879,7 @@
         "englishNameTranslation": "The Evidence",
         "numberOfAyahs": 8,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-bayyinah-taleem-ul-quran"
     },
     {
         "number": 99,
@@ -888,7 +888,7 @@
         "englishNameTranslation": "The Earthquake",
         "numberOfAyahs": 8,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-zalzala-taleem-ul-quran"
     },
     {
         "number": 100,
@@ -897,7 +897,7 @@
         "englishNameTranslation": "The Chargers",
         "numberOfAyahs": 11,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-aadiyat-taleem-ul-quran"
     },
     {
         "number": 101,
@@ -906,7 +906,7 @@
         "englishNameTranslation": "The Calamity",
         "numberOfAyahs": 11,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-qaaria-taleem-ul-quran"
     },
     {
         "number": 102,
@@ -915,7 +915,7 @@
         "englishNameTranslation": "Competition",
         "numberOfAyahs": 8,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-takathur-taleem-ul-quran"
     },
     {
         "number": 103,
@@ -924,7 +924,7 @@
         "englishNameTranslation": "The Declining Day, Epoch",
         "numberOfAyahs": 3,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-asr-taleem-ul-quran-by"
     },
     {
         "number": 104,
@@ -933,7 +933,7 @@
         "englishNameTranslation": "The Traducer",
         "numberOfAyahs": 9,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-humaza-taleem-ul-quran"
     },
     {
         "number": 105,
@@ -942,7 +942,7 @@
         "englishNameTranslation": "The Elephant",
         "numberOfAyahs": 5,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-fil-taleem-ul-quran-by"
     },
     {
         "number": 106,
@@ -951,7 +951,7 @@
         "englishNameTranslation": "Quraysh",
         "numberOfAyahs": 4,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-quraysh-taleem-ul-quran"
     },
     {
         "number": 107,
@@ -960,7 +960,7 @@
         "englishNameTranslation": "Almsgiving",
         "numberOfAyahs": 7,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-maun-taleem-ul-quran-by"
     },
     {
         "number": 108,
@@ -969,7 +969,7 @@
         "englishNameTranslation": "Abundance",
         "numberOfAyahs": 3,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-kawthar-taleem-ul-quran"
     },
     {
         "number": 109,
@@ -978,7 +978,7 @@
         "englishNameTranslation": "The Disbelievers",
         "numberOfAyahs": 6,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-kafirun-taleem-ul-quran"
     },
     {
         "number": 110,
@@ -987,7 +987,7 @@
         "englishNameTranslation": "Divine Support",
         "numberOfAyahs": 3,
         "revelationType": "Medinan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-nasar-taleem-ul-quran-by"
     },
     {
         "number": 111,
@@ -996,7 +996,7 @@
         "englishNameTranslation": "The Palm Fibre",
         "numberOfAyahs": 5,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-masad-taleem-ul-quran-by"
     },
     {
         "number": 112,
@@ -1005,7 +1005,7 @@
         "englishNameTranslation": "Sincerity",
         "numberOfAyahs": 4,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-ikhlas-taleem-ul-quran"
     },
     {
         "number": 113,
@@ -1014,7 +1014,7 @@
         "englishNameTranslation": "The Dawn",
         "numberOfAyahs": 5,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-falaq-taleem-ul-quran-by"
     },
     {
         "number": 114,
@@ -1023,6 +1023,6 @@
         "englishNameTranslation": "Mankind",
         "numberOfAyahs": 6,
         "revelationType": "Meccan",
-        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-an-nahl-taleem-ul-quran-by-sheikh"
+        "playlistUrl": "https://soundcloud.com/taleemquranpk/sets/surah-naas-taleem-ul-quran-by"
     }
 ]

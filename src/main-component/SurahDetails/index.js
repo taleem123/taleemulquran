@@ -5,30 +5,40 @@ import PageTitle from '../../components/pagetitle';
 import Footer from '../../components/footer';
 import Scrollbar from '../../components/scrollbar';
 import Box from '@mui/material/Box';
-import { Grid, Typography } from '@mui/material';
+import './style.css';
+import { Grid2, Typography } from '@mui/material';
 
 const SurahDetails = () => {
   const location = useLocation();
   const { surah } = location.state; // Get Surah data from location state
 
-  const SoundCloudPlaylist = ({ playlistUrl }) => {
+  if (!surah) {
     return (
-      <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+      <Typography variant="h6" color="error">
+        Surah data is not available. Please try again.
+      </Typography>
+    );
+  }
+
+  const SoundCloudPlaylist = ({ playlistUrl }) => {
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    return (
+      <div className="soundcloud-container">
+        {isLoading && (
+          <Typography variant="body2" color="textSecondary">
+            Loading playlist...
+          </Typography>
+        )}
         <iframe
+          className="soundcloud-iframe"
           src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(
             playlistUrl
-          )}&color=%23222&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false`}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            borderRadius: '10px',
-          }}
-          frameBorder="no"
+          )}&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false`}
           allow="autoplay"
-          title="SoundCloud Playlist"
+          title={`Playlist for ${surah.englishName}`}
+          aria-label={`Audio playlist for Surah ${surah.englishName}`}
+          onLoad={() => setIsLoading(false)}
         ></iframe>
       </div>
     );
@@ -40,16 +50,16 @@ const SurahDetails = () => {
       <Navbar />
       <PageTitle pageTitle="تعلیم القرآن ( آڈیوٰ تفسیر )" pagesub="Audio Tafseer" />
       <Box sx={{ width: '100%', padding: 3 }}>
-        <Grid container spacing={6} justifyContent="center" alignItems="center">
-          <Grid item xs={12} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+        <Grid2 container spacing={6} justifyContent="center" alignItems="center">
+          <Grid2 item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
             <Typography variant="h5">{surah.englishName}</Typography>
             <Typography variant="subtitle1">{surah.englishNameTranslation}</Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
+          </Grid2>
+          <Grid2 item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
             <Typography variant="h5">{surah.name}</Typography>
             <Typography variant="subtitle1">Total Ayaat: {surah.numberOfAyahs}</Typography>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Box>
       <Box sx={{ width: '100%' }}>
         <SoundCloudPlaylist playlistUrl={surah.playlistUrl} />
