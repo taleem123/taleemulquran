@@ -31,10 +31,10 @@ const SurahDetails = () => {
           </Typography>
         )}
         <iframe
-          className="soundcloud-iframe"
+          className="soundcloud-iframe" 
           src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(
             playlistUrl
-          )}&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false`}
+          )}&auto_play=false&allowfullscreen=true&download=true&sharing=false&buying=false&frameborder=no&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&allowtransparency=true&color=%230066cc&show_teaser=false&show_artwork=true&s=small&show_playcount=false&show_user=false`} 
           allow="autoplay"
           title={`Playlist for ${surah.englishName}`}
           aria-label={`Audio playlist for Surah ${surah.englishName}`}
@@ -64,7 +64,7 @@ const SurahDetails = () => {
       <Box sx={{ width: '100%' }}>
         <SoundCloudPlaylist playlistUrl={surah.playlistUrl} />
       </Box>
-      <Footer footerClass="wpo-ne-footer-2" />
+      {/* <Footer footerClass="wpo-ne-footer-2" /> */}
       <Scrollbar />
     </Fragment>
   );
