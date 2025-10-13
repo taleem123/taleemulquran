@@ -2,35 +2,7 @@
 
 .recent-videos-section {
   padding: 100px 0;
-  background: linear-gradient(135deg, #fff5e6 0%, #f8f9fa 50%, #e0f7ff 100%);
-  background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
   position: relative;
-  overflow: hidden;
-}
-
-.recent-videos-section::before {
-  content: '';
-  position: absolute;
-  top: -150px;
-  right: -150px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 193, 7, 0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float 9s ease-in-out infinite;
-}
-
-.recent-videos-section::after {
-  content: '';
-  position: absolute;
-  bottom: -200px;
-  left: -100px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 167, 213, 0.05) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float 11s ease-in-out infinite reverse;
 }
 
 .recent-videos-section .container {

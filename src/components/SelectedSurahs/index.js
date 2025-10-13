@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Card, 
@@ -10,9 +10,10 @@ import surahData from '../SurahList/surahData.json';
 import Madina from '../../images/madina.png';
 import Makka from '../../images/makka.png';
 import SectionHeader from '../SectionHeader';
+import AnimatedBackground from '../AnimatedBackground';
 import './style.css';
 
-const SelectedSurahs = () => {
+const SelectedSurahs = memo(() => {
   const navigate = useNavigate();
 
   // Select 6 audio surahs as requested
@@ -88,37 +89,41 @@ const SelectedSurahs = () => {
   };
 
   return (
-    <section className="selected-surahs-section">
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <SectionHeader 
-              title="آڈیو تفسیر"
-              subtitle="تعلیم القرآن کی مکمل سورتوں کو تفسیر سنیں"
-            />
+    <AnimatedBackground variant="default" particleCount={0} enableParticles={false}>
+      <section className="selected-surahs-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <SectionHeader 
+                title="آڈیو تفسیر"
+                subtitle="تعلیم القرآن کی مکمل سورتوں کو تفسیر سنیں"
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="surahs-grid">
-          <div className="surahs-grid-container">
-            {selectedSurahs.map((surah) => (
-              <SurahTile key={surah.number} surah={surah} />
-            ))}
+          <div className="surahs-grid">
+            <div className="surahs-grid-container">
+              {selectedSurahs.map((surah) => (
+                <SurahTile key={surah.number} surah={surah} />
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* View All Button */}
-        <Box sx={{ textAlign: 'center', mt: 4 }}>
-          <button
-            className="view-all-btn"
-            onClick={() => navigate('/tafseer/audios')}
-          >
-            تمام سورتیں دیکھیں
-          </button>
-        </Box>
-      </div>
-    </section>
+          {/* View All Button */}
+          <Box sx={{ textAlign: 'center', mt: 4 }}>
+            <button
+              className="view-all-btn"
+              onClick={() => navigate('/tafseer/audios')}
+            >
+              تمام سورتیں دیکھیں
+            </button>
+          </Box>
+        </div>
+      </section>
+    </AnimatedBackground>
   );
-};
+});
+
+SelectedSurahs.displayName = 'SelectedSurahs';
 
 export default SelectedSurahs;

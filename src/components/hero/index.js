@@ -1,9 +1,11 @@
 import React from 'react'
+import AnimatedBackground from '../AnimatedBackground'
 import './style.css'
 
 const Hero = (props) => {
 
     return(
+        <AnimatedBackground variant="hero" particleCount={12} enableParticles={true}>
         <section  className={`hero ${props.HeroStyleClass}`}>
             <div className="hero-slider">
                 <div className="slide">
@@ -39,6 +41,7 @@ const Hero = (props) => {
                 </div>
             </div>
         </section>
+        </AnimatedBackground>
     )
 }
 

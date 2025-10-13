@@ -1,0 +1,161 @@
+/* Optimized Animated Background */
+.animated-background {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  will-change: background-position; /* GPU acceleration hint */
+}
+
+.particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.6; /* More subtle */
+}
+
+.animated-background__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Optimized Gradients - Static on most sections */
+.animated-background--default {
+  background: linear-gradient(135deg, #e0f7ff 0%, #f8f9fa 50%, #fff5e6 100%);
+}
+
+.animated-background--primary {
+  background: linear-gradient(135deg, #00a7d5 0%, #00ded8 50%, #0088b3 100%);
+}
+
+.animated-background--purple {
+  background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 50%, #ffe6f0 100%);
+}
+
+.animated-background--warm {
+  background: linear-gradient(135deg, #fff5e6 0%, #f8f9fa 50%, #ffe6e6 100%);
+}
+
+.animated-background--cool {
+  background: linear-gradient(135deg, #e6fff9 0%, #f8f9fa 50%, #e6f2ff 100%);
+}
+
+.animated-background--dark {
+  background: linear-gradient(135deg, #1a365d 0%, #2d5a87 50%, #00a7d5 100%);
+}
+
+.animated-background--light {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f0f0f0 100%);
+}
+
+.animated-background--surah {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f8f9fa 50%, #e3f2fd 100%);
+}
+
+/* Animated gradient only for hero section */
+.animated-background--hero {
+  background: linear-gradient(135deg, #e0f7ff 0%, #f8f9fa 50%, #fff5e6 100%);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+}
+
+/* Floating orbs - optimized and subtle */
+.animated-background--hero::before,
+.animated-background--hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.animated-background--hero::before {
+  top: -100px;
+  left: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 167, 213, 0.06) 0%, transparent 70%);
+  animation: float 12s ease-in-out infinite;
+}
+
+.animated-background--hero::after {
+  bottom: -100px;
+  right: -100px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(0, 222, 216, 0.05) 0%, transparent 70%);
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+/* Gradient animation keyframe */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  75% {
+    transform: translateY(10px) translateX(-10px);
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .animated-background {
+    animation: none !important;
+    background-size: 100% 100% !important;
+  }
+  
+  .animated-background::before,
+  .animated-background::after {
+    animation: none !important;
+  }
+  
+  .particles-canvas {
+    display: none !important;
+  }
+}
+
+/* Mobile optimizations - no animations */
+@media (max-width: 768px) {
+  .animated-background {
+    animation: none;
+    background-size: 100% 100%;
+  }
+  
+  .animated-background::before,
+  .animated-background::after {
+    display: none;
+  }
+  
+  .particles-canvas {
+    display: none;
+  }
+}
+
+/* Tablet - reduced animations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .animated-background::before,
+  .animated-background::after {
+    width: 200px;
+    height: 200px;
+  }
+}

@@ -19,6 +19,7 @@ import {
 import UniversalVideoPlayer from '../../design-system/components/UniversalVideoPlayer';
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../SectionHeader';
+import AnimatedBackground from '../AnimatedBackground';
 import './style.css';
 
 const SelectedLessons = () => {
@@ -264,8 +265,9 @@ const SelectedLessons = () => {
   );
 
   return (
-    <section className="selected-lessons-section section-padding">
-      <div className="container">
+    <AnimatedBackground variant="purple" particleCount={0} enableParticles={false}>
+      <section className="selected-lessons-section section-padding">
+        <div className="container">
         <SectionHeader 
           title="منتخب اسباق"
           subtitle="تعلیم القرآن کی تفصیلی تفسیر کے اسباق اور طویل لیکچرز"
@@ -301,6 +303,7 @@ const SelectedLessons = () => {
         />
       )}
     </section>
+    </AnimatedBackground>
   );
 };
 

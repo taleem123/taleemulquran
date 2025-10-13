@@ -2,35 +2,7 @@
 
 .selected-surahs-section {
   padding: 100px 0;
-  background: linear-gradient(135deg, #e0f7ff 0%, #f8f9fa 50%, #fff5e6 100%);
-  background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
   position: relative;
-  overflow: hidden;
-}
-
-.selected-surahs-section::before {
-  content: '';
-  position: absolute;
-  top: -200px;
-  left: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 167, 213, 0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float 8s ease-in-out infinite;
-}
-
-.selected-surahs-section::after {
-  content: '';
-  position: absolute;
-  bottom: -150px;
-  right: -150px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0, 222, 216, 0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float 10s ease-in-out infinite reverse;
 }
 
 .section-header {
@@ -160,6 +132,7 @@
 .surah-english-section {
   flex: 1;
   min-width: 0;
+  margin-top: 13px;
 }
 
 .surah-arabic-section {

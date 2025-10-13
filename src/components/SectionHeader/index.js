@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Typography } from '@mui/material';
 import './style.css';
 
-const SectionHeader = ({ title, subtitle }) => {
+const SectionHeader = memo(({ title, subtitle }) => {
   return (
     <div className="section-header">
       <Typography 
@@ -34,7 +34,9 @@ const SectionHeader = ({ title, subtitle }) => {
       )}
     </div>
   );
-};
+});
+
+SectionHeader.displayName = 'SectionHeader';
 
 export default SectionHeader;
 

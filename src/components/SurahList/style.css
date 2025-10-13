@@ -7,8 +7,8 @@
   service single sidebar
 ----------------------------------------*/
 .service-sidebar {
-    /*** service-list-widget ***/
-    /*** contact-widget ***/
+    /* Styles defined in child elements */
+    margin: 0;
 }
 
 @media (max-width: 991px) {

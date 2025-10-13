@@ -3,22 +3,34 @@ import surahData from './surahData.json';
 import './style.css';
 import './enhanced-style.css';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Box, Alert, TextField, Button, IconButton } from '@mui/material';
+import { Typography, Box, Alert, TextField, Button } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Madina from '../../images/madina.png';
 import Makka from '../../images/makka.png';
 import LoadingSpinner from '../LoadingSpinner';
 import ErrorBoundary from '../ErrorBoundary';
-import { Search, BookmarkBorder, Bookmark } from '@mui/icons-material';
+import { Search } from '@mui/icons-material';
+import AnimatedBackground from '../AnimatedBackground';
+import { debounce } from '../../utils/optimizations';
 
 const SurahList = (props) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
-  const [bookmarkedSurahs, setBookmarkedSurahs] = useState(new Set());
+  const [bookmarkedSurahs] = useState(new Set()); // Bookmark feature coming soon
+
+  // Debounced search to reduce re-renders
+  useEffect(() => {
+    const handler = debounce(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+    
+    handler();
+  }, [searchTerm]);
 
   // Simulate loading for better UX
   useEffect(() => {
@@ -43,28 +55,30 @@ const SurahList = (props) => {
     }
   }, [navigate]);
 
-  const toggleBookmark = useCallback((surahNumber) => {
-    setBookmarkedSurahs(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(surahNumber)) {
-        newSet.delete(surahNumber);
-      } else {
-        newSet.add(surahNumber);
-      }
-      return newSet;
-    });
-  }, []);
+  // Bookmark toggle function (currently not used, kept for future feature)
+  // const toggleBookmark = useCallback((surahNumber) => {
+  //   setBookmarkedSurahs(prev => {
+  //     const newSet = new Set(prev);
+  //     if (newSet.has(surahNumber)) {
+  //       newSet.delete(surahNumber);
+  //     } else {
+  //       newSet.add(surahNumber);
+  //     }
+  //     return newSet;
+  //   });
+  // }, []);
 
-  // Filter and search logic
+  // Filter and search logic with debounced search
   const filteredSurahs = useMemo(() => {
     let filtered = surahData;
 
-    // Apply search filter
-    if (searchTerm) {
+    // Apply search filter with debounced term
+    if (debouncedSearchTerm) {
+      const lowerSearch = debouncedSearchTerm.toLowerCase();
       filtered = filtered.filter(surah =>
-        surah.englishName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        surah.englishNameTranslation.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        surah.name.includes(searchTerm)
+        surah.englishName.toLowerCase().includes(lowerSearch) ||
+        surah.englishNameTranslation.toLowerCase().includes(lowerSearch) ||
+        surah.name.includes(debouncedSearchTerm)
       );
     }
 
@@ -79,7 +93,7 @@ const SurahList = (props) => {
     }
 
     return filtered;
-  }, [searchTerm, selectedFilter, bookmarkedSurahs]);
+  }, [debouncedSearchTerm, selectedFilter, bookmarkedSurahs]);
 
   const filterOptions = [
     { value: 'all', label: 'تمام سورتیں', count: surahData.length },
@@ -126,8 +140,9 @@ const SurahList = (props) => {
 
   return (
     <ErrorBoundary>
-      <section className="service-single-section section-padding">
-        <div className="container">
+      <AnimatedBackground variant="surah" particleCount={0} enableParticles={false}>
+        <section className="service-single-section section-padding">
+          <div className="container">
           <div className="service-single-content">
             <h2>{props.formate} تفسیر</h2>
             <p>آپ کسی بھی وقت سن، ڈاؤن لوڈ اور شیئر کر سکتے ہیں۔</p>
@@ -253,7 +268,8 @@ const SurahList = (props) => {
             )}
           </Box>
         </div>
-      </section>
+        </section>
+      </AnimatedBackground>
     </ErrorBoundary>
   );
 };

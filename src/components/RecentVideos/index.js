@@ -19,6 +19,7 @@ import {
 import UniversalVideoPlayer from '../../design-system/components/UniversalVideoPlayer';
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../SectionHeader';
+import AnimatedBackground from '../AnimatedBackground';
 import './style.css';
 
 const RecentVideos = () => {
@@ -264,8 +265,9 @@ const RecentVideos = () => {
   );
 
   return (
-    <section className="recent-videos-section section-padding">
-      <div className="container">
+    <AnimatedBackground variant="warm" particleCount={0} enableParticles={false}>
+      <section className="recent-videos-section section-padding">
+        <div className="container">
         <SectionHeader 
           title="شارٹ ویڈیوز"
           subtitle="تعلیم القرآن  کی تازہ ترین شارٹ ویڈیو تشریحات"
@@ -301,6 +303,7 @@ const RecentVideos = () => {
         />
       )}
     </section>
+    </AnimatedBackground>
   );
 };
 

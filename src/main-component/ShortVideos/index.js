@@ -26,6 +26,7 @@ import {
 import UniversalVideoPlayer from '../../design-system/components/UniversalVideoPlayer';
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../../components/SectionHeader';
+import AnimatedBackground from '../../components/AnimatedBackground';
 
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/footer'
@@ -77,7 +78,8 @@ const ShortVideos = () => {
 
   // Filter and sort videos
   const filteredVideos = useMemo(() => {
-    let filtered = allVideos;
+    // Create a new array to avoid mutating the original
+    let filtered = [...allVideos];
 
     // Apply search filter
     if (searchTerm) {
@@ -111,7 +113,7 @@ const ShortVideos = () => {
     });
 
     return filtered;
-  }, [searchTerm, sortBy, allVideos]);
+  }, [searchTerm, sortBy]);
 
   const handleVideoClick = useCallback((video) => {
     setSelectedVideo(video);
@@ -330,7 +332,7 @@ const ShortVideos = () => {
   return (
         <Fragment>
       <Navbar />
-      
+      <AnimatedBackground variant="warm" particleCount={0} enableParticles={false}>
       <section className="service-single-section section-padding">
         <div className="container">
           <SectionHeader 
@@ -424,6 +426,7 @@ const ShortVideos = () => {
           </div>
         </div>
       </section>
+      </AnimatedBackground>
 
       {/* Video Modal */}
       {isVideoModalOpen && selectedVideo && (

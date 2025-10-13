@@ -2,35 +2,7 @@
 
 .selected-lessons-section {
   padding: 100px 0;
-  background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 50%, #ffe6f0 100%);
-  background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
   position: relative;
-  overflow: hidden;
-}
-
-.selected-lessons-section::before {
-  content: '';
-  position: absolute;
-  top: -180px;
-  left: -120px;
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, rgba(138, 45, 226, 0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float 10s ease-in-out infinite;
-}
-
-.selected-lessons-section::after {
-  content: '';
-  position: absolute;
-  bottom: -220px;
-  right: -100px;
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle, rgba(0, 167, 213, 0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float 13s ease-in-out infinite reverse;
 }
 
 .selected-lessons-section .container {

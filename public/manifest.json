@@ -1,6 +1,7 @@
 {
-  "short_name": "Tafseer",
-  "name": "Taleem Ul Quran",
+  "short_name": "تعلیم القرآن",
+  "name": "Taleem ul Quran - Islamic Learning Platform",
+  "description": "قرآن مجید کی تفسیر، آڈیو، ویڈیو اور اسباق",
   "icons": [
     {
       "src": "favicon.ico",
@@ -16,10 +17,15 @@
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
-    }	    
+    }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#00a7d5",
+  "background_color": "#ffffff",
+  "lang": "ur",
+  "dir": "rtl",
+  "orientation": "portrait",
+  "categories": ["education", "religion", "lifestyle"],
+  "prefer_related_applications": false
 }

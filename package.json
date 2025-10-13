@@ -23,12 +23,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "react-scripts build",
     "test": "react-scripts test",
     "analyze": "npm run build && node scripts/simple-analyze.js",
     "analyze:simple": "npm run build && node scripts/simple-analyze.js",
     "analyze:visual": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
     "analyze:windows": "scripts\\analyze-windows.bat",
-    "analyze:detailed": "GENERATE_SOURCEMAP=true npm run build && npx source-map-explorer 'build/static/js/*.js'",
+    "analyze:detailed": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
     "analyze:css": "npm run build && npx source-map-explorer 'build/static/css/*.css'",
     "analyze:all": "npm run build && npx source-map-explorer 'build/static/js/*.js' 'build/static/css/*.css'"
   },
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "compression-webpack-plugin": "^11.1.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "source-map-explorer": "^2.5.3",
