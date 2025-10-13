@@ -54,6 +54,8 @@ body {
     color: #525252;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    direction: rtl;
+    text-align: right;
 }
 
 .App{

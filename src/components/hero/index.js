@@ -20,9 +20,9 @@ const Hero = (props) => {
                                 <div className="slide-subtitle urdu-font">
                                     <p>اسلام کی حقیقی اور مستند تعلیمات کی روشنی میں قرآن مجید کی نا یاب تفسیر</p>
                                 </div>
-                                <div className="btns">
+                                {/* <div className="btns">
                                     <Link to="/about" className="theme-btn urdu-font">مزید جانئیے</Link>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,330 @@
+/* Universal Video Player Styles */
+.universal-video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background-color: #000;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.youtube-player {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Platform Indicator */
+.platform-indicator {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+.platform-indicator .MuiChip-root {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  color: white !important;
+  font-size: 0.75rem !important;
+  height: 24px !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Center Play/Pause Buttons */
+.center-play-overlay,
+.center-pause-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.center-play-button,
+.center-pause-button {
+  width: 100px !important;
+  height: 100px !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  color: white !important;
+  border: 3px solid rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.3s ease !important;
+  border-radius: 50% !important;
+  pointer-events: auto !important;
+}
+
+.center-play-button:hover,
+.center-pause-button:hover {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  transform: scale(1.1) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.center-pause-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.universal-video-container:hover .center-pause-overlay {
+  opacity: 1;
+}
+
+/* Video Controls (YouTube) */
+.video-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0) 80%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 5;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.video-controls > * {
+  pointer-events: auto;
+}
+
+/* Simple Controls (Non-YouTube) */
+.simple-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0) 80%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 5;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.simple-controls > * {
+  pointer-events: auto;
+}
+
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+}
+
+.video-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.close-button {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 50% !important;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.bottom-controls {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  gap: 10px;
+}
+
+.play-pause-btn,
+.mute-btn,
+.fullscreen-btn,
+.action-btn {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  transition: all 0.3s ease !important;
+}
+
+.play-pause-btn:hover,
+.mute-btn:hover,
+.fullscreen-btn:hover,
+.action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.1) !important;
+}
+
+.action-btn {
+  border-radius: 25px !important;
+  padding: 8px 16px !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Error State */
+.video-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  border: 2px dashed #ccc;
+  height: 100%;
+}
+
+/* Modal Styles */
+.video-modal .MuiDialog-paper {
+  background-color: black;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-modal .MuiDialogContent-root {
+  padding: 0;
+  background-color: black;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .universal-video-container {
+    padding-top: 65%;
+  }
+
+  .center-play-button,
+  .center-pause-button {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .video-title {
+    font-size: 1rem;
+  }
+
+  .top-controls,
+  .bottom-controls {
+    padding: 10px 15px;
+  }
+
+  .play-pause-btn,
+  .mute-btn,
+  .fullscreen-btn,
+  .action-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+
+  .platform-indicator .MuiChip-root {
+    font-size: 0.7rem !important;
+    height: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .universal-video-container {
+    padding-top: 70%;
+  }
+
+  .center-play-button,
+  .center-pause-button {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .video-title {
+    font-size: 0.9rem;
+  }
+
+  .action-btn {
+    padding: 6px 12px !important;
+    font-size: 0.7rem !important;
+  }
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.video-controls,
+.simple-controls {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.center-play-button:focus,
+.center-pause-button:focus,
+.play-pause-btn:focus,
+.mute-btn:focus,
+.fullscreen-btn:focus,
+.action-btn:focus {
+  outline: 3px solid #00a7d5;
+  outline-offset: 2px;
+}
+
+/* Hide YouTube's default controls when our custom controls are shown */
+.universal-video-container:hover .youtube-player iframe {
+  pointer-events: none;
+}
+
+.universal-video-container:hover .video-controls {
+  pointer-events: auto;
+}
+
+/* Platform-specific styling */
+.universal-video-container[data-platform="facebook"] {
+  background: linear-gradient(135deg, #1877f2, #42a5f5);
+}
+
+.universal-video-container[data-platform="tiktok"] {
+  background: linear-gradient(135deg, #000000, #ff0050);
+}
+
+.universal-video-container[data-platform="youtube"] {
+  background: linear-gradient(135deg, #ff0000, #ff4444);
+}

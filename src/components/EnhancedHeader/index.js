@@ -23,11 +23,9 @@ import {
   Close as CloseIcon
 } from '@mui/icons-material';
 import Logo from '../../images/slider/no-bg-logo.png';
-import HeaderTopbar from '../HeaderTopbar';
 import EnhancedSearch from '../EnhancedSearch';
-import './style.css';
 
-const Header = () => {
+const EnhancedHeader = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -54,9 +52,9 @@ const Header = () => {
   }, [showSearch]);
 
   const navigationItems = [
-    { label: 'ہوم', path: '/', icon: <HomeIcon /> },
-    { label: 'تعارف', path: '/about', icon: <InfoIcon /> },
-    { label: 'رابطہ', path: '/contact', icon: <ContactIcon /> },
+    { label: 'Home', path: '/', icon: <HomeIcon /> },
+    { label: 'About', path: '/about', icon: <InfoIcon /> },
+    { label: 'Contact', path: '/contact', icon: <ContactIcon /> },
   ];
 
   const drawer = (
@@ -74,9 +72,9 @@ const Header = () => {
         {navigationItems.map((item) => (
           <ListItem 
             key={item.label}
-            button 
             onClick={() => handleNavigation(item.path)}
             sx={{
+              cursor: 'pointer',
               '&:hover': {
                 backgroundColor: '#f5f5f5',
               }
@@ -94,7 +92,6 @@ const Header = () => {
 
   return (
     <>
-      <HeaderTopbar/>
       <AppBar 
         position="sticky" 
         sx={{ 
@@ -192,7 +189,7 @@ const Header = () => {
           <Box sx={{ p: 2, backgroundColor: '#f8f9fa', borderTop: '1px solid #eee' }}>
             <EnhancedSearch 
               onSurahSelect={handleSurahSelect}
-              placeholder="سورتوں کے نام، ترجمہ یا نمبر سے تلاش کریں..."
+              placeholder="Search Surahs by name, translation, or number..."
             />
           </Box>
         )}
@@ -220,4 +217,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default EnhancedHeader;

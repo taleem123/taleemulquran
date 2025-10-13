@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
 import Navbar from '../../components/Navbar'
 import Hero from '../../components/hero'
-import Service2 from '../../components/Service2'
+import SelectedSurahs from '../../components/SelectedSurahs'
+import RecentVideos from '../../components/RecentVideos'
 import Pilars from '../../components/Pilars'
 import Footer from '../../components/footer'
 import Scrollbar from '../../components/scrollbar'
@@ -13,7 +14,8 @@ const HomePage =() => {
         <Fragment>
             <Navbar/>
             <Hero HeroStyleClass={'hero-style-2'} heroImg={hero1}/>
-            <Service2/>
+            <SelectedSurahs/>
+            <RecentVideos/>
             <Pilars/>
             <Footer/>
             <Scrollbar/>

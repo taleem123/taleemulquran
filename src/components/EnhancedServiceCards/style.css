@@ -1,0 +1,253 @@
+/* Enhanced Service Cards Styles */
+
+.enhanced-service-area {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.service-grid .row {
+  margin: 0 -15px;
+}
+
+.service-grid .col-lg-6,
+.service-grid .col-md-6,
+.service-grid .col-sm-12 {
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+
+.service-card {
+  border-radius: 15px !important;
+  overflow: hidden;
+  position: relative;
+  background: white;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.service-card.coming-soon {
+  opacity: 0.8;
+  filter: grayscale(0.3);
+}
+
+.service-card.coming-soon:hover {
+  transform: translateY(-4px) !important;
+  filter: grayscale(0.1);
+}
+
+.service-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-media::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+  pointer-events: none;
+}
+
+.service-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(5px);
+}
+
+.service-actions {
+  display: flex;
+  gap: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.service-actions .MuiIconButton-root {
+  width: 50px;
+  height: 50px;
+  transition: all 0.3s ease;
+}
+
+.service-actions .MuiIconButton-root:hover {
+  transform: scale(1.15);
+}
+
+.bookmark-btn {
+  transition: all 0.3s ease;
+}
+
+.bookmark-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Section Title */
+.wpo-section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.wpo-section-title h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.wpo-section-title hr {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #00a7d5, #00ded8);
+  border: none;
+  margin: 0 auto 30px;
+  border-radius: 2px;
+}
+
+.wpo-section-title p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .enhanced-service-area {
+    padding: 60px 0;
+  }
+  
+  .wpo-section-title h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .enhanced-service-area {
+    padding: 40px 0;
+  }
+  
+  .wpo-section-title h2 {
+    font-size: 2rem;
+  }
+  
+  .wpo-section-title p {
+    font-size: 1rem;
+  }
+  
+  .service-actions {
+    gap: 10px;
+  }
+  
+  .service-actions .MuiIconButton-root {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpo-section-title h2 {
+    font-size: 1.8rem;
+  }
+  
+  .service-card {
+    margin-bottom: 20px;
+  }
+}
+
+/* Animation for card entrance */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.2s; }
+.service-card:nth-child(3) { animation-delay: 0.3s; }
+.service-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Loading state */
+.service-card.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.service-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #00a7d5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Focus states for accessibility */
+.service-card:focus {
+  outline: 3px solid #00a7d5;
+  outline-offset: 2px;
+}
+
+.service-card:focus-visible {
+  outline: 3px solid #00a7d5;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .service-card {
+    border: 2px solid #000;
+  }
+  
+  .service-card:hover {
+    border-color: #00a7d5;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-actions .MuiIconButton-root,
+  .bookmark-btn {
+    transition: none;
+  }
+  
+  .service-card:hover {
+    transform: none;
+  }
+  
+  .service-actions {
+    opacity: 1;
+    transform: none;
+  }
+}

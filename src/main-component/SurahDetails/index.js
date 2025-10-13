@@ -26,7 +26,7 @@ const SurahDetails = () => {
       <div className="soundcloud-container">
         {isLoading && (
           <Typography variant="body2" color="textSecondary">
-            Loading playlist...
+            پلے لسٹ لوڈ ہو رہی ہے...
           </Typography>
         )}
         <iframe
@@ -47,16 +47,16 @@ const SurahDetails = () => {
   return (
     <Fragment>
       <Navbar />
-      <PageTitle pageTitle="تعلیم القرآن ( آڈیوٰ تفسیر )" pagesub="Audio Tafseer" />
+      <PageTitle pageTitle="تعلیم القرآن ( آڈیوٰ تفسیر )" pagesub="آڈیو تفسیر" />
       <Box sx={{ width: '100%', padding: 3 }}>
         <Grid container spacing={6} justifyContent="center" alignItems="center">
-          <Grid item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+          <Grid xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
             <Typography variant="h5">{surah.englishName}</Typography>
             <Typography variant="subtitle1">{surah.englishNameTranslation}</Typography>
           </Grid>
-          <Grid item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
+          <Grid xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
             <Typography variant="h5">{surah.name}</Typography>
-            <Typography variant="subtitle1">Total Ayaat: {surah.numberOfAyahs}</Typography>
+            <Typography variant="subtitle1">کل آیات: {surah.numberOfAyahs}</Typography>
           </Grid>
         </Grid>
       </Box>

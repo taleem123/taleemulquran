@@ -1,125 +1,186 @@
-import React, { Component } from 'react'
+import React, { useState, useCallback } from 'react'
 
-
-class ContactForm extends Component {
-
-
-    state = {
+const ContactForm = () => {
+    const [formData, setFormData] = useState({
         name: '',
         email: '',
         subject: '',
         lastname: '',
         events: '',
         notes: '',
-        error: {}
-    }
+        message: ''
+    });
+    
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const changeHandler = useCallback((e) => {
+        const { name, value } = e.target;
+        
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        
+        // Clear error when user starts typing
+        if (errors[name]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: ''
+            }));
+        }
+    }, [errors]);
 
-    changeHandler = (e) => {
-        const error = this.state.error;
-        error[e.target.name] = ''
+    const validateForm = useCallback(() => {
+        const newErrors = {};
 
-        this.setState({
-            [e.target.name]: e.target.value,
-            error
-        })
-    }
+        if (!formData.name.trim()) {
+            newErrors.name = "براہ کرم اپنا نام درج کریں";
+        }
+        if (!formData.email.trim()) {
+            newErrors.email = "براہ کرم اپنا ای میل درج کریں";
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = "براہ کرم درست ای میل درج کریں";
+        }
+        if (!formData.subject.trim()) {
+            newErrors.subject = "براہ کرم اپنا موضوع درج کریں";
+        }
+        if (!formData.lastname.trim()) {
+            newErrors.lastname = "براہ کرم اپنا خاندانی نام درج کریں";
+        }
+        if (!formData.events.trim()) {
+            newErrors.events = "اپنی تقریب کی فہرست منتخب کریں";
+        }
+        if (!formData.notes.trim()) {
+            newErrors.notes = "براہ کرم اپنا نوٹ درج کریں";
+        }
+        
+        return newErrors;
+    }, [formData]);
 
-    subimtHandler = (e) => {
+    const submitHandler = useCallback(async (e) => {
         e.preventDefault();
-
-        const { name,
-            email,
-            subject,
-            lastname,
-            events,
-            notes, error } = this.state;
-
-        if (name === '') {
-            error.name = "Please enter your name";
+        setIsSubmitting(true);
+        
+        const newErrors = validateForm();
+        
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            setIsSubmitting(false);
+            return;
         }
-        if (email === '') {
-            error.email = "Please enter your email";
-        }
-        if (subject === '') {
-            error.subject = "Please enter your subject";
-        }
-        if (lastname === '') {
-            error.lastname = "Please enter your Lastname";
-        }
-        if (events === '') {
-            error.events = "Select your event list";
-        }
-        if (notes === '') {
-            error.notes = "Please enter your note";
-        }
-
-
-        if (error) {
-            this.setState({
-                error
-            })
-        }
-        if (error.name === '' && error.email === '' && error.email === '' && error.lastname === '' && error.subject === '' && error.events === '' && error.notes === '') {
-            this.setState({
+        
+        try {
+            // Here you would typically send the data to your backend
+            console.log('Form submitted:', formData);
+            
+            // Reset form on successful submission
+            setFormData({
                 name: '',
                 email: '',
                 subject: '',
+                lastname: '',
                 events: '',
                 notes: '',
-                error: {}
-            })
+                message: ''
+            });
+            setErrors({});
+            
+                // You might want to show a success message here
+                alert('پیغام کامیابی سے بھیجا گیا!');
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setErrors({ submit: 'پیغام بھیجنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔' });
+        } finally {
+            setIsSubmitting(false);
         }
-    }
+    }, [formData, validateForm]);
 
-    render(){
-        const { name,
-            email,
-            subject,
-            lastname,
-            error } = this.state;
-
-        return(
-            <form onSubmit={this.subimtHandler} className="form">
-                <div className="row">
-                    <div className="col-lg-6 col-md-12">
-                        <div className="form-field">
-                            <input value={name} onChange={this.changeHandler} type="text" name="name" placeholder="Name"/>
-                            <p>{error.name ? error.name : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-12">
-                        <div className="form-field">
-                            <input value={lastname} onChange={this.changeHandler} type="text" name="lastname" placeholder="Lastname"/>
-                            <p>{error.lastname ? error.lastname : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-field">
-                            <input onChange={this.changeHandler} value={email} type="email" name="email" placeholder="Email"/>
-                            <p>{error.email ? error.email : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-field">
-                            <input onChange={this.changeHandler} value={subject} type="text" name="subject" placeholder="Subject"/>
-                            <p>{error.subject ? error.subject : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-field">
-                            <textarea name="message" placeholder="Message"></textarea>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-submit">
-                            <button type="submit" className="theme-btn">Send Message</button>
-                        </div>
+    return (
+        <form onSubmit={submitHandler} className="form">
+            <div className="row">
+                <div className="col-lg-6 col-md-12">
+                    <div className="form-field">
+                            <input
+                                value={formData.name}
+                                onChange={changeHandler}
+                                type="text"
+                                name="name"
+                                placeholder="نام"
+                                disabled={isSubmitting}
+                            />
+                        {errors.name && <p className="error-text">{errors.name}</p>}
                     </div>
                 </div>
-            </form>
-        )
-    }
+                <div className="col-lg-6 col-md-12">
+                    <div className="form-field">
+                        <input 
+                            value={formData.lastname} 
+                            onChange={changeHandler} 
+                            type="text" 
+                            name="lastname" 
+                                placeholder="خاندانی نام"
+                            disabled={isSubmitting}
+                        />
+                        {errors.lastname && <p className="error-text">{errors.lastname}</p>}
+                    </div>
+                </div>
+                <div className="col-lg-12">
+                    <div className="form-field">
+                        <input 
+                            onChange={changeHandler} 
+                            value={formData.email} 
+                            type="email" 
+                            name="email" 
+                                placeholder="ای میل"
+                            disabled={isSubmitting}
+                        />
+                        {errors.email && <p className="error-text">{errors.email}</p>}
+                    </div>
+                </div>
+                <div className="col-lg-12">
+                    <div className="form-field">
+                        <input 
+                            onChange={changeHandler} 
+                            value={formData.subject} 
+                            type="text" 
+                            name="subject" 
+                                placeholder="موضوع"
+                            disabled={isSubmitting}
+                        />
+                        {errors.subject && <p className="error-text">{errors.subject}</p>}
+                    </div>
+                </div>
+                <div className="col-lg-12">
+                    <div className="form-field">
+                        <textarea 
+                            name="message" 
+                                placeholder="پیغام"
+                            value={formData.message}
+                            onChange={changeHandler}
+                            disabled={isSubmitting}
+                        />
+                    </div>
+                </div>
+                <div className="col-lg-12">
+                    <div className="form-submit">
+                        <button 
+                            type="submit" 
+                            className="theme-btn"
+                            disabled={isSubmitting}
+                        >
+                                {isSubmitting ? 'بھیجا جا رہا ہے...' : 'پیغام بھیجیں'}
+                        </button>
+                    </div>
+                </div>
+                {errors.submit && (
+                    <div className="col-lg-12">
+                        <p className="error-text">{errors.submit}</p>
+                    </div>
+                )}
+            </div>
+        </form>
+    );
+};
 
-}
-export default  ContactForm;
+export default ContactForm;

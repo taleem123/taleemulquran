@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import surahData from './surahData.json';
-import './style.css';
 import './enhanced-style.css';
 import { useNavigate } from 'react-router-dom';
-import { Grid, Typography, Box, Alert, TextField, Button, IconButton } from '@mui/material';
+import { Grid, Typography, Box, Alert, TextField, Button, Chip, IconButton } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Madina from '../../images/madina.png';
 import Makka from '../../images/makka.png';
 import LoadingSpinner from '../LoadingSpinner';
 import ErrorBoundary from '../ErrorBoundary';
-import { Search, PlayArrow, BookmarkBorder, Bookmark } from '@mui/icons-material';
+import { Search, FilterList, PlayArrow, BookmarkBorder, Bookmark } from '@mui/icons-material';
 
-const SurahList = (props) => {
+const EnhancedSurahList = (props) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -82,10 +81,10 @@ const SurahList = (props) => {
   }, [searchTerm, selectedFilter, bookmarkedSurahs]);
 
   const filterOptions = [
-    { value: 'all', label: 'تمام سورتیں', count: surahData.length },
-    { value: 'meccan', label: 'مکی', count: surahData.filter(s => s.revelationType === 'Meccan').length },
-    { value: 'medinan', label: 'مدنی', count: surahData.filter(s => s.revelationType === 'Medinan').length },
-    { value: 'bookmarked', label: 'بک مارک', count: bookmarkedSurahs.size }
+    { value: 'all', label: 'All Surahs', count: surahData.length },
+    { value: 'meccan', label: 'Meccan', count: surahData.filter(s => s.revelationType === 'Meccan').length },
+    { value: 'medinan', label: 'Medinan', count: surahData.filter(s => s.revelationType === 'Medinan').length },
+    { value: 'bookmarked', label: 'Bookmarked', count: bookmarkedSurahs.size }
   ];
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -115,8 +114,8 @@ const SurahList = (props) => {
       <section className="service-single-section section-padding">
         <div className="container">
           <div className="service-single-content">
-            <h2>{props.formate} تفسیر</h2>
-            <p>آپ کسی بھی وقت سن، ڈاؤن لوڈ اور شیئر کر سکتے ہیں۔</p>
+            <h2>{props.formate} Tafseer</h2>
+            <p>You can listen, download and share anytime.</p>
           </div>
           <LoadingSpinner message="Loading Surahs..." />
         </div>
@@ -129,15 +128,15 @@ const SurahList = (props) => {
       <section className="service-single-section section-padding">
         <div className="container">
           <div className="service-single-content">
-            <h2>{props.formate} تفسیر</h2>
-            <p>آپ کسی بھی وقت سن، ڈاؤن لوڈ اور شیئر کر سکتے ہیں۔</p>
+            <h2>{props.formate} Tafseer</h2>
+            <p>You can listen, download and share anytime.</p>
           </div>
 
           {/* Search and Filter Bar */}
           <div className="search-filter-container">
             <TextField
               fullWidth
-              placeholder="سورتوں کے نام یا ترجمہ سے تلاش کریں..."
+              placeholder="Search Surahs by name or translation..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               InputProps={{
@@ -164,107 +163,134 @@ const SurahList = (props) => {
           {/* Results Count */}
           <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
             <Typography variant="body2" color="text.secondary">
-              {filteredSurahs.length} میں سے {surahData.length} سورتیں دکھائی جا رہی ہیں
+              Showing {filteredSurahs.length} of {surahData.length} Surahs
             </Typography>
           </Box>
 
           {/* Surah Grid */}
           <Box sx={{ width: '100%' }}>
-            {filteredSurahs.length === 0 ? (
-              <div className="empty-state">
-                <div className="empty-state-icon">🔍</div>
-                <h3>کوئی سورت نہیں ملی</h3>
-                <p>اپنی تلاش یا فلٹر کی شرائط کو تبدیل کرنے کی کوشش کریں</p>
-                <Button 
-                  variant="outlined" 
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedFilter('all');
-                  }}
-                >
-                  فلٹر صاف کریں
-                </Button>
-              </div>
-            ) : (
-              <div className="surahs-grid-container">
-                {filteredSurahs.map((surah) => (
-                  <Item 
+            <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              {filteredSurahs.length === 0 ? (
+                <Grid xs={12}>
+                  <div className="empty-state">
+                    <div className="empty-state-icon">🔍</div>
+                    <h3>No Surahs Found</h3>
+                    <p>Try adjusting your search or filter criteria</p>
+                    <Button 
+                      variant="outlined" 
+                      onClick={() => {
+                        setSearchTerm('');
+                        setSelectedFilter('all');
+                      }}
+                    >
+                      Clear Filters
+                    </Button>
+                  </div>
+                </Grid>
+              ) : (
+                filteredSurahs.map((surah) => (
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
                     key={surah.number}
-                    className="surah-tile"
-                    onClick={() => _openDetails(props.formate, surah.number)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        _openDetails(props.formate, surah.number);
-                      }
-                    }}
                   >
-                    <div className="surah-tile-content">
-                      <div className="surah-tile-header">
-                        {/* Left side - English info */}
-                        <div className="surah-english-section">
+                    <Item 
+                      className="surah-card"
+                      onClick={() => _openDetails(props.formate, surah.number)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          _openDetails(props.formate, surah.number);
+                        }
+                      }}
+                    >
+                      <div className="surah-card-content">
+                        <div className="surah-header">
                           <Typography 
                             component="div" 
                             className="surah-number"
+                            variant="h4"
                           >
                             {surah.number}
                           </Typography>
+                          <img
+                            src={surah.revelationType === 'Medinan' ? Madina : Makka}
+                            width="40px"
+                            height="40px"
+                            alt={surah.revelationType}
+                            className="revelation-icon"
+                            loading="lazy"
+                          />
+                        </div>
+
+                        <Typography 
+                          component="div" 
+                          className="surah-arabic-name"
+                          variant="h6"
+                        >
+                          {surah.name}
+                        </Typography>
+
+                        <Typography 
+                          component="div" 
+                          className="surah-ayat-count"
+                          variant="body2"
+                        >
+                          Ayat: {surah.numberOfAyahs}
+                        </Typography>
+
+                        <div className="surah-english-info">
                           <Typography 
                             component="div" 
                             className="surah-english-name"
+                            variant="subtitle1"
                           >
                             {surah.englishName}
                           </Typography>
                           <Typography 
                             component="div" 
                             className="surah-english-translation"
+                            variant="body2"
                           >
                             {surah.englishNameTranslation}
                           </Typography>
                         </div>
 
-                        {/* Right side - Arabic info */}
-                        <div className="surah-arabic-section">
-                          <img
-                            src={surah.revelationType === 'Medinan' ? Madina : Makka}
-                            alt={surah.revelationType}
-                            className="revelation-icon"
-                            loading="lazy"
-                          />
-                          <Typography 
-                            component="div" 
-                            className="surah-arabic-name"
-                          >
-                            {surah.name}
-                          </Typography>
-                          <Typography 
-                            component="div" 
-                            className="surah-ayat-count"
-                          >
-                            Ayat: {surah.numberOfAyahs}
-                          </Typography>
+                        {/* Action Buttons */}
+                        <div className="surah-action-btn">
+                          <PlayArrow />
                         </div>
-                      </div>
 
-                      {/* Bookmark Button */}
-                      <IconButton
-                        className="bookmark-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleBookmark(surah.number);
-                        }}
-                      >
-                        {bookmarkedSurahs.has(surah.number) ? 
-                          <Bookmark color="primary" /> : 
-                          <BookmarkBorder />
-                        }
-                      </IconButton>
-                    </div>
-                  </Item>
-                ))}
-              </div>
-            )}
+                        {/* Bookmark Button */}
+                        <IconButton
+                          className="bookmark-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleBookmark(surah.number);
+                          }}
+                          sx={{
+                            position: 'absolute',
+                            top: 10,
+                            right: 10,
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            '&:hover': {
+                              backgroundColor: 'rgba(255, 255, 255, 1)',
+                            }
+                          }}
+                        >
+                          {bookmarkedSurahs.has(surah.number) ? 
+                            <Bookmark color="primary" /> : 
+                            <BookmarkBorder />
+                          }
+                        </IconButton>
+                      </div>
+                    </Item>
+                  </Grid>
+                ))
+              )}
+            </Grid>
           </Box>
         </div>
       </section>
@@ -272,4 +298,4 @@ const SurahList = (props) => {
   );
 };
 
-export default SurahList;
+export default EnhancedSurahList;

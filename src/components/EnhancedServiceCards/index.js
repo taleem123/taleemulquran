@@ -10,7 +10,7 @@ import {
   IconButton,
   Tooltip,
   Fade,
-  Button
+  Zoom
 } from '@mui/material';
 import { 
   PlayArrow, 
@@ -25,9 +25,8 @@ import pdfImage from '../../images/pdf.png';
 import audioImage from '../../images/audio.png';
 import shortVideos from '../../images/shortvideos.png';
 import './style.css';
-import '../EnhancedServiceCards/style.css';
 
-const Service2 = (props) => {
+const EnhancedServiceCards = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [bookmarkedServices, setBookmarkedServices] = useState(new Set());
 
@@ -64,10 +63,6 @@ const Service2 = (props) => {
       // You could show a toast notification here
     }
   }, []);
-
-  const ClickHandler = () => {
-    window.scrollTo(10, 0);
-  }
 
   const services = [
     {
@@ -232,7 +227,6 @@ const Service2 = (props) => {
                       <IconButton
                         component={Link}
                         to={service.path}
-                        onClick={ClickHandler}
                         sx={{
                           backgroundColor: 'primary.main',
                           color: 'white',
@@ -357,7 +351,6 @@ const Service2 = (props) => {
               <Button
                 component={Link}
                 to={service.path}
-                onClick={ClickHandler}
                 variant="contained"
                 fullWidth
                 sx={{
@@ -398,7 +391,7 @@ const Service2 = (props) => {
   };
 
   return (
-    <div className={`service-area-2 ${props.serviceClass}`}>
+    <div className="enhanced-service-area">
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -415,7 +408,7 @@ const Service2 = (props) => {
           </div>
         </div>
 
-        <div className="service-wrap">
+        <div className="service-grid">
           <div className="row">
             {services.map((service) => (
               <div key={service.id} className="col-lg-6 col-md-6 col-sm-12 mb-4">
@@ -429,4 +422,4 @@ const Service2 = (props) => {
   );
 };
 
-export default Service2;
+export default EnhancedServiceCards;

@@ -1,7 +1,5 @@
 import React from 'react';
-
 import {Link} from 'react-router-dom'
-// import IslamicCalander from '../Calander'
 import tmr1 from '../../images/prayer-shape/2.png'
 import tmr2 from '../../images/prayer-shape/1.png'
 import tmr3 from '../../images/prayer-shape/3.png'

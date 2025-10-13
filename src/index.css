@@ -1,0 +1,162 @@
+/* RTL Support for Taleem Ul Quran */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  direction: rtl;
+  text-align: right;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* RTL Global Styles */
+* {
+  direction: inherit;
+}
+
+/* RTL Grid System */
+.row {
+  direction: rtl;
+}
+
+[class*="col-"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Navigation */
+nav ul {
+  direction: rtl;
+  text-align: right;
+}
+
+nav li {
+  float: right;
+}
+
+/* RTL Forms */
+form {
+  direction: rtl;
+}
+
+input, textarea, select {
+  text-align: right;
+}
+
+/* RTL Buttons */
+button {
+  direction: rtl;
+}
+
+/* RTL Lists */
+ul, ol {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Tables */
+table {
+  direction: rtl;
+}
+
+th, td {
+  text-align: right;
+}
+
+/* RTL Cards */
+.card {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Modals */
+.modal {
+  direction: rtl;
+}
+
+/* RTL Alerts */
+.alert {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Breadcrumbs */
+.breadcrumb {
+  direction: rtl;
+}
+
+/* RTL Pagination */
+.pagination {
+  direction: rtl;
+}
+
+/* RTL Dropdown */
+.dropdown-menu {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Tabs */
+.nav-tabs {
+  direction: rtl;
+}
+
+/* RTL Accordion */
+.accordion {
+  direction: rtl;
+}
+
+/* RTL Carousel */
+.carousel {
+  direction: rtl;
+}
+
+/* RTL Progress */
+.progress {
+  direction: rtl;
+}
+
+/* RTL Badge */
+.badge {
+  direction: rtl;
+}
+
+/* RTL Spinner */
+.spinner {
+  direction: rtl;
+}
+
+/* RTL Skeleton */
+.skeleton {
+  direction: rtl;
+}
+
+/* RTL Empty State */
+.empty-state {
+  direction: rtl;
+  text-align: center;
+}
+
+/* RTL Error State */
+.error-state {
+  direction: rtl;
+  text-align: center;
+}
+
+/* RTL Success State */
+.success-state {
+  direction: rtl;
+  text-align: center;
+}
+
+/* RTL Loading State */
+.loading-state {
+  direction: rtl;
+  text-align: center;
+}
