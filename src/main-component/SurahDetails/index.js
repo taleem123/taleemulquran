@@ -2,11 +2,10 @@ import React, { Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import PageTitle from '../../components/pagetitle';
-import Footer from '../../components/footer';
 import Scrollbar from '../../components/scrollbar';
 import Box from '@mui/material/Box';
 import './style.css';
-import { Grid2, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 const SurahDetails = () => {
   const location = useLocation();
@@ -50,16 +49,16 @@ const SurahDetails = () => {
       <Navbar />
       <PageTitle pageTitle="تعلیم القرآن ( آڈیوٰ تفسیر )" pagesub="Audio Tafseer" />
       <Box sx={{ width: '100%', padding: 3 }}>
-        <Grid2 container spacing={6} justifyContent="center" alignItems="center">
-          <Grid2 item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+        <Grid container spacing={6} justifyContent="center" alignItems="center">
+          <Grid item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
             <Typography variant="h5">{surah.englishName}</Typography>
             <Typography variant="subtitle1">{surah.englishNameTranslation}</Typography>
-          </Grid2>
-          <Grid2 item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
+          </Grid>
+          <Grid item xs={6} sm={6} md={4} sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
             <Typography variant="h5">{surah.name}</Typography>
             <Typography variant="subtitle1">Total Ayaat: {surah.numberOfAyahs}</Typography>
-          </Grid2>
-        </Grid2>
+          </Grid>
+        </Grid>
       </Box>
       <Box sx={{ width: '100%' }}>
         <SoundCloudPlaylist playlistUrl={surah.playlistUrl} />
