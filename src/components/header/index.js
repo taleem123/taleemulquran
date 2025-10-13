@@ -17,9 +17,6 @@ import {
 import { 
   Menu as MenuIcon, 
   Search as SearchIcon,
-  Home as HomeIcon,
-  Info as InfoIcon,
-  ContactMail as ContactIcon,
   Close as CloseIcon
 } from '@mui/icons-material';
 import Logo from '../../images/slider/no-bg-logo.png';
@@ -54,41 +51,162 @@ const Header = () => {
   }, [showSearch]);
 
   const navigationItems = [
-    { label: 'ہوم', path: '/', icon: <HomeIcon /> },
-    { label: 'تعارف', path: '/about', icon: <InfoIcon /> },
-    { label: 'رابطہ', path: '/contact', icon: <ContactIcon /> },
+    { label: 'ہوم', path: '/' },
+    { label: 'تعارف', path: '/about' },
+    { label: 'رابطہ', path: '/contact' },
   ];
 
   const drawer = (
-    <Box sx={{ width: 250 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', p: 2, borderBottom: '1px solid #eee' }}>
-        <img src={Logo} alt="Taleem ul Quran" style={{ height: 40, marginRight: 10 }} />
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Taleem Ul Quran
-        </Typography>
-        <IconButton onClick={handleDrawerToggle}>
+    <Box sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+      {/* Modern Drawer Header */}
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          alignItems: 'center', 
+          p: 3,
+          background: 'linear-gradient(135deg, #00a7d5, #00ded8)',
+          color: 'white',
+          position: 'relative',
+          minHeight: '180px'
+        }}
+      >
+        <IconButton 
+          onClick={handleDrawerToggle}
+          sx={{ 
+            position: 'absolute',
+            top: 10,
+            right: 10,
+            color: 'white',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.3)'
+            }
+          }}
+        >
           <CloseIcon />
         </IconButton>
+        
+        <img 
+          src={Logo} 
+          alt="Taleem ul Quran" 
+          style={{ 
+            height: 60, 
+            marginBottom: 12,
+            filter: 'brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+          }} 
+        />
+        {/* <Typography 
+          variant="h6" 
+          component="div" 
+          sx={{ 
+            fontWeight: 700,
+            textAlign: 'center',
+            textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
+        >
+          تعلیم القرآن
+        </Typography> */}
+        <Typography 
+          variant="caption" 
+          sx={{ 
+            opacity: 0.9,
+            fontSize: '0.85rem',
+            mt: 0.5
+          }}
+        >
+          Taleem Ul Quran
+        </Typography>
       </Box>
-      <List>
-        {navigationItems.map((item) => (
+
+      {/* Search in Mobile Drawer */}
+      <Box sx={{ px: 2, pt: 3, pb: 2 }}>
+        <Button
+          fullWidth
+          variant="contained"
+          startIcon={<SearchIcon />}
+          onClick={() => {
+            handleDrawerToggle();
+            setShowSearch(true);
+          }}
+          sx={{
+            background: 'linear-gradient(135deg, #00a7d5, #00ded8)',
+            color: 'white',
+            borderRadius: '12px',
+            py: 1.5,
+            fontSize: '1rem',
+            fontWeight: 600,
+            textTransform: 'none',
+            boxShadow: '0 4px 12px rgba(0, 167, 213, 0.3)',
+            '&:hover': {
+              background: 'linear-gradient(135deg, #0088b3, #00c4bf)',
+              boxShadow: '0 6px 16px rgba(0, 167, 213, 0.4)',
+            }
+          }}
+        >
+        </Button>
+      </Box>
+
+      {/* Navigation List */}
+      <List sx={{ px: 2, py: 2, mb: 8 }}>
+        {navigationItems.map((item, index) => (
           <ListItem 
             key={item.label}
             button 
             onClick={() => handleNavigation(item.path)}
             sx={{
+              borderRadius: '12px',
+              mb: 1.5,
+              py: 2,
+              px: 3,
+              transition: 'all 0.3s ease',
+              background: 'white',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
               '&:hover': {
-                backgroundColor: '#f5f5f5',
+                backgroundColor: 'rgba(0, 167, 213, 0.08)',
+                boxShadow: '0 4px 12px rgba(0, 167, 213, 0.15)',
               }
             }}
           >
-            <Box sx={{ mr: 2, color: 'primary.main' }}>
-              {item.icon}
-            </Box>
-            <ListItemText primary={item.label} />
+            <ListItemText 
+              primary={item.label}
+              sx={{
+                '& .MuiTypography-root': {
+                  fontWeight: 600,
+                  fontSize: '1.15rem',
+                  color: '#1a365d',
+                  textAlign: 'center',
+                  direction: 'rtl'
+                }
+              }}
+            />
           </ListItem>
         ))}
       </List>
+
+      {/* Footer Info */}
+      <Box 
+        sx={{ 
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          p: 2,
+          textAlign: 'center',
+          borderTop: '1px solid rgba(0, 167, 213, 0.1)',
+          backgroundColor: 'rgba(0, 167, 213, 0.03)'
+        }}
+      >
+        <Typography 
+          variant="caption" 
+          sx={{ 
+            color: '#666',
+            fontSize: '0.75rem'
+          }}
+        >
+          © 2024 Taleem Ul Quran
+        </Typography>
+      </Box>
     </Box>
   );
 
@@ -97,58 +215,106 @@ const Header = () => {
       <HeaderTopbar/>
       <AppBar 
         position="sticky" 
+        className="modern-header"
         sx={{ 
-          backgroundColor: 'white', 
-          color: 'text.primary',
-          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-          zIndex: theme.zIndex.drawer + 1
+          background: isMobile ? 'white' : 'linear-gradient(135deg, #00a7d5 0%, #00ded8 100%)', 
+          color: isMobile ? 'text.primary' : 'white',
+          boxShadow: '0 4px 20px rgba(0, 167, 213, 0.15)',
+          zIndex: theme.zIndex.drawer + 1,
+          borderBottom: isMobile ? '3px solid' : 'none',
+          borderImage: isMobile ? 'linear-gradient(90deg, #00a7d5, #00ded8) 1' : 'none',
+          display: isMobile && mobileOpen ? 'none' : 'block'
         }}
       >
-        <Toolbar>
-          {/* Logo */}
+        <Toolbar sx={{ py: 1.5, minHeight: { xs: 70, md: 80 } }}>
+          {/* Mobile Menu Button - FAR LEFT */}
+          {isMobile && (
+            <IconButton
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+              className="menu-button"
+              sx={{
+                background: 'linear-gradient(135deg, #00a7d5, #00ded8)',
+                color: 'white',
+                width: 45,
+                height: 45,
+                borderRadius: '12px',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 12px rgba(0, 167, 213, 0.3)',
+                mr: 2,
+                '&:hover': {
+                  background: 'linear-gradient(135deg, #0088b3, #00c4bf)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 6px 16px rgba(0, 167, 213, 0.4)',
+                }
+              }}
+            >
+              <MenuIcon sx={{ fontSize: 24 }} />
+            </IconButton>
+          )}
+
+          {/* Logo - CENTER (Mobile) / LEFT (Desktop) */}
           <Box 
             sx={{ 
               display: 'flex', 
               alignItems: 'center', 
               cursor: 'pointer',
-              mr: 4
+              transition: 'transform 0.3s ease',
+              mr: isMobile ? 'auto' : 2,
+              ml: isMobile ? 'auto' : 0,
+              '&:hover': {
+                transform: 'scale(1.05)'
+              }
             }}
             onClick={() => handleNavigation('/')}
           >
             <img 
               src={Logo} 
               alt="Taleem ul Quran" 
-              style={{ height: 50, marginRight: 10 }} 
+              style={{ 
+                height: isMobile ? 50 : 60, 
+                marginRight: 10,
+                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+              }} 
             />
-            {!isMobile && (
-              <Typography 
-                variant="h6" 
-                component="div" 
-                sx={{ 
-                  fontWeight: 'bold',
-                  color: 'primary.main',
-                  display: { xs: 'none', sm: 'block' }
-                }}
-              >
-                تعلیم القرآن
-              </Typography>
-            )}
           </Box>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - LEFT Side (after logo) */}
           {!isMobile && (
-            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mr: 'auto' }}>
               {navigationItems.map((item) => (
                 <Button
                   key={item.label}
-                  color="inherit"
                   onClick={() => handleNavigation(item.path)}
+                  className="nav-button"
                   sx={{ 
-                    mr: 2,
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: '12px',
                     textTransform: 'none',
-                    fontWeight: 500,
+                    fontWeight: 700,
+                    fontSize: '1.1rem',
+                    fontFamily: '"Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif',
+                    color: 'white',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&:before': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: 0,
+                      left: '50%',
+                      width: 0,
+                      height: '3px',
+                      background: 'white',
+                      transition: 'all 0.3s ease',
+                      transform: 'translateX(-50%)'
+                    },
                     '&:hover': {
-                      backgroundColor: 'rgba(0, 167, 213, 0.1)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                      color: 'white',
+                      '&:before': {
+                        width: '80%'
+                      }
                     }
                   }}
                 >
@@ -158,38 +324,42 @@ const Header = () => {
             </Box>
           )}
 
-          {/* Search and Mobile Menu */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          {/* Search Button - RIGHT Side (Desktop Only) */}
+          {!isMobile && (
             <IconButton
-              color="inherit"
               onClick={toggleSearch}
+              className="action-button"
               sx={{
-                backgroundColor: showSearch ? 'primary.main' : 'transparent',
-                color: showSearch ? 'white' : 'text.primary',
+                backgroundColor: showSearch ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.15)',
+                color: 'white',
+                width: 45,
+                height: 45,
+                borderRadius: '12px',
+                transition: 'all 0.3s ease',
+                boxShadow: showSearch ? '0 4px 12px rgba(255, 255, 255, 0.2)' : 'none',
                 '&:hover': {
-                  backgroundColor: showSearch ? 'primary.dark' : 'rgba(0, 167, 213, 0.1)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 6px 16px rgba(255, 255, 255, 0.3)',
                 }
               }}
             >
-              <SearchIcon />
+              <SearchIcon sx={{ fontSize: 22 }} />
             </IconButton>
-
-            {isMobile && (
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
-          </Box>
+          )}
         </Toolbar>
 
         {/* Search Bar */}
         {showSearch && (
-          <Box sx={{ p: 2, backgroundColor: '#f8f9fa', borderTop: '1px solid #eee' }}>
+          <Box 
+            className="search-bar-container"
+            sx={{ 
+              p: 2.5, 
+              background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+              borderTop: '1px solid rgba(0, 167, 213, 0.1)',
+              animation: 'slideDown 0.3s ease'
+            }}
+          >
             <EnhancedSearch 
               onSurahSelect={handleSurahSelect}
               placeholder="سورتوں کے نام، ترجمہ یا نمبر سے تلاش کریں..."
@@ -198,19 +368,25 @@ const Header = () => {
         )}
       </AppBar>
 
-      {/* Mobile Drawer */}
+      {/* Modern Mobile Drawer */}
       <Drawer
         variant="temporary"
+        anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: 'block', md: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 250,
+            width: { xs: '85vw', sm: 320 },
+            maxWidth: 320,
+            background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
+            borderLeft: '3px solid',
+            borderImage: 'linear-gradient(180deg, #00a7d5, #00ded8) 1',
+            overflowX: 'hidden'
           },
         }}
       >

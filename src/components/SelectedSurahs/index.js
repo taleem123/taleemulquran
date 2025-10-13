@@ -1,28 +1,28 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Card, 
   CardContent, 
   Typography, 
-  Box, 
-  Grid
+  Box
 } from '@mui/material';
 import surahData from '../SurahList/surahData.json';
 import Madina from '../../images/madina.png';
 import Makka from '../../images/makka.png';
+import SectionHeader from '../SectionHeader';
 import './style.css';
 
 const SelectedSurahs = () => {
   const navigate = useNavigate();
 
-  // Select 6 popular/important Surahs
+  // Select 6 audio surahs as requested
   const selectedSurahs = [
-    surahData.find(s => s.number === 1),   // Al-Faatiha
-    surahData.find(s => s.number === 2),   // Al-Baqara
-    surahData.find(s => s.number === 3),   // Aal-i-Imraan
-    surahData.find(s => s.number === 4),   // An-Nisaa
-    surahData.find(s => s.number === 5),   // Al-Maaida
-    surahData.find(s => s.number === 6),   // Al-An'aam
+    surahData.find(s => s.number === 18),  // Al-Kahf (Al-Kahaf)
+    surahData.find(s => s.number === 12),  // Yusuf (Yousuf)
+    surahData.find(s => s.number === 67),  // Al-Mulk
+    surahData.find(s => s.number === 36),  // Yaseen
+    surahData.find(s => s.number === 33),  // Al-Ahzaab
+    surahData.find(s => s.number === 9),   // At-Tawba (At-Tauba)
   ].filter(Boolean);
 
   const handleSurahClick = useCallback((surah) => {
@@ -45,7 +45,7 @@ const SelectedSurahs = () => {
                 component="div"
                 className="surah-number"
               >
-                {surah.number}
+                #{surah.number}
               </Typography>
               <Typography 
                 component="div"
@@ -61,7 +61,7 @@ const SelectedSurahs = () => {
               </Typography>
             </Box>
 
-            {/* Right side - Arabic info */}
+            {/* Right side - Arabic info with Icon */}
             <Box className="surah-arabic-section">
               <img
                 src={isMeccan ? Makka : Madina}
@@ -78,7 +78,7 @@ const SelectedSurahs = () => {
                 component="div"
                 className="surah-ayat-count"
               >
-                Ayat: {surah.numberOfAyahs}
+                کل آیات: {surah.numberOfAyahs}
               </Typography>
             </Box>
           </Box>
@@ -92,33 +92,10 @@ const SelectedSurahs = () => {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <div className="section-header">
-              <Typography 
-                variant="h3" 
-                component="h2"
-                className="section-title"
-                sx={{
-                  fontWeight: 'bold',
-                  color: '#1a365d',
-                  mb: 2,
-                  textAlign: 'center'
-                }}
-              >
-                منتخب سورتیں
-              </Typography>
-              <Typography 
-                variant="h6" 
-                color="text.secondary"
-                sx={{
-                  textAlign: 'center',
-                  mb: 4,
-                  maxWidth: '600px',
-                  margin: '0 auto 2rem'
-                }}
-              >
-                قرآن کریم کی منتخب سورتوں کو سنیں اور سیکھیں
-              </Typography>
-            </div>
+            <SectionHeader 
+              title="آڈیو تفسیر"
+              subtitle="تعلیم القرآن کی مکمل سورتوں کو تفسیر سنیں"
+            />
           </div>
         </div>
 

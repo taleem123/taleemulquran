@@ -4,7 +4,9 @@
 --------------------------------------------------------------*/
 .wpo-site-footer,
 .wpo-site-footer {
-    background: #fff;
+    background: linear-gradient(135deg, #1a365d 0%, #2d5a87 50%, #00a7d5 100%);
+    background-size: 400% 400%;
+    animation: gradient 25s ease infinite;
     position: relative;
     font-size: 15px;
     /*** about-widget ***/
@@ -13,6 +15,31 @@
     /*** market-widget ***/
     /*** wpo-lower-footer ***/
     padding-top: 100px;
+    overflow: hidden;
+}
+
+.wpo-site-footer::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 222, 216, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 12s ease-in-out infinite;
+}
+
+.wpo-site-footer::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite reverse;
 }
 
 .wpo-news-letter-wrap {
@@ -35,7 +62,7 @@
 
 .wpo-site-footer p,
 .wpo-site-footer li {
-    color: #444444;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .wpo-site-footer-2 p,
@@ -292,7 +319,7 @@
 
 .wpo-site-footer .wpo-lower-footer .row,
 .wpo-site-footer-2 .wpo-lower-footer .row {
-    border-top: 1px solid #e3eff0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .wpo-site-footer .wpo-lower-footer .row,
@@ -308,6 +335,8 @@
     font-size: 15px;
     font-size: 0.9375rem;
     margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
 }
 
 @media (max-width: 991px) {

@@ -1,0 +1,79 @@
+/* Button Styles */
+.design-button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+
+.design-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.design-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.design-button:active::before {
+  width: 0;
+  height: 0;
+}
+
+/* Loading state */
+.design-button--loading {
+  pointer-events: none;
+}
+
+.design-button--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Focus states for accessibility */
+.design-button:focus-visible {
+  outline: 3px solid rgba(0, 167, 213, 0.3);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .design-button {
+    transition: none;
+  }
+  
+  .design-button::before {
+    transition: none;
+  }
+  
+  .design-button:hover {
+    transform: none;
+  }
+  
+  .design-button--loading::after {
+    animation: none;
+  }
+}

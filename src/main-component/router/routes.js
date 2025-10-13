@@ -10,6 +10,7 @@ const ErrorPage = React.lazy(() => import('../ErrorPage'));
 const ContactPage = React.lazy(() => import('../ContactPage'));
 const AllSurahs = React.lazy(() => import('../AllSurahs'));
 const ShortVideos = React.lazy(() => import('../ShortVideos'));
+const SelectedLessonsPage = React.lazy(() => import('../SelectedLessonsPage'));
 const SurahDetails = React.lazy(() => import('../SurahDetails'));
 const UnderConstruction = React.lazy(() => import('../UnderConstruction'));
 
@@ -33,6 +34,7 @@ const AllRoute = () => {
               <Route path='/video/:surahNumber' element={<SurahDetails/>} />
               <Route path='/pdf/:surahNumber' element={<SurahDetails/>} />
               <Route path='/shorts' element={<ShortVideos/>} />
+              <Route path='/lessons' element={<SelectedLessonsPage/>} />
               <Route path='/coming-soon' element={<UnderConstruction/>} />
               <Route path='*' element={<ErrorPage/>} />
             </Routes>

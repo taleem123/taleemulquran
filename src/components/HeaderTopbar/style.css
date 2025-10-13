@@ -1,3 +1,34 @@
+/* Modern Topbar Styles */
+@import url('https://fonts.googleapis.com/css2?family=Amiri&family=Scheherazade+New&display=swap');
+
+.modern-topbar {
+  transition: all 0.4s ease-in-out;
+}
+
+.modern-topbar:hover {
+  filter: brightness(1.1);
+}
+
+.modern-topbar {
+    box-shadow: 0 2px 8px rgba(0, 167, 213, 0.2);
+    position: relative;
+    z-index: 1000;
+}
+
+.modern-topbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%
+    );
+}
+
 .wpo-header-style-2 .topbar,
 .middle-header .topbar {
     border-bottom: 1px solid rgba(255, 255, 255, .1);

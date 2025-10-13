@@ -234,6 +234,8 @@
   margin-bottom: 5px !important;
   padding-right: 640px;
   text-align: right;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease-out 0.5s both;
 }
 
 .hero .slide-caption>div.slide-top * {
@@ -311,12 +313,21 @@
 
 .hero .slide-caption>div.slide-top span {
   display: inline-block;
-  padding: 5px 20px;
-  background: #fff;
-  border-radius: 20px;
+  padding: 8px 24px;
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  border-radius: 25px;
   color: #088998;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 167, 213, 0.2);
+  border: 2px solid rgba(0, 167, 213, 0.1);
+  transition: all 0.3s ease;
+  animation: fadeInDown 0.8s ease-out 0.3s both;
+}
+
+.hero .slide-caption>div.slide-top span:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 167, 213, 0.3);
 }
 
 .hero .slide-caption>div.slide-top {
@@ -585,6 +596,9 @@
   line-height: normal;
   padding-right: 640px;
   text-align: right;
+  animation: fadeInUp 1s ease-out 0.7s both;
+  font-size: 1.1rem;
+  color: #555;
 }
 
 
@@ -629,11 +643,40 @@
 .hero-style-3,
 .hero-style-4,
 .hero-style-5 {
-  background: url(../../images/slider/bg.png) no-repeat center center / cover;
+  background: linear-gradient(135deg, #e0f7ff 0%, #f8f9fa 50%, #fff5e6 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero-style-2:after {
-  display: none;
+.hero-style-2::before,
+.hero-style-3::before,
+.hero-style-4::before,
+.hero-style-5::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 167, 213, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-style-3::after,
+.hero-style-4::after,
+.hero-style-5::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 222, 216, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
 }
 
 .hero-style-2 .slide .container {

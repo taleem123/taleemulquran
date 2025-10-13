@@ -63,9 +63,11 @@ export const getFacebookId = (url) => {
   
   const patterns = [
     /facebook\.com\/.*\/videos\/(\d+)/,
+    /facebook\.com\/.*\/reel\/(\d+)/,
     /fb\.watch\/([^\/\?]+)/,
     /facebook\.com\/.*\/posts\/(\d+)/,
-    /facebook\.com\/.*\/photos\/(\d+)/
+    /facebook\.com\/.*\/photos\/(\d+)/,
+    /facebook\.com\/watch\/\?v=(\d+)/
   ];
   
   for (const pattern of patterns) {
@@ -173,7 +175,8 @@ export const getEmbedUrl = (platform, videoId, options = {}) => {
       return `https://www.youtube.com/embed/${videoId}?${ytParams.toString()}`;
     
     case 'facebook':
-      return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(`https://www.facebook.com/watch/?v=${videoId}`)}&show_text=false&width=560&height=315`;
+      // For Facebook reels and videos, use the original URL directly
+      return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(`https://www.facebook.com/reel/${videoId}`)}&show_text=false&width=560&height=315&t=0`;
     
     case 'tiktok':
       return `https://www.tiktok.com/embed/v2/${videoId}`;

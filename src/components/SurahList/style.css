@@ -24,6 +24,15 @@
     }
 }
 
+.revelation-icon {
+  width: 42px !important;
+  height: 48px !important;
+  margin-bottom: 8px !important;
+  display: block;
+  align-self: flex-end;
+  object-fit: contain;
+}
+
 .service-sidebar>.widget+.widget {
     margin-top: 60px;
 }

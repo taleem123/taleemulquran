@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useCallback, useMemo } from 'react';
-
 import {
   Card,
   CardContent,
@@ -32,64 +31,80 @@ import Footer from '../../components/footer'
 import Scrollbar from '../../components/scrollbar'
 import './style.css'
 
-// Real video data from the provided JSON
-const allVideos = [
+// All lessons data - longer videos (15-20 minutes)
+const allLessons = [
     {
       id: 1,
-      title: 'Islamic Teaching Video 1',
+      title: 'Tafseer Lesson 1: Understanding Surah Al-Fatiha',
       sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
       thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
       platform: 'youtube',
-      description: 'A beautiful Islamic teaching video about Quranic lessons and moral values.'
+      description: 'A comprehensive tafseer lesson explaining the deep meanings and interpretations of Surah Al-Fatiha, the opening chapter of the Quran.'
     },
     {
       id: 2,
-      title: 'Islamic Teaching Video 2',
+      title: 'Tafseer Lesson 2: Stories of the Prophets',
       sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
       thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
       platform: 'youtube',
-      description: 'Another inspiring Islamic video sharing wisdom from the Quran.'
+      description: 'An in-depth exploration of the stories of prophets mentioned in the Quran and the lessons we can learn from their lives.'
     },
     {
       id: 3,
-      title: 'Islamic Teaching Video 3',
+      title: 'Tafseer Lesson 3: Islamic Ethics and Morals',
       sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
       thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
       platform: 'youtube',
-      description: 'Learn about Islamic principles through this educational video.'
+      description: 'A detailed study of Islamic ethics and moral values as taught in the Quran, with practical applications for daily life.'
     },
     {
       id: 4,
-      title: 'Islamic Teaching Video 4',
+      title: 'Tafseer Lesson 4: Understanding Prayer in Quran',
       sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
       thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube'
-      // No description - optional field
+      platform: 'youtube',
+      description: 'A comprehensive study of prayer as mentioned in the Quran, its importance, and the spiritual benefits.'
+    },
+    {
+      id: 5,
+      title: 'Tafseer Lesson 5: Family Values in Islam',
+      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
+      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
+      platform: 'youtube',
+      description: 'Exploring the Islamic perspective on family relationships, marriage, and raising children according to Quranic teachings.'
+    },
+    {
+      id: 6,
+      title: 'Tafseer Lesson 6: Patience and Perseverance',
+      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
+      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
+      platform: 'youtube',
+      description: 'Learning about patience and perseverance from Quranic stories and verses, and how to apply these virtues in daily life.'
     }
 ];
 
-const ShortVideos = () => {
+const SelectedLessonsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('newest');
   const [filterBy, setFilterBy] = useState('all');
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
-  // Filter and sort videos
-  const filteredVideos = useMemo(() => {
-    let filtered = allVideos;
+  // Filter and sort lessons
+  const filteredLessons = useMemo(() => {
+    let filtered = allLessons;
 
     // Apply search filter
     if (searchTerm) {
-      filtered = filtered.filter(video =>
-        video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (video.description && video.description.toLowerCase().includes(searchTerm.toLowerCase()))
+      filtered = filtered.filter(lesson =>
+        lesson.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (lesson.description && lesson.description.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
 
     // Apply category filter (removed since we don't have categories anymore)
     // if (filterBy !== 'all') {
-    //   filtered = filtered.filter(video => video.category === filterBy);
+    //   filtered = filtered.filter(lesson => lesson.category === filterBy);
     // }
 
     // Apply sorting
@@ -111,12 +126,13 @@ const ShortVideos = () => {
     });
 
     return filtered;
-  }, [searchTerm, sortBy, allVideos]);
+  }, [searchTerm, sortBy, allLessons]);
 
   const handleVideoClick = useCallback((video) => {
     setSelectedVideo(video);
     setIsVideoModalOpen(true);
   }, []);
+
 
   const handleDirectPlay = useCallback((video, e) => {
     e.preventDefault();
@@ -126,12 +142,25 @@ const ShortVideos = () => {
     }
   }, []);
 
+  const handleDownload = useCallback((video, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (video.sources && video.sources[0]) {
+      const link = document.createElement('a');
+      link.href = video.sources[0];
+      link.download = `${video.title || 'lesson'}.mp4`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }, []);
+
   const handleShare = useCallback((video, e) => {
     e.stopPropagation();
     if (navigator.share) {
       navigator.share({
         title: video.title,
-        text: video.description || 'Islamic teaching video',
+        text: video.description || 'Islamic teaching lesson',
         url: window.location.href
       });
     } else {
@@ -139,31 +168,10 @@ const ShortVideos = () => {
     }
   }, []);
 
-  const handleDownload = useCallback((video, e) => {
-    e.stopPropagation();
-    if (video.sources && video.sources[0]) {
-      const link = document.createElement('a');
-      link.href = video.sources[0];
-      link.download = `${video.title || 'video'}.mp4`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  }, []);
-
   const handleCloseVideo = useCallback(() => {
     setIsVideoModalOpen(false);
     setSelectedVideo(null);
   }, []);
-
-  // Test video URLs on component mount (can be removed in production)
-  // React.useEffect(() => {
-  //   const testVideos = async () => {
-  //     const results = await testAllVideoUrls(allVideos);
-  //     logVideoTestResults(results);
-  //   };
-  //   testVideos();
-  // }, []);
 
   const getPlatformIcon = (platform) => {
     switch (platform) {
@@ -178,22 +186,22 @@ const ShortVideos = () => {
     }
   };
 
-  const VideoCard = ({ video }) => (
+  const LessonCard = ({ lesson }) => (
     <Card 
       className="video-card"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        handleVideoClick(video);
+        handleVideoClick(lesson);
       }}
     >
       <Box className="video-thumbnail-container">
-        {video.thumb || video.thumbnail ? (
+        {lesson.thumb || lesson.thumbnail ? (
           <CardMedia
             component="img"
             height="200"
-            image={video.thumb || video.thumbnail}
-            alt={video.title}
+            image={lesson.thumb || lesson.thumbnail}
+            alt={lesson.title}
             className="video-thumbnail"
           />
         ) : (
@@ -205,16 +213,16 @@ const ShortVideos = () => {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: video.platform === 'facebook' ? '#1877f2' : 
-                             video.platform === 'tiktok' ? '#000000' : 
-                             video.platform === 'youtube' ? '#ff0000' : '#666666',
+              backgroundColor: lesson.platform === 'facebook' ? '#1877f2' : 
+                             lesson.platform === 'tiktok' ? '#000000' : 
+                             lesson.platform === 'youtube' ? '#ff0000' : '#666666',
               color: 'white',
               fontSize: '3rem'
             }}
           >
-            {getPlatformIcon(video.platform)}
+            {getPlatformIcon(lesson.platform)}
             <Typography variant="caption" sx={{ mt: 1, fontSize: '0.8rem' }}>
-              {video.platform?.toUpperCase()}
+              {lesson.platform?.toUpperCase()}
             </Typography>
           </Box>
         )}
@@ -238,7 +246,7 @@ const ShortVideos = () => {
         />
 
         <Box className="platform-icon">
-          {getPlatformIcon(video.platform)}
+          {getPlatformIcon(lesson.platform)}
         </Box>
       </Box>
 
@@ -255,11 +263,11 @@ const ShortVideos = () => {
             lineHeight: 1.3
           }}
         >
-          {video.title}
+          {lesson.title}
         </Typography>
 
         {/* Description (optional) */}
-        {video.description && (
+        {lesson.description && (
           <Typography 
             variant="body2" 
             className="video-description"
@@ -270,7 +278,7 @@ const ShortVideos = () => {
               lineHeight: 1.4
             }}
           >
-            {video.description}
+            {lesson.description}
           </Typography>
         )}
 
@@ -281,7 +289,7 @@ const ShortVideos = () => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                handleDirectPlay(video, e);
+                handleDirectPlay(lesson, e);
               }}
               className="direct-play-button"
               title="Direct Play"
@@ -294,7 +302,7 @@ const ShortVideos = () => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                handleDownload(video, e);
+                handleDownload(lesson, e);
               }}
               className="download-button"
               title="Download Video"
@@ -306,7 +314,7 @@ const ShortVideos = () => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                handleShare(video, e);
+                handleShare(lesson, e);
               }}
               className="share-button"
               title="Share Video"
@@ -328,21 +336,21 @@ const ShortVideos = () => {
   );
 
   return (
-        <Fragment>
+    <Fragment>
       <Navbar />
       
       <section className="service-single-section section-padding">
         <div className="container">
           <SectionHeader 
-            title="شارٹ ویڈیوز"
-            subtitle="قرآن کریم کی تمام ویڈیو تشریحات اور تعلیمات"
+            title="منتخب اسباق"
+            subtitle="تفصیلی تفسیر کے اسباق، کہانیاں اور طویل لیکچرز سے نصیحتیں"
           />
 
           {/* Search and Filter Bar */}
           <div className="search-filter-container">
             <TextField
               fullWidth
-              placeholder="ویڈیوز تلاش کریں..."
+              placeholder="اسباق تلاش کریں..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               InputProps={{
@@ -388,18 +396,18 @@ const ShortVideos = () => {
           {/* Results Count */}
           <div className="results-count">
             <Typography variant="body2" color="text.secondary">
-              {filteredVideos.length} میں سے {allVideos.length} ویڈیوز دکھائی جا رہی ہیں
+              {filteredLessons.length} میں سے {allLessons.length} ویڈیوز دکھائی جا رہی ہیں
             </Typography>
           </div>
 
-          {/* Videos Grid */}
+          {/* Lessons Grid */}
           <div className="videos-grid">
             <Grid container spacing={2}>
-              {filteredVideos.length === 0 ? (
+              {filteredLessons.length === 0 ? (
                 <Grid size={12}>
                   <div className="empty-state">
-                    <div className="empty-state-icon">🎥</div>
-                    <h3>کوئی ویڈیو نہیں ملی</h3>
+                    <div className="empty-state-icon">📚</div>
+                    <h3>کوئی سبق نہیں ملا</h3>
                     <p>اپنی تلاش کی شرائط کو تبدیل کرنے کی کوشش کریں</p>
                     <Button 
                       variant="outlined" 
@@ -414,9 +422,9 @@ const ShortVideos = () => {
                   </div>
                 </Grid>
               ) : (
-                filteredVideos.map((video) => (
-                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={video.id}>
-                    <VideoCard video={video} />
+                filteredLessons.map((lesson) => (
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={lesson.id}>
+                    <LessonCard lesson={lesson} />
                   </Grid>
                 ))
               )}
@@ -438,7 +446,8 @@ const ShortVideos = () => {
 
       <Footer footerClass={'wpo-ne-footer-2'} />
       <Scrollbar />
-        </Fragment>
+    </Fragment>
   );
 };
-export default ShortVideos;
+
+export default SelectedLessonsPage;

@@ -3,14 +3,14 @@ import surahData from './surahData.json';
 import './style.css';
 import './enhanced-style.css';
 import { useNavigate } from 'react-router-dom';
-import { Grid, Typography, Box, Alert, TextField, Button, IconButton } from '@mui/material';
+import { Typography, Box, Alert, TextField, Button, IconButton } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Madina from '../../images/madina.png';
 import Makka from '../../images/makka.png';
 import LoadingSpinner from '../LoadingSpinner';
 import ErrorBoundary from '../ErrorBoundary';
-import { Search, PlayArrow, BookmarkBorder, Bookmark } from '@mui/icons-material';
+import { Search, BookmarkBorder, Bookmark } from '@mui/icons-material';
 
 const SurahList = (props) => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const SurahList = (props) => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 800);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -61,7 +61,7 @@ const SurahList = (props) => {
 
     // Apply search filter
     if (searchTerm) {
-      filtered = filtered.filter(surah => 
+      filtered = filtered.filter(surah =>
         surah.englishName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         surah.englishNameTranslation.toLowerCase().includes(searchTerm.toLowerCase()) ||
         surah.name.includes(searchTerm)
@@ -70,11 +70,11 @@ const SurahList = (props) => {
 
     // Apply revelation type filter
     if (selectedFilter !== 'all') {
-      filtered = filtered.filter(surah => 
+      filtered = filtered.filter(surah =>
         selectedFilter === 'meccan' ? surah.revelationType === 'Meccan' :
-        selectedFilter === 'medinan' ? surah.revelationType === 'Medinan' :
-        selectedFilter === 'bookmarked' ? bookmarkedSurahs.has(surah.number) :
-        true
+          selectedFilter === 'medinan' ? surah.revelationType === 'Medinan' :
+            selectedFilter === 'bookmarked' ? bookmarkedSurahs.has(surah.number) :
+              true
       );
     }
 
@@ -145,7 +145,7 @@ const SurahList = (props) => {
               }}
               className="search-input"
             />
-            
+
             <div className="filter-buttons">
               {filterOptions.map((option) => (
                 <Button
@@ -175,8 +175,8 @@ const SurahList = (props) => {
                 <div className="empty-state-icon">🔍</div>
                 <h3>کوئی سورت نہیں ملی</h3>
                 <p>اپنی تلاش یا فلٹر کی شرائط کو تبدیل کرنے کی کوشش کریں</p>
-                <Button 
-                  variant="outlined" 
+                <Button
+                  variant="outlined"
                   onClick={() => {
                     setSearchTerm('');
                     setSelectedFilter('all');
@@ -188,7 +188,7 @@ const SurahList = (props) => {
             ) : (
               <div className="surahs-grid-container">
                 {filteredSurahs.map((surah) => (
-                  <Item 
+                  <Item
                     key={surah.number}
                     className="surah-tile"
                     onClick={() => _openDetails(props.formate, surah.number)}
@@ -204,20 +204,20 @@ const SurahList = (props) => {
                       <div className="surah-tile-header">
                         {/* Left side - English info */}
                         <div className="surah-english-section">
-                          <Typography 
-                            component="div" 
+                          <Typography
+                            component="div"
                             className="surah-number"
                           >
                             {surah.number}
                           </Typography>
-                          <Typography 
-                            component="div" 
+                          <Typography
+                            component="div"
                             className="surah-english-name"
                           >
                             {surah.englishName}
                           </Typography>
-                          <Typography 
-                            component="div" 
+                          <Typography
+                            component="div"
                             className="surah-english-translation"
                           >
                             {surah.englishNameTranslation}
@@ -232,34 +232,20 @@ const SurahList = (props) => {
                             className="revelation-icon"
                             loading="lazy"
                           />
-                          <Typography 
-                            component="div" 
+                          <Typography
+                            component="div"
                             className="surah-arabic-name"
                           >
                             {surah.name}
                           </Typography>
-                          <Typography 
-                            component="div" 
+                          <Typography
+                            component="div"
                             className="surah-ayat-count"
                           >
-                            Ayat: {surah.numberOfAyahs}
+                            Ayaat: {surah.numberOfAyahs}
                           </Typography>
                         </div>
                       </div>
-
-                      {/* Bookmark Button */}
-                      <IconButton
-                        className="bookmark-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleBookmark(surah.number);
-                        }}
-                      >
-                        {bookmarkedSurahs.has(surah.number) ? 
-                          <Bookmark color="primary" /> : 
-                          <BookmarkBorder />
-                        }
-                      </IconButton>
                     </div>
                   </Item>
                 ))}

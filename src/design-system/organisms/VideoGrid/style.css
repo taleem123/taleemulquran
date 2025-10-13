@@ -1,0 +1,84 @@
+/* Video Grid Styles */
+.video-grid {
+  position: relative;
+}
+
+/* Grid Layout */
+.video-grid .MuiGrid-container {
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+  .video-grid .MuiGrid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .video-grid .MuiGrid-container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .video-grid .MuiGrid-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .video-grid {
+    padding: 16px 0;
+  }
+  
+  .video-grid .MuiGrid-container {
+    gap: 16px;
+  }
+}
+
+/* Variant-specific styles */
+.video-grid--compact {
+  padding: 12px 0;
+}
+
+.video-grid--compact .MuiGrid-container {
+  gap: 12px;
+}
+
+.video-grid--large {
+  padding: 24px 0;
+}
+
+.video-grid--large .MuiGrid-container {
+  gap: 24px;
+}
+
+/* Animation for grid entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.video-grid {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Focus states for accessibility */
+.video-grid:focus-within {
+  outline: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .video-grid {
+    animation: none;
+  }
+}

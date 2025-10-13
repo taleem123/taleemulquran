@@ -21,36 +21,36 @@ import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../SectionHeader';
 import './style.css';
 
-const RecentVideos = () => {
+const SelectedLessons = () => {
   const navigate = useNavigate();
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
-  // Real video data from the provided JSON
-  const recentVideos = [
+  // Selected lessons data - longer videos (15-20 minutes)
+  const selectedLessons = [
     {
       id: 1,
-      title: 'Islamic Teaching Video 1',
+      title: 'Tafseer Lesson 1: Understanding Surah Al-Fatiha',
       sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
       thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
       platform: 'youtube',
-      description: 'A beautiful Islamic teaching video about Quranic lessons and moral values.'
+      description: 'A comprehensive tafseer lesson explaining the deep meanings and interpretations of Surah Al-Fatiha, the opening chapter of the Quran.'
     },
     {
       id: 2,
-      title: 'Islamic Teaching Video 2',
+      title: 'Tafseer Lesson 2: Stories of the Prophets',
       sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
       thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
       platform: 'youtube',
-      description: 'Another inspiring Islamic video sharing wisdom from the Quran.'
+      description: 'An in-depth exploration of the stories of prophets mentioned in the Quran and the lessons we can learn from their lives.'
     },
     {
       id: 3,
-      title: 'Islamic Teaching Video 3',
+      title: 'Tafseer Lesson 3: Islamic Ethics and Morals',
       sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
       thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
       platform: 'youtube',
-      description: 'Learn about Islamic principles through this educational video.'
+      description: 'A detailed study of Islamic ethics and moral values as taught in the Quran, with practical applications for daily life.'
     }
   ];
 
@@ -72,7 +72,7 @@ const RecentVideos = () => {
     if (navigator.share) {
       navigator.share({
         title: video.title,
-        text: video.titleUrdu,
+        text: video.description || 'Islamic teaching lesson',
         url: window.location.href
       });
     } else {
@@ -85,7 +85,7 @@ const RecentVideos = () => {
     if (video.sources && video.sources[0]) {
       const link = document.createElement('a');
       link.href = video.sources[0];
-      link.download = `${video.title || 'video'}.mp4`;
+      link.download = `${video.title || 'lesson'}.mp4`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -98,7 +98,7 @@ const RecentVideos = () => {
   }, []);
 
   const handleShowMore = useCallback(() => {
-    navigate('/shorts');
+    navigate('/lessons');
   }, [navigate]);
 
   const getPlatformIcon = (platform) => {
@@ -114,22 +114,22 @@ const RecentVideos = () => {
     }
   };
 
-  const VideoCard = ({ video }) => (
+  const LessonCard = ({ lesson }) => (
     <Card 
       className="video-card"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        handleVideoClick(video);
+        handleVideoClick(lesson);
       }}
     >
       <Box className="video-thumbnail-container">
-        {video.thumb || video.thumbnail ? (
+        {lesson.thumb || lesson.thumbnail ? (
           <CardMedia
             component="img"
             height="200"
-            image={video.thumb || video.thumbnail}
-            alt={video.title}
+            image={lesson.thumb || lesson.thumbnail}
+            alt={lesson.title}
             className="video-thumbnail"
           />
         ) : (
@@ -141,16 +141,16 @@ const RecentVideos = () => {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: video.platform === 'facebook' ? '#1877f2' : 
-                             video.platform === 'tiktok' ? '#000000' : 
-                             video.platform === 'youtube' ? '#ff0000' : '#666666',
+              backgroundColor: lesson.platform === 'facebook' ? '#1877f2' : 
+                             lesson.platform === 'tiktok' ? '#000000' : 
+                             lesson.platform === 'youtube' ? '#ff0000' : '#666666',
               color: 'white',
               fontSize: '3rem'
             }}
           >
-            {getPlatformIcon(video.platform)}
+            {getPlatformIcon(lesson.platform)}
             <Typography variant="caption" sx={{ mt: 1, fontSize: '0.8rem' }}>
-              {video.platform?.toUpperCase()}
+              {lesson.platform?.toUpperCase()}
             </Typography>
           </Box>
         )}
@@ -162,7 +162,7 @@ const RecentVideos = () => {
         </Box>
 
         <Chip
-          label="Video"
+          label="Lesson"
           size="small"
           className="duration-badge"
           sx={{
@@ -174,7 +174,7 @@ const RecentVideos = () => {
         />
 
         <Box className="platform-icon">
-          {getPlatformIcon(video.platform)}
+          {getPlatformIcon(lesson.platform)}
         </Box>
       </Box>
 
@@ -191,11 +191,11 @@ const RecentVideos = () => {
             lineHeight: 1.3
           }}
         >
-          {video.title}
+          {lesson.title}
         </Typography>
 
         {/* Description (optional) */}
-        {video.description && (
+        {lesson.description && (
           <Typography 
             variant="body2" 
             className="video-description"
@@ -206,7 +206,7 @@ const RecentVideos = () => {
               lineHeight: 1.4
             }}
           >
-            {video.description}
+            {lesson.description}
           </Typography>
         )}
 
@@ -217,7 +217,7 @@ const RecentVideos = () => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                handleDirectPlay(video, e);
+                handleDirectPlay(lesson, e);
               }}
               className="direct-play-button"
               title="Direct Play"
@@ -230,10 +230,10 @@ const RecentVideos = () => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                handleDownload(video, e);
+                handleDownload(lesson, e);
               }}
               className="download-button"
-              title="Download Video"
+              title="Download Lesson"
             >
               <Download sx={{ fontSize: 16 }} />
             </IconButton>
@@ -242,10 +242,10 @@ const RecentVideos = () => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                handleShare(video, e);
+                handleShare(lesson, e);
               }}
               className="share-button"
-              title="Share Video"
+              title="Share Lesson"
             >
               <Share sx={{ fontSize: 16 }} />
             </IconButton>
@@ -264,19 +264,19 @@ const RecentVideos = () => {
   );
 
   return (
-    <section className="recent-videos-section section-padding">
+    <section className="selected-lessons-section section-padding">
       <div className="container">
         <SectionHeader 
-          title="شارٹ ویڈیوز"
-          subtitle="تعلیم القرآن  کی تازہ ترین شارٹ ویڈیو تشریحات"
+          title="منتخب اسباق"
+          subtitle="تعلیم القرآن کی تفصیلی تفسیر کے اسباق اور طویل لیکچرز"
         />
 
-        {/* Videos Grid */}
+        {/* Lessons Grid */}
         <div className="videos-grid">
           <Grid container spacing={2}>
-            {recentVideos.map((video) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={video.id}>
-                <VideoCard video={video} />
+            {selectedLessons.map((lesson) => (
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={lesson.id}>
+                <LessonCard lesson={lesson} />
               </Grid>
             ))}
           </Grid>
@@ -304,4 +304,4 @@ const RecentVideos = () => {
   );
 };
 
-export default RecentVideos;
+export default SelectedLessons;

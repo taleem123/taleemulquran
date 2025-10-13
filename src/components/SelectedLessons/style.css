@@ -1,66 +1,66 @@
-/* Recent Videos Section Styles - Matching Selected Lessons */
+/* Selected Lessons Section Styles - Matching Recent Videos */
 
-.recent-videos-section {
+.selected-lessons-section {
   padding: 100px 0;
-  background: linear-gradient(135deg, #fff5e6 0%, #f8f9fa 50%, #e0f7ff 100%);
+  background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 50%, #ffe6f0 100%);
   background-size: 400% 400%;
   animation: gradient 20s ease infinite;
   position: relative;
   overflow: hidden;
 }
 
-.recent-videos-section::before {
+.selected-lessons-section::before {
   content: '';
   position: absolute;
-  top: -150px;
-  right: -150px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 193, 7, 0.06) 0%, transparent 70%);
+  top: -180px;
+  left: -120px;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(138, 45, 226, 0.08) 0%, transparent 70%);
   border-radius: 50%;
-  animation: float 9s ease-in-out infinite;
+  animation: float 10s ease-in-out infinite;
 }
 
-.recent-videos-section::after {
+.selected-lessons-section::after {
   content: '';
   position: absolute;
-  bottom: -200px;
-  left: -100px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 167, 213, 0.05) 0%, transparent 70%);
+  bottom: -220px;
+  right: -100px;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(0, 167, 213, 0.06) 0%, transparent 70%);
   border-radius: 50%;
-  animation: float 11s ease-in-out infinite reverse;
+  animation: float 13s ease-in-out infinite reverse;
 }
 
-.recent-videos-section .container {
+.selected-lessons-section .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 /* Videos Grid */
-.recent-videos-section .videos-grid {
+.selected-lessons-section .videos-grid {
   margin-bottom: 40px;
   position: relative;
   z-index: 1;
 }
 
-.recent-videos-section .videos-grid .MuiGrid-container {
+.selected-lessons-section .videos-grid .MuiGrid-container {
   width: 100%;
   margin: 0;
 }
 
-.recent-videos-section .videos-grid .MuiGrid-item {
+.selected-lessons-section .videos-grid .MuiGrid-item {
   display: flex;
   flex-direction: column;
 }
 
 /* Video Card Styles */
-.recent-videos-section .video-card {
+.selected-lessons-section .video-card {
   border-radius: 16px !important;
   background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
-  border: 1px solid rgba(0, 167, 213, 0.1);
+  border: 1px solid rgba(138, 45, 226, 0.1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
@@ -68,71 +68,53 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.recent-videos-section .video-card::before {
+.selected-lessons-section .video-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #ffc107, #ff9800);
+  background: linear-gradient(90deg, #8e2de2, #4a00e0);
   transform: scaleX(0);
   transition: transform 0.4s ease;
   z-index: 10;
 }
 
-.recent-videos-section .video-card:hover::before {
+.selected-lessons-section .video-card:hover::before {
   transform: scaleX(1);
 }
 
-.recent-videos-section .video-card:hover {
+.selected-lessons-section .video-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(255, 193, 7, 0.25);
-  border-color: #ffc107;
+  box-shadow: 0 12px 32px rgba(138, 45, 226, 0.25);
+  border-color: #8e2de2;
 }
 
 /* Video Thumbnail Container */
-.recent-videos-section .video-thumbnail-container {
+.selected-lessons-section .video-thumbnail-container {
   position: relative;
   width: 100%;
   height: 200px;
   overflow: hidden;
 }
 
-.recent-videos-section .video-thumbnail {
+.selected-lessons-section .video-thumbnail {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.95);
+  transition: transform 0.3s ease;
 }
 
-.recent-videos-section .video-card:hover .video-thumbnail {
-  transform: scale(1.15);
-  filter: brightness(1);
-}
-
-.recent-videos-section .video-thumbnail-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
-  z-index: 1;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.recent-videos-section .video-card:hover .video-thumbnail-container::before {
-  opacity: 0.3;
+.selected-lessons-section .video-card:hover .video-thumbnail {
+  transform: scale(1.05);
 }
 
 /* Play Button Overlay */
-.recent-videos-section .play-button-overlay {
+.selected-lessons-section .play-button-overlay {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -140,7 +122,7 @@
   z-index: 2;
 }
 
-.recent-videos-section .play-button {
+.selected-lessons-section .play-button {
   background: rgba(255, 193, 7, 0.9) !important;
   width: 60px !important;
   height: 60px !important;
@@ -149,14 +131,14 @@
   transition: all 0.3s ease !important;
 }
 
-.recent-videos-section .play-button:hover {
+.selected-lessons-section .play-button:hover {
   background: rgba(255, 193, 7, 1) !important;
   transform: scale(1.1) !important;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Duration Badge */
-.recent-videos-section .duration-badge {
+.selected-lessons-section .duration-badge {
   position: absolute !important;
   bottom: 8px !important;
   right: 8px !important;
@@ -164,7 +146,7 @@
 }
 
 /* Platform Icon */
-.recent-videos-section .platform-icon {
+.selected-lessons-section .platform-icon {
   position: absolute;
   top: 8px;
   left: 8px;
@@ -176,14 +158,14 @@
 }
 
 /* Video Content */
-.recent-videos-section .video-content {
+.selected-lessons-section .video-content {
   padding: 16px !important;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.recent-videos-section .video-title-english {
+.selected-lessons-section .video-title-english {
   font-size: 1rem !important;
   font-weight: bold !important;
   color: #1a365d !important;
@@ -195,7 +177,7 @@
   overflow: hidden;
 }
 
-.recent-videos-section .video-description {
+.selected-lessons-section .video-description {
   color: #666;
   font-size: 0.9rem;
   line-height: 1.4;
@@ -207,7 +189,7 @@
 }
 
 /* Video Metadata */
-.recent-videos-section .video-metadata {
+.selected-lessons-section .video-metadata {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -216,40 +198,40 @@
   border-top: 1px solid #f0f0f0;
 }
 
-.recent-videos-section .metadata-left {
+.selected-lessons-section .metadata-left {
   display: flex;
   align-items: center;
 }
 
-.recent-videos-section .metadata-right {
+.selected-lessons-section .metadata-right {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.recent-videos-section .metadata-item {
+.selected-lessons-section .metadata-item {
   display: flex;
   align-items: center;
   color: #666;
 }
 
-.recent-videos-section .share-button {
+.selected-lessons-section .share-button {
   padding: 4px !important;
   color: #666 !important;
 }
 
-.recent-videos-section .share-button:hover {
+.selected-lessons-section .share-button:hover {
   background: rgba(0, 167, 213, 0.1) !important;
   color: #00a7d5 !important;
 }
 
 /* View All Button */
-.recent-videos-section .view-all-container {
+.selected-lessons-section .view-all-container {
   text-align: center;
   margin-top: 40px;
 }
 
-.recent-videos-section .view-all-btn {
+.selected-lessons-section .view-all-btn {
   background: #00a7d5;
   color: white;
   border: none;
@@ -262,7 +244,7 @@
   box-shadow: 0 4px 12px rgba(0, 167, 213, 0.3);
 }
 
-.recent-videos-section .view-all-btn:hover {
+.selected-lessons-section .view-all-btn:hover {
   background: #0088b3;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 167, 213, 0.4);
@@ -270,68 +252,68 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .recent-videos-section {
+  .selected-lessons-section {
     padding: 60px 0;
   }
 
-  .recent-videos-section .videos-grid {
+  .selected-lessons-section .videos-grid {
     padding: 0 10px;
   }
 
-  .recent-videos-section .video-card {
+  .selected-lessons-section .video-card {
     margin: 0;
     height: 100%;
   }
 
-  .recent-videos-section .video-thumbnail-container {
+  .selected-lessons-section .video-thumbnail-container {
     height: 200px;
   }
 
-  .recent-videos-section .video-content {
+  .selected-lessons-section .video-content {
     padding: 16px !important;
   }
 
-  .recent-videos-section .video-title-english {
+  .selected-lessons-section .video-title-english {
     font-size: 0.95rem !important;
   }
 
-  .recent-videos-section .play-button {
+  .selected-lessons-section .play-button {
     width: 50px !important;
     height: 50px !important;
   }
 }
 
 @media (max-width: 480px) {
-  .recent-videos-section .videos-grid {
+  .selected-lessons-section .videos-grid {
     padding: 0 5px;
   }
 
-  .recent-videos-section .video-thumbnail-container {
+  .selected-lessons-section .video-thumbnail-container {
     height: 180px;
   }
 
-  .recent-videos-section .video-content {
+  .selected-lessons-section .video-content {
     padding: 14px !important;
   }
 
-  .recent-videos-section .video-title-english {
+  .selected-lessons-section .video-title-english {
     font-size: 0.9rem !important;
   }
 
-  .recent-videos-section .metadata-right {
+  .selected-lessons-section .metadata-right {
     gap: 8px;
   }
 
-  .recent-videos-section .metadata-item {
+  .selected-lessons-section .metadata-item {
     font-size: 0.7rem;
   }
 
-  .recent-videos-section .play-button {
+  .selected-lessons-section .play-button {
     width: 45px !important;
     height: 45px !important;
   }
 
-  .recent-videos-section .view-all-btn {
+  .selected-lessons-section .view-all-btn {
     padding: 10px 36px;
     font-size: 14px;
   }
@@ -349,48 +331,48 @@
   }
 }
 
-.recent-videos-section .video-card {
+.selected-lessons-section .video-card {
   animation: slideInUp 0.5s ease-out;
 }
 
 /* Focus states for accessibility */
-.recent-videos-section .video-card:focus {
+.selected-lessons-section .video-card:focus {
   outline: 3px solid #00a7d5;
   outline-offset: 2px;
 }
 
-.recent-videos-section .video-card:focus-visible {
+.selected-lessons-section .video-card:focus-visible {
   outline: 3px solid #00a7d5;
   outline-offset: 2px;
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .recent-videos-section .video-card {
+  .selected-lessons-section .video-card {
     border: 2px solid #000;
   }
 
-  .recent-videos-section .video-card:hover {
+  .selected-lessons-section .video-card:hover {
     border-color: #00a7d5;
   }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .recent-videos-section .video-card {
+  .selected-lessons-section .video-card {
     transition: none;
     animation: none;
   }
 
-  .recent-videos-section .video-card:hover {
+  .selected-lessons-section .video-card:hover {
     transform: none;
   }
 
-  .recent-videos-section .video-thumbnail {
+  .selected-lessons-section .video-thumbnail {
     transition: none;
   }
 
-  .recent-videos-section .video-card:hover .video-thumbnail {
+  .selected-lessons-section .video-card:hover .video-thumbnail {
     transform: none;
   }
 }

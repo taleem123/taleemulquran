@@ -1,12 +1,41 @@
 /* Selected Surahs Section Styles */
 
 .selected-surahs-section {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 100px 0;
+  background: linear-gradient(135deg, #e0f7ff 0%, #f8f9fa 50%, #fff5e6 100%);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.selected-surahs-section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 167, 213, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.selected-surahs-section::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 222, 216, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite reverse;
 }
 
 .section-header {
   margin-bottom: 50px;
+  text-align: center;
 }
 
 .section-title {
@@ -28,13 +57,15 @@
 
 .surahs-grid {
   margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Uniform Grid for Selected Surahs */
 .surahs-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 24px;
   padding: 20px 0;
   width: 100%;
   margin: 0 auto;
@@ -74,11 +105,11 @@
 }
 
 .surah-tile {
-  border-radius: 12px !important;
-  background: white;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid rgba(0, 167, 213, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   height: 150px;
   width: 100%;
   display: flex;
@@ -88,9 +119,25 @@
   overflow: hidden;
 }
 
+.surah-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00a7d5, #00ded8);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.surah-tile:hover::before {
+  transform: scaleX(1);
+}
+
 .surah-tile:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 12px 32px rgba(0, 167, 213, 0.25) !important;
   border-color: #00a7d5;
 }
 
@@ -167,12 +214,12 @@
 }
 
 .revelation-icon {
-  width: 24px !important;
-  height: 20px !important;
+  width: 42px !important;
+  height: 48px !important;
   margin-bottom: 8px !important;
   display: block;
-  align-self: flex-start;
-  margin-left: 0 !important;
+  align-self: flex-end;
+  object-fit: contain;
 }
 
 @media (max-width: 767px) {

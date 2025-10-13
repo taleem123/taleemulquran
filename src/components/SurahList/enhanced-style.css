@@ -95,12 +95,12 @@
 }
 
 .revelation-icon {
-  width: 24px !important;
-  height: 20px !important;
+  width: 42px !important;
+  height: 48px !important;
   margin-bottom: 8px !important;
   display: block;
-  align-self: flex-start;
-  margin-left: 0 !important;
+  align-self: flex-end;
+  object-fit: contain;
 }
 
 .bookmark-btn {
@@ -203,10 +203,6 @@
   transform: scale(1.1);
 }
 
-.surah-card:hover .revelation-icon {
-  transform: scale(1.2);
-}
-
 /* Loading State */
 .surah-card.loading {
   opacity: 0.6;
@@ -303,17 +299,10 @@
   transition: all 0.3s ease;
 }
 
-.revelation-icon {
-  width: 40px;
-  height: 40px;
-  transition: all 0.3s ease;
-}
-
 .surah-arabic-name {
   font-size: 18px;
   font-weight: bold;
   text-align: center;
-  margin: 15px 0;
   color: #2c3e50;
   line-height: 1.4;
 }

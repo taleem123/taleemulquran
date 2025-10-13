@@ -47,12 +47,6 @@ const EnhancedSearch = ({ onSurahSelect, placeholder = "Search Surahs..." }) => 
     });
   }, [onSurahSelect]);
 
-  const handleClearSearch = useCallback(() => {
-    setSearchTerm('');
-    setSearchResults([]);
-    setShowSuggestions(false);
-  }, []);
-
   return (
     <Box sx={{ position: 'relative', width: '100%' }}>
       <TextField

@@ -1,4 +1,4 @@
-/* Short Videos Page Styles */
+/* Selected Lessons Page Styles */
 
 /* Service Single Section Styles */
 .service-single-section {
@@ -165,31 +165,12 @@
   overflow: hidden;
 }
 
-.video-title-urdu {
-  font-family: 'Amiri', 'Times New Roman', serif;
-  font-size: 1.1rem !important;
-  font-weight: bold !important;
-  color: #1a365d !important;
-  margin-bottom: 4px !important;
-  line-height: 1.3 !important;
-  direction: rtl;
-  text-align: right;
+.video-description {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.4;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.video-subtitle-urdu {
-  font-family: 'Amiri', 'Times New Roman', serif;
-  font-size: 0.9rem !important;
-  color: #666 !important;
-  margin-bottom: 16px !important;
-  line-height: 1.4 !important;
-  direction: rtl;
-  text-align: right;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex: 1;
@@ -296,10 +277,10 @@
     padding: 8px !important;
   }
 
-  .video-card {
-    margin: 0;
-    height: 100%;
-  }
+.video-card {
+  margin: 0;
+  height: 100%;
+}
 
   .video-thumbnail-container {
     height: 200px;
@@ -311,14 +292,6 @@
 
   .video-title-english {
     font-size: 0.95rem !important;
-  }
-
-  .video-title-urdu {
-    font-size: 1rem !important;
-  }
-
-  .video-subtitle-urdu {
-    font-size: 0.85rem !important;
   }
 
   .play-button {
@@ -356,14 +329,6 @@
 
   .video-title-english {
     font-size: 0.9rem !important;
-  }
-
-  .video-title-urdu {
-    font-size: 0.95rem !important;
-  }
-
-  .video-subtitle-urdu {
-    font-size: 0.8rem !important;
   }
 
   .metadata-right {
