@@ -4,27 +4,35 @@ import {
   Card, 
   CardContent, 
   Typography, 
-  Box
+  Box,
+  CircularProgress,
+  Alert
 } from '@mui/material';
 import surahData from '../SurahList/surahData.json';
 import Madina from '../../images/madina.png';
 import Makka from '../../images/makka.png';
 import SectionHeader from '../SectionHeader';
 import AnimatedBackground from '../AnimatedBackground';
+import { useSelectedSurahs } from '../../hooks/useFirebaseData';
 import './style.css';
 
 const SelectedSurahs = memo(() => {
   const navigate = useNavigate();
-
-  // Select 6 audio surahs as requested
-  const selectedSurahs = [
-    surahData.find(s => s.number === 18),  // Al-Kahf (Al-Kahaf)
-    surahData.find(s => s.number === 12),  // Yusuf (Yousuf)
-    surahData.find(s => s.number === 67),  // Al-Mulk
-    surahData.find(s => s.number === 36),  // Yaseen
-    surahData.find(s => s.number === 33),  // Al-Ahzaab
-    surahData.find(s => s.number === 9),   // At-Tawba (At-Tauba)
-  ].filter(Boolean);
+  
+  // Use Firebase data with fallback to default surahs
+  const { surahs: firebaseSurahs, loading, error } = useSelectedSurahs();
+  
+  // Get selected surahs from Firebase or fallback to default
+  const selectedSurahs = firebaseSurahs.length > 0 
+    ? firebaseSurahs.map(s => surahData.find(surah => surah.number === s.number)).filter(Boolean)
+    : [
+        surahData.find(s => s.number === 18),  // Al-Kahf (Al-Kahaf)
+        surahData.find(s => s.number === 12),  // Yusuf (Yousuf)
+        surahData.find(s => s.number === 67),  // Al-Mulk
+        surahData.find(s => s.number === 36),  // Yaseen
+        surahData.find(s => s.number === 33),  // Al-Ahzaab
+        surahData.find(s => s.number === 9),   // At-Tawba (At-Tauba)
+      ].filter(Boolean);
 
   const handleSurahClick = useCallback((surah) => {
     navigate(`/tafseer/audios/${surah.number}`, { state: { surah } });
@@ -88,6 +96,28 @@ const SelectedSurahs = memo(() => {
     );
   };
 
+  if (loading) {
+    return (
+      <AnimatedBackground variant="default" particleCount={0} enableParticles={false}>
+        <section className="selected-surahs-section">
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <SectionHeader 
+                  title="آڈیو تفسیر"
+                  subtitle="تعلیم القرآن کی مکمل سورتوں کو تفسیر سنیں"
+                />
+              </div>
+            </div>
+            <Box display="flex" justifyContent="center" py={4}>
+              <CircularProgress />
+            </Box>
+          </div>
+        </section>
+      </AnimatedBackground>
+    );
+  }
+
   return (
     <AnimatedBackground variant="default" particleCount={0} enableParticles={false}>
       <section className="selected-surahs-section">
@@ -100,6 +130,12 @@ const SelectedSurahs = memo(() => {
               />
             </div>
           </div>
+
+          {error && (
+            <Alert severity="warning" sx={{ mb: 2 }}>
+              Using default surahs. Admin can configure selected surahs.
+            </Alert>
+          )}
 
           <div className="surahs-grid">
             <div className="surahs-grid-container">

@@ -8,7 +8,9 @@ import {
   Box,
   IconButton,
   Chip,
-  Grid
+  Grid,
+  CircularProgress,
+  Alert
 } from '@mui/material';
 import {
   PlayArrow,
@@ -20,6 +22,7 @@ import UniversalVideoPlayer from '../../design-system/components/UniversalVideoP
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../SectionHeader';
 import AnimatedBackground from '../AnimatedBackground';
+import { useLessons } from '../../hooks/useFirebaseData';
 import './style.css';
 
 const SelectedLessons = () => {
@@ -27,33 +30,9 @@ const SelectedLessons = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
-  // Selected lessons data - longer videos (15-20 minutes)
-  const selectedLessons = [
-    {
-      id: 1,
-      title: 'Tafseer Lesson 1: Understanding Surah Al-Fatiha',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'A comprehensive tafseer lesson explaining the deep meanings and interpretations of Surah Al-Fatiha, the opening chapter of the Quran.'
-    },
-    {
-      id: 2,
-      title: 'Tafseer Lesson 2: Stories of the Prophets',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'An in-depth exploration of the stories of prophets mentioned in the Quran and the lessons we can learn from their lives.'
-    },
-    {
-      id: 3,
-      title: 'Tafseer Lesson 3: Islamic Ethics and Morals',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'A detailed study of Islamic ethics and moral values as taught in the Quran, with practical applications for daily life.'
-    }
-  ];
+  // Use Firebase data - get only the 3 most recent lessons
+  const { lessons: allLessons, loading, error } = useLessons();
+  const selectedLessons = allLessons.slice(0, 3);
 
   const handleVideoClick = useCallback((video) => {
     setSelectedVideo(video);
@@ -65,6 +44,8 @@ const SelectedLessons = () => {
     e.stopPropagation();
     if (video.sources && video.sources[0]) {
       window.open(video.sources[0], '_blank');
+    } else if (video.url) {
+      window.open(video.url, '_blank');
     }
   }, []);
 
@@ -83,9 +64,10 @@ const SelectedLessons = () => {
 
   const handleDownload = useCallback((video, e) => {
     e.stopPropagation();
-    if (video.sources && video.sources[0]) {
+    const downloadUrl = video.sources?.[0] || video.url;
+    if (downloadUrl) {
       const link = document.createElement('a');
-      link.href = video.sources[0];
+      link.href = downloadUrl;
       link.download = `${video.title || 'lesson'}.mp4`;
       document.body.appendChild(link);
       link.click();
@@ -125,11 +107,11 @@ const SelectedLessons = () => {
       }}
     >
       <Box className="video-thumbnail-container">
-        {lesson.thumb || lesson.thumbnail ? (
+        {(lesson.thumb || lesson.thumbnail || getThumbnailUrl(lesson.platform, lesson.url)) ? (
           <CardMedia
             component="img"
             height="200"
-            image={lesson.thumb || lesson.thumbnail}
+            image={lesson.thumb || lesson.thumbnail || getThumbnailUrl(lesson.platform, lesson.url)}
             alt={lesson.title}
             className="video-thumbnail"
           />
@@ -263,6 +245,44 @@ const SelectedLessons = () => {
       </CardContent>
     </Card>
   );
+
+  // Loading state
+  if (loading) {
+    return (
+      <AnimatedBackground variant="purple" particleCount={0} enableParticles={false}>
+        <section className="selected-lessons-section section-padding">
+          <div className="container">
+            <SectionHeader 
+              title="منتخب اسباق"
+              subtitle="تعلیم القرآن کی تفصیلی تفسیر کے اسباق اور طویل لیکچرز"
+            />
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+              <CircularProgress />
+            </Box>
+          </div>
+        </section>
+      </AnimatedBackground>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <AnimatedBackground variant="purple" particleCount={0} enableParticles={false}>
+        <section className="selected-lessons-section section-padding">
+          <div className="container">
+            <SectionHeader 
+              title="منتخب اسباق"
+              subtitle="تعلیم القرآن کی تفصیلی تفسیر کے اسباق اور طویل لیکچرز"
+            />
+            <Alert severity="error">
+              Failed to load lessons. Please try again later.
+            </Alert>
+          </div>
+        </section>
+      </AnimatedBackground>
+    );
+  }
 
   return (
     <AnimatedBackground variant="purple" particleCount={0} enableParticles={false}>

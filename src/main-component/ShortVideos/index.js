@@ -14,7 +14,9 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Grid
+  Grid,
+  CircularProgress,
+  Alert
 } from '@mui/material';
 import {
   PlayArrow,
@@ -27,47 +29,12 @@ import UniversalVideoPlayer from '../../design-system/components/UniversalVideoP
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../../components/SectionHeader';
 import AnimatedBackground from '../../components/AnimatedBackground';
+import { useShortVideos } from '../../hooks/useFirebaseData';
 
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/footer'
 import Scrollbar from '../../components/scrollbar'
 import './style.css'
-
-// Real video data from the provided JSON
-const allVideos = [
-    {
-      id: 1,
-      title: 'Islamic Teaching Video 1',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'A beautiful Islamic teaching video about Quranic lessons and moral values.'
-    },
-    {
-      id: 2,
-      title: 'Islamic Teaching Video 2',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'Another inspiring Islamic video sharing wisdom from the Quran.'
-    },
-    {
-      id: 3,
-      title: 'Islamic Teaching Video 3',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'Learn about Islamic principles through this educational video.'
-    },
-    {
-      id: 4,
-      title: 'Islamic Teaching Video 4',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube'
-      // No description - optional field
-    }
-];
 
 const ShortVideos = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -75,6 +42,9 @@ const ShortVideos = () => {
   const [filterBy, setFilterBy] = useState('all');
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  
+  // Use Firebase data
+  const { videos: allVideos, loading, error } = useShortVideos();
 
   // Filter and sort videos
   const filteredVideos = useMemo(() => {
@@ -328,6 +298,52 @@ const ShortVideos = () => {
       </CardContent>
     </Card>
   );
+
+  if (loading) {
+    return (
+      <Fragment>
+        <Navbar />
+        <AnimatedBackground variant="cool" particleCount={0} enableParticles={false}>
+          <section className="service-single-section section-padding">
+            <div className="container">
+              <SectionHeader 
+                title="شارٹ ویڈیوز"
+                subtitle="قرآن کریم کی تمام ویڈیو تشریحات اور تعلیمات"
+              />
+              <Box display="flex" justifyContent="center" py={4}>
+                <CircularProgress />
+              </Box>
+            </div>
+          </section>
+        </AnimatedBackground>
+        <Footer footerClass={'wpo-ne-footer-2'} />
+        <Scrollbar />
+      </Fragment>
+    );
+  }
+
+  if (error) {
+    return (
+      <Fragment>
+        <Navbar />
+        <AnimatedBackground variant="cool" particleCount={0} enableParticles={false}>
+          <section className="service-single-section section-padding">
+            <div className="container">
+              <SectionHeader 
+                title="شارٹ ویڈیوز"
+                subtitle="قرآن کریم کی تمام ویڈیو تشریحات اور تعلیمات"
+              />
+              <Alert severity="error" sx={{ mt: 2 }}>
+                Failed to load videos. Please try again later.
+              </Alert>
+            </div>
+          </section>
+        </AnimatedBackground>
+        <Footer footerClass={'wpo-ne-footer-2'} />
+        <Scrollbar />
+      </Fragment>
+    );
+  }
 
   return (
         <Fragment>

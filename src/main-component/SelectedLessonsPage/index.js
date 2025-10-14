@@ -13,7 +13,9 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Grid
+  Grid,
+  CircularProgress,
+  Alert
 } from '@mui/material';
 import {
   PlayArrow,
@@ -26,63 +28,12 @@ import UniversalVideoPlayer from '../../design-system/components/UniversalVideoP
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../../components/SectionHeader';
 import AnimatedBackground from '../../components/AnimatedBackground';
+import { useLessons } from '../../hooks/useFirebaseData';
 
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/footer'
 import Scrollbar from '../../components/scrollbar'
 import './style.css'
-
-// All lessons data - longer videos (15-20 minutes)
-const allLessons = [
-    {
-      id: 1,
-      title: 'Tafseer Lesson 1: Understanding Surah Al-Fatiha',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'A comprehensive tafseer lesson explaining the deep meanings and interpretations of Surah Al-Fatiha, the opening chapter of the Quran.'
-    },
-    {
-      id: 2,
-      title: 'Tafseer Lesson 2: Stories of the Prophets',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'An in-depth exploration of the stories of prophets mentioned in the Quran and the lessons we can learn from their lives.'
-    },
-    {
-      id: 3,
-      title: 'Tafseer Lesson 3: Islamic Ethics and Morals',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'A detailed study of Islamic ethics and moral values as taught in the Quran, with practical applications for daily life.'
-    },
-    {
-      id: 4,
-      title: 'Tafseer Lesson 4: Understanding Prayer in Quran',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'A comprehensive study of prayer as mentioned in the Quran, its importance, and the spiritual benefits.'
-    },
-    {
-      id: 5,
-      title: 'Tafseer Lesson 5: Family Values in Islam',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'Exploring the Islamic perspective on family relationships, marriage, and raising children according to Quranic teachings.'
-    },
-    {
-      id: 6,
-      title: 'Tafseer Lesson 6: Patience and Perseverance',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'Learning about patience and perseverance from Quranic stories and verses, and how to apply these virtues in daily life.'
-    }
-];
 
 const SelectedLessonsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -90,6 +41,9 @@ const SelectedLessonsPage = () => {
   const [filterBy, setFilterBy] = useState('all');
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  
+  // Use Firebase data
+  const { lessons: allLessons, loading, error } = useLessons();
 
   // Filter and sort lessons
   const filteredLessons = useMemo(() => {
@@ -336,6 +290,52 @@ const SelectedLessonsPage = () => {
       </CardContent>
     </Card>
   );
+
+  if (loading) {
+    return (
+      <Fragment>
+        <Navbar />
+        <AnimatedBackground variant="purple" particleCount={0} enableParticles={false}>
+          <section className="service-single-section section-padding">
+            <div className="container">
+              <SectionHeader 
+                title="منتخب اسباق"
+                subtitle="تفصیلی تفسیر کے اسباق، کہانیاں اور طویل لیکچرز سے نصیحتیں"
+              />
+              <Box display="flex" justifyContent="center" py={4}>
+                <CircularProgress />
+              </Box>
+            </div>
+          </section>
+        </AnimatedBackground>
+        <Footer footerClass={'wpo-ne-footer-2'} />
+        <Scrollbar />
+      </Fragment>
+    );
+  }
+
+  if (error) {
+    return (
+      <Fragment>
+        <Navbar />
+        <AnimatedBackground variant="purple" particleCount={0} enableParticles={false}>
+          <section className="service-single-section section-padding">
+            <div className="container">
+              <SectionHeader 
+                title="منتخب اسباق"
+                subtitle="تفصیلی تفسیر کے اسباق، کہانیاں اور طویل لیکچرز سے نصیحتیں"
+              />
+              <Alert severity="error" sx={{ mt: 2 }}>
+                Failed to load lessons. Please try again later.
+              </Alert>
+            </div>
+          </section>
+        </AnimatedBackground>
+        <Footer footerClass={'wpo-ne-footer-2'} />
+        <Scrollbar />
+      </Fragment>
+    );
+  }
 
   return (
     <Fragment>

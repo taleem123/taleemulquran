@@ -13,6 +13,7 @@ const ShortVideos = React.lazy(() => import('../ShortVideos'));
 const SelectedLessonsPage = React.lazy(() => import('../SelectedLessonsPage'));
 const SurahDetails = React.lazy(() => import('../SurahDetails'));
 const UnderConstruction = React.lazy(() => import('../UnderConstruction'));
+const AdminWrapper = React.lazy(() => import('../../components/Admin/AdminWrapper'));
 
 const AllRoute = () => { 
   return (
@@ -36,6 +37,7 @@ const AllRoute = () => {
               <Route path='/shorts' element={<ShortVideos/>} />
               <Route path='/lessons' element={<SelectedLessonsPage/>} />
               <Route path='/coming-soon' element={<UnderConstruction/>} />
+              <Route path='/admin/*' element={<AdminWrapper/>} />
               <Route path='*' element={<ErrorPage/>} />
             </Routes>
           </Suspense>

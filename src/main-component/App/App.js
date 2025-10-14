@@ -5,22 +5,21 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import '../../css/rtl-support.css';
 
 const App = () => {
   return (
     <ErrorBoundary>
-      <div className="App" id='scrool' dir="rtl">
-        <Suspense fallback={<LoadingSpinner fullScreen message="تعلیم القرآن لوڈ ہو رہا ہے..." />}>
+      <div className="App" id='scrool'>
+        <Suspense fallback={<LoadingSpinner fullScreen message="Loading Taleem Ul Quran..." />}>
           <AllRoutes/>
         </Suspense>
         <ToastContainer
-          position="top-left"
+          position="top-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
-          rtl={true}
+          rtl={false}
           pauseOnFocusLoss
           draggable
           pauseOnHover

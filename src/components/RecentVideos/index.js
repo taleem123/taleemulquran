@@ -8,7 +8,9 @@ import {
   Box,
   IconButton,
   Chip,
-  Grid
+  Grid,
+  CircularProgress,
+  Alert
 } from '@mui/material';
 import {
   PlayArrow,
@@ -20,40 +22,20 @@ import UniversalVideoPlayer from '../../design-system/components/UniversalVideoP
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
 import SectionHeader from '../SectionHeader';
 import AnimatedBackground from '../AnimatedBackground';
+import { useRecentVideos } from '../../hooks/useFirebaseData';
 import './style.css';
 
 const RecentVideos = () => {
   const navigate = useNavigate();
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-
-  // Real video data from the provided JSON
-  const recentVideos = [
-    {
-      id: 1,
-      title: 'Islamic Teaching Video 1',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'A beautiful Islamic teaching video about Quranic lessons and moral values.'
-    },
-    {
-      id: 2,
-      title: 'Islamic Teaching Video 2',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'Another inspiring Islamic video sharing wisdom from the Quran.'
-    },
-    {
-      id: 3,
-      title: 'Islamic Teaching Video 3',
-      sources: ['https://www.youtube.com/shorts/xDawAJKKgE0'],
-      thumb: getThumbnailUrl('youtube', 'xDawAJKKgE0'),
-      platform: 'youtube',
-      description: 'Learn about Islamic principles through this educational video.'
-    }
-  ];
+  
+  // Use Firebase data
+  const { videos: recentVideos, loading, error } = useRecentVideos(3);
+  
+  console.log('RecentVideos component - recentVideos:', recentVideos);
+  console.log('RecentVideos component - loading:', loading);
+  console.log('RecentVideos component - error:', error);
 
   const handleVideoClick = useCallback((video) => {
     setSelectedVideo(video);
@@ -65,6 +47,8 @@ const RecentVideos = () => {
     e.stopPropagation();
     if (video.sources && video.sources[0]) {
       window.open(video.sources[0], '_blank');
+    } else if (video.url) {
+      window.open(video.url, '_blank');
     }
   }, []);
 
@@ -83,9 +67,10 @@ const RecentVideos = () => {
 
   const handleDownload = useCallback((video, e) => {
     e.stopPropagation();
-    if (video.sources && video.sources[0]) {
+    const downloadUrl = video.sources?.[0] || video.url;
+    if (downloadUrl) {
       const link = document.createElement('a');
-      link.href = video.sources[0];
+      link.href = downloadUrl;
       link.download = `${video.title || 'video'}.mp4`;
       document.body.appendChild(link);
       link.click();
@@ -126,11 +111,11 @@ const RecentVideos = () => {
       }}
     >
       <Box className="video-thumbnail-container">
-        {video.thumb || video.thumbnail ? (
+        {(video.thumb || video.thumbnail || getThumbnailUrl(video.platform, video.url)) ? (
           <CardMedia
             component="img"
             height="200"
-            image={video.thumb || video.thumbnail}
+            image={video.thumb || video.thumbnail || getThumbnailUrl(video.platform, video.url)}
             alt={video.title}
             className="video-thumbnail"
           />
@@ -265,6 +250,42 @@ const RecentVideos = () => {
     </Card>
   );
 
+  if (loading) {
+    return (
+      <AnimatedBackground variant="warm" particleCount={0} enableParticles={false}>
+        <section className="recent-videos-section section-padding">
+          <div className="container">
+            <SectionHeader 
+              title="شارٹ ویڈیوز"
+              subtitle="تعلیم القرآن  کی تازہ ترین شارٹ ویڈیو تشریحات"
+            />
+            <Box display="flex" justifyContent="center" py={4}>
+              <CircularProgress />
+            </Box>
+          </div>
+        </section>
+      </AnimatedBackground>
+    );
+  }
+
+  if (error) {
+    return (
+      <AnimatedBackground variant="warm" particleCount={0} enableParticles={false}>
+        <section className="recent-videos-section section-padding">
+          <div className="container">
+            <SectionHeader 
+              title="شارٹ ویڈیوز"
+              subtitle="تعلیم القرآن  کی تازہ ترین شارٹ ویڈیو تشریحات"
+            />
+            <Alert severity="error" sx={{ mt: 2 }}>
+              Failed to load recent videos. Please try again later.
+            </Alert>
+          </div>
+        </section>
+      </AnimatedBackground>
+    );
+  }
+
   return (
     <AnimatedBackground variant="warm" particleCount={0} enableParticles={false}>
       <section className="recent-videos-section section-padding">
@@ -277,11 +298,21 @@ const RecentVideos = () => {
         {/* Videos Grid */}
         <div className="videos-grid">
           <Grid container spacing={2}>
-            {recentVideos.map((video) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={video.id}>
-                <VideoCard video={video} />
+            {recentVideos.length === 0 ? (
+              <Grid size={12}>
+                <Box textAlign="center" py={4}>
+                  <Typography variant="h6" color="text.secondary">
+                    No recent videos available
+                  </Typography>
+                </Box>
               </Grid>
-            ))}
+            ) : (
+              recentVideos.map((video) => (
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={video.id}>
+                  <VideoCard video={video} />
+                </Grid>
+              ))
+            )}
           </Grid>
         </div>
 
