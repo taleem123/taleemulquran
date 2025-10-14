@@ -1,5 +1,13 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+Disallow: /static/
+Disallow: /build/
+Disallow: /node_modules/
+
+# Sitemaps
 Sitemap: http://taleemulquran.pk/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
 

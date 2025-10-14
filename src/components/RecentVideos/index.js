@@ -103,16 +103,17 @@ const RecentVideos = () => {
   }, [navigate]);
 
   const getPlatformIcon = (platform) => {
-    switch (platform) {
-      case 'facebook':
-        return '📘';
-      case 'youtube':
-        return '📺';
-      case 'tiktok':
-        return '🎵';
-      default:
-        return '🎥';
-    }
+    return '';
+    // switch (platform) {
+    //   case 'facebook':
+    //     return '📘';
+    //   case 'youtube':
+    //     return '📺';
+    //   case 'tiktok':
+    //     return '🎵';
+    //   default:
+    //     return '🎥';
+    // }
   };
 
   const VideoCard = ({ video }) => (
