@@ -1,5 +1,4 @@
 import React from 'react'
-import Newsletter from '../Newsletter'
 import './style.css'
 
 const Footer = (props) =>{
@@ -10,7 +9,6 @@ const Footer = (props) =>{
 
   return(
     <div className={`wpo-ne-footer ${props.footerClass}`}>
-        <Newsletter/>
         <footer className="wpo-site-footer">
             <div className="wpo-upper-footer">
                 <div className="container">

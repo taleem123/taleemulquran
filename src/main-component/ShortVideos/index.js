@@ -332,7 +332,7 @@ const ShortVideos = () => {
   return (
         <Fragment>
       <Navbar />
-      <AnimatedBackground variant="warm" particleCount={0} enableParticles={false}>
+      <AnimatedBackground variant="cool" particleCount={0} enableParticles={false}>
       <section className="service-single-section section-padding">
         <div className="container">
           <SectionHeader 

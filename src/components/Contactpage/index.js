@@ -1,5 +1,4 @@
 import React from 'react';
-import ContactForm from '../ContactFrom'
 import './style.css'
 
 const Contactpage = () => {
@@ -13,7 +12,7 @@ const Contactpage = () => {
                             <div className="col col-lg-12 col-md-6 col-sm-12 col-12">
                                 <div className="contact-form">
                                     <h2>Get In Touch</h2>
-                                    <ContactForm/>
+                                    <p>Contact form will be implemented here.</p>
                                 </div>
                             </div>
                             {/* <div className="col col-lg-6 col-md-6 col-sm-12 col-12">

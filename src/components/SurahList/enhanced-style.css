@@ -268,13 +268,49 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 14px;
+  color: #333 !important;
+  font-weight: 500;
 }
 
-.filter-btn.active,
+/* Material-UI contained variant (selected state) */
+.filter-btn.MuiButton-contained {
+  background: #00a7d5 !important;
+  color: white !important;
+  border-color: #00a7d5 !important;
+  box-shadow: 0 2px 8px rgba(0, 167, 213, 0.3) !important;
+}
+
+/* Override Material-UI text color for contained buttons */
+.filter-btn.MuiButton-contained .MuiButton-label {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+/* Material-UI outlined variant (unselected state) */
+.filter-btn.MuiButton-outlined {
+  background: white !important;
+  color: #333 !important;
+  border-color: #e9ecef !important;
+}
+
 .filter-btn:hover {
-  background: #00a7d5;
-  color: white;
-  border-color: #00a7d5;
+  background: #00a7d5 !important;
+  color: white !important;
+  border-color: #00a7d5 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 167, 213, 0.2) !important;
+}
+
+/* Ensure text is always visible */
+.filter-btn .MuiButton-label {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* Focus state for accessibility */
+.filter-btn:focus {
+  outline: 2px solid #00a7d5;
+  outline-offset: 2px;
 }
 
 /* Enhanced Card Content */
