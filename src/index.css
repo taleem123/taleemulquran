@@ -1,4 +1,4 @@
-/* RTL Support for Taleem Ul Quran */
+/* LTR Support for Taleem Ul Quran */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,8 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  direction: rtl;
-  text-align: right;
+  direction: ltr;
+  text-align: left;
   overflow-x: hidden;
 }
 
@@ -166,17 +166,17 @@ code {
 
 /* RTL Grid System */
 .row {
-  direction: rtl;
+  direction: ltr;
 }
 
 [class*="col-"] {
-  direction: rtl;
+  direction: ltr;
   text-align: right;
 }
 
 /* RTL Navigation */
 nav ul {
-  direction: rtl;
+  direction: ltr;
   text-align: right;
 }
 
@@ -186,7 +186,7 @@ nav li {
 
 /* RTL Forms */
 form {
-  direction: rtl;
+  direction: ltr;
 }
 
 input, textarea, select {
@@ -195,18 +195,18 @@ input, textarea, select {
 
 /* RTL Buttons */
 button {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Lists */
 ul, ol {
-  direction: rtl;
+  direction: ltr;
   text-align: right;
 }
 
 /* RTL Tables */
 table {
-  direction: rtl;
+  direction: ltr;
 }
 
 th, td {
@@ -215,92 +215,92 @@ th, td {
 
 /* RTL Cards */
 .card {
-  direction: rtl;
+  direction: ltr;
   text-align: right;
 }
 
 /* RTL Modals */
 .modal {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Alerts */
 .alert {
-  direction: rtl;
+  direction: ltr;
   text-align: right;
 }
 
 /* RTL Breadcrumbs */
 .breadcrumb {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Pagination */
 .pagination {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Dropdown */
 .dropdown-menu {
-  direction: rtl;
+  direction: ltr;
   text-align: right;
 }
 
 /* RTL Tabs */
 .nav-tabs {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Accordion */
 .accordion {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Carousel */
 .carousel {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Progress */
 .progress {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Badge */
 .badge {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Spinner */
 .spinner {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Skeleton */
 .skeleton {
-  direction: rtl;
+  direction: ltr;
 }
 
 /* RTL Empty State */
 .empty-state {
-  direction: rtl;
+  direction: ltr;
   text-align: center;
 }
 
 /* RTL Error State */
 .error-state {
-  direction: rtl;
+  direction: ltr;
   text-align: center;
 }
 
 /* RTL Success State */
 .success-state {
-  direction: rtl;
+  direction: ltr;
   text-align: center;
 }
 
 /* RTL Loading State */
 .loading-state {
-  direction: rtl;
+  direction: ltr;
   text-align: center;
 }

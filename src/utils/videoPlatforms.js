@@ -64,7 +64,7 @@ export const getFacebookId = (url) => {
   const patterns = [
     /facebook\.com\/.*\/videos\/(\d+)/,
     /facebook\.com\/.*\/reel\/(\d+)/,
-    /fb\.watch\/([^\/\?]+)/,
+    /fb\.watch\/([^/?]+)/,
     /facebook\.com\/.*\/posts\/(\d+)/,
     /facebook\.com\/.*\/photos\/(\d+)/,
     /facebook\.com\/watch\/\?v=(\d+)/
@@ -87,8 +87,8 @@ export const getTikTokId = (url) => {
   if (!url) return null;
   
   const patterns = [
-    /tiktok\.com\/@[^\/]+\/video\/(\d+)/,
-    /vm\.tiktok\.com\/([^\/\?]+)/,
+    /tiktok\.com\/@[^/]+\/video\/(\d+)/,
+    /vm\.tiktok\.com\/([^/?]+)/,
     /tiktok\.com\/.*\/video\/(\d+)/
   ];
   

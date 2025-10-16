@@ -82,7 +82,7 @@
 
 nav ul {
 	margin-top: -4px;
-	text-align: right;
+	text-align: left;
 }
 nav > ul > li {
 	display: inline-block;

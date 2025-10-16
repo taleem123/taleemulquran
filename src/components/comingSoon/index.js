@@ -1,22 +1,33 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import comingSoon from '../../images/comingsoon.jpg'
 import './style.css'
 
-const Error = (props) => {
+const ComingSoon = (props) => {
     return(
-        <section className="error-404-section section-padding">
+        <section className="coming-soon-section">
             <div className="container">
                 <div className="row">
                     <div className="col col-xs-12">
-                        <div className="content clearfix">
-                            <div className="error">
-                                <img src={comingSoon} alt=""/>
+                        <div className="coming-soon-content">
+                            <div className="coming-soon-icon">
+                                <i className="ti-settings"></i>
                             </div>
-                            <div className="error-message">
-                                {/* <h3>Oops! Page Not Found!</h3> */}
-                                <p>Ths content is not ready yet.</p>
-                                <Link to="/" className="theme-btn-s4">Back to home</Link>
+                            <h1 className="coming-soon-title">Coming Soon</h1>
+                            <p className="coming-soon-description">
+                                We're working hard to bring you something amazing. 
+                                This feature is currently under development and will be available soon.
+                            </p>
+                            <div className="coming-soon-actions">
+                                <Link to="/" className="btn btn-primary">Back to Home</Link>
+                                <Link to="/contact" className="btn btn-outline">Contact Us</Link>
+                            </div>
+                            <div className="coming-soon-features">
+                                <h3>What to expect:</h3>
+                                <ul>
+                                    <li><i className="ti-check"></i> Enhanced user experience</li>
+                                    <li><i className="ti-check"></i> New learning materials</li>
+                                    <li><i className="ti-check"></i> Improved functionality</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -26,4 +37,4 @@ const Error = (props) => {
     )
 }
 
-export default Error;
+export default ComingSoon;

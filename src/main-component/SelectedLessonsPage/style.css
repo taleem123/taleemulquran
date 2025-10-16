@@ -19,7 +19,7 @@
 }
 
 .search-input {
-  direction: rtl;
+  direction: ltr;
 }
 
 .search-input .MuiInputBase-input {

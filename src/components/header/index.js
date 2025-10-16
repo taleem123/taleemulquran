@@ -51,9 +51,9 @@ const Header = () => {
   }, [showSearch]);
 
   const navigationItems = [
-    { label: 'ہوم', path: '/' },
-    { label: 'تعارف', path: '/about' },
-    { label: 'رابطہ', path: '/contact' },
+    { label: 'Home', path: '/' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
   ];
 
   const drawer = (
@@ -105,7 +105,7 @@ const Header = () => {
             textShadow: '0 2px 4px rgba(0,0,0,0.1)'
           }}
         >
-          تعلیم القرآن
+          Taleem Ul Quran
         </Typography> */}
         <Typography 
           variant="caption" 
@@ -176,7 +176,7 @@ const Header = () => {
                   fontSize: '1.15rem',
                   color: '#1a365d',
                   textAlign: 'center',
-                  direction: 'rtl'
+                  direction: 'ltr'
                 }
               }}
             />
@@ -294,7 +294,7 @@ const Header = () => {
                     textTransform: 'none',
                     fontWeight: 700,
                     fontSize: '1.1rem',
-                    fontFamily: '"Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif',
+                    fontFamily: '"Roboto", "Arial", sans-serif',
                     color: 'white',
                     position: 'relative',
                     overflow: 'hidden',
@@ -362,7 +362,7 @@ const Header = () => {
           >
             <EnhancedSearch 
               onSurahSelect={handleSurahSelect}
-              placeholder="سورتوں کے نام، ترجمہ یا نمبر سے تلاش کریں..."
+              placeholder="Search by surah names, translation or numbers..."
             />
           </Box>
         )}

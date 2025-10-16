@@ -1,36 +1,201 @@
-.error-404-section {
+/* Coming Soon Page Styles */
+.coming-soon-section {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.coming-soon-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 167, 213, 0.05) 0%, transparent 70%);
+  animation: float 20s ease-in-out infinite;
+}
+
+.coming-soon-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.coming-soon-icon {
+  margin-bottom: 30px;
+}
+
+.coming-soon-icon i {
+  font-size: 80px;
+  color: #00a7d5;
+  animation: spin 3s linear infinite;
+}
+
+.coming-soon-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #1a365d 0%, #00a7d5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.coming-soon-description {
+  font-size: 18px;
+  color: #6c757d;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.coming-soon-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  min-width: 150px;
   text-align: center;
 }
 
-.error-404-section .error-message {
-  margin-top: 70px;
-  padding: 0 200px;
-}
-
-@media (max-width: 991px) {
-  .error-404-section .error-message {
-      margin-top: 50px;
-      padding: 0 100px;
-  }
-}
-
-@media (max-width: 767px) {
-  .error-404-section .error-message {
-      padding: 0;
-  }
-}
-
-.error-404-section .error-message h3 {
-  font-size: 20px;
-  font-size: 1.25rem;
-  margin: 0 0 0.8em;
-}
-
-.error-404-section .error-message p {
-  margin-bottom: 1.8em;
-}
-
-.error-message .theme-btn-s4 {
-  background-color: #029ca5;
+.btn-primary {
+  background: linear-gradient(135deg, #00a7d5 0%, #029ca5 100%);
   color: #fff;
+  border-color: #00a7d5;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 167, 213, 0.3);
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #00a7d5;
+  border-color: #00a7d5;
+}
+
+.btn-outline:hover {
+  background: #00a7d5;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 167, 213, 0.3);
+  text-decoration: none;
+}
+
+.coming-soon-features {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.coming-soon-features h3 {
+  color: #1a365d;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.coming-soon-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.coming-soon-features ul li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  color: #6c757d;
+  font-size: 16px;
+}
+
+.coming-soon-features ul li i {
+  color: #28a745;
+  font-size: 18px;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coming-soon-section {
+    padding: 60px 0;
+    min-height: 70vh;
+  }
+  
+  .coming-soon-title {
+    font-size: 36px;
+  }
+  
+  .coming-soon-description {
+    font-size: 16px;
+    padding: 0 20px;
+  }
+  
+  .coming-soon-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 200px;
+  }
+  
+  .coming-soon-features {
+    margin: 0 20px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .coming-soon-title {
+    font-size: 28px;
+  }
+  
+  .coming-soon-icon i {
+    font-size: 60px;
+  }
+  
+  .coming-soon-features h3 {
+    font-size: 20px;
+  }
 }

@@ -175,7 +175,7 @@
   color: #1a365d !important;
   margin-bottom: 4px !important;
   line-height: 1.3 !important;
-  direction: rtl;
+  direction: ltr;
   text-align: right;
 }
 
@@ -220,7 +220,7 @@
 .arabic-title {
   font-family: 'Amiri', 'Times New Roman', serif;
   line-height: 1.3;
-  direction: rtl;
+  direction: ltr;
 }
 
 .view-all-btn {

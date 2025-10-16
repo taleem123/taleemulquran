@@ -88,14 +88,15 @@ export const logComponentRender = (componentName) => {
 };
 
 /**
- * Monitor long tasks (tasks > 50ms)
+ * Monitor long tasks (tasks > 50ms) - Only log significant ones
  */
 export const monitorLongTasks = () => {
   if ('PerformanceObserver' in window) {
     try {
       const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (process.env.NODE_ENV === 'development') {
+          // Only log tasks longer than 100ms to reduce noise
+          if (process.env.NODE_ENV === 'development' && entry.duration > 100) {
             console.warn('[Long Task]', Math.round(entry.duration), 'ms', entry);
           }
         }

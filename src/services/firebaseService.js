@@ -58,11 +58,17 @@ export const shortVideosService = {
   // Add new short video
   async add(videoData) {
     try {
-      const docRef = await addDoc(collection(db, COLLECTIONS.SHORT_VIDEOS), {
+      // Normalize data structure - ensure we have both url and sources
+      const normalizedData = {
         ...videoData,
+        // Ensure we have both url and sources for backward compatibility
+        url: videoData.url || (videoData.sources && videoData.sources[0]) || '',
+        sources: videoData.sources || (videoData.url ? [videoData.url] : []),
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now()
-      });
+      };
+      
+      const docRef = await addDoc(collection(db, COLLECTIONS.SHORT_VIDEOS), normalizedData);
       return docRef.id;
     } catch (error) {
       console.error('Error adding short video:', error);
@@ -73,11 +79,17 @@ export const shortVideosService = {
   // Update short video
   async update(id, videoData) {
     try {
-      const docRef = doc(db, COLLECTIONS.SHORT_VIDEOS, id);
-      await updateDoc(docRef, {
+      // Normalize data structure - ensure we have both url and sources
+      const normalizedData = {
         ...videoData,
+        // Ensure we have both url and sources for backward compatibility
+        url: videoData.url || (videoData.sources && videoData.sources[0]) || '',
+        sources: videoData.sources || (videoData.url ? [videoData.url] : []),
         updatedAt: Timestamp.now()
-      });
+      };
+      
+      const docRef = doc(db, COLLECTIONS.SHORT_VIDEOS, id);
+      await updateDoc(docRef, normalizedData);
     } catch (error) {
       console.error('Error updating short video:', error);
       throw error;
@@ -130,11 +142,17 @@ export const lessonsService = {
   // Add new lesson
   async add(lessonData) {
     try {
-      const docRef = await addDoc(collection(db, COLLECTIONS.LESSONS), {
+      // Normalize data structure - ensure we have both url and sources
+      const normalizedData = {
         ...lessonData,
+        // Ensure we have both url and sources for backward compatibility
+        url: lessonData.url || (lessonData.sources && lessonData.sources[0]) || '',
+        sources: lessonData.sources || (lessonData.url ? [lessonData.url] : []),
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now()
-      });
+      };
+      
+      const docRef = await addDoc(collection(db, COLLECTIONS.LESSONS), normalizedData);
       return docRef.id;
     } catch (error) {
       console.error('Error adding lesson:', error);
@@ -145,11 +163,17 @@ export const lessonsService = {
   // Update lesson
   async update(id, lessonData) {
     try {
-      const docRef = doc(db, COLLECTIONS.LESSONS, id);
-      await updateDoc(docRef, {
+      // Normalize data structure - ensure we have both url and sources
+      const normalizedData = {
         ...lessonData,
+        // Ensure we have both url and sources for backward compatibility
+        url: lessonData.url || (lessonData.sources && lessonData.sources[0]) || '',
+        sources: lessonData.sources || (lessonData.url ? [lessonData.url] : []),
         updatedAt: Timestamp.now()
-      });
+      };
+      
+      const docRef = doc(db, COLLECTIONS.LESSONS, id);
+      await updateDoc(docRef, normalizedData);
     } catch (error) {
       console.error('Error updating lesson:', error);
       throw error;
@@ -168,12 +192,13 @@ export const lessonsService = {
 };
 
 // Recent Videos Service
+// Recent Videos Service - Optimized for homepage
 export const recentVideosService = {
-  // Get recent videos (limited to 3 for homepage)
+  // Get recent short videos (optimized for homepage - only gets 3 most recent)
   async getRecent(limitCount = 3) {
     try {
       const q = query(
-        collection(db, COLLECTIONS.RECENT_VIDEOS), 
+        collection(db, COLLECTIONS.SHORT_VIDEOS), 
         orderBy('createdAt', 'desc'),
         limit(limitCount)
       );
@@ -186,28 +211,26 @@ export const recentVideosService = {
       console.error('Error getting recent videos:', error);
       throw error;
     }
-  },
+  }
+};
 
-  // Add to recent videos
-  async add(videoData) {
+// Recent Lessons Service - Optimized for homepage
+export const recentLessonsService = {
+  // Get recent lessons (optimized for homepage - only gets 3 most recent)
+  async getRecent(limitCount = 3) {
     try {
-      const docRef = await addDoc(collection(db, COLLECTIONS.RECENT_VIDEOS), {
-        ...videoData,
-        createdAt: Timestamp.now()
-      });
-      return docRef.id;
+      const q = query(
+        collection(db, COLLECTIONS.LESSONS), 
+        orderBy('createdAt', 'desc'),
+        limit(limitCount)
+      );
+      const querySnapshot = await getDocs(q);
+      return querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
     } catch (error) {
-      console.error('Error adding recent video:', error);
-      throw error;
-    }
-  },
-
-  // Remove from recent videos
-  async remove(id) {
-    try {
-      await deleteDoc(doc(db, COLLECTIONS.RECENT_VIDEOS, id));
-    } catch (error) {
-      console.error('Error removing recent video:', error);
+      console.error('Error getting recent lessons:', error);
       throw error;
     }
   }

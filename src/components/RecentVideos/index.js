@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -7,19 +7,22 @@ import {
   Typography,
   Box,
   IconButton,
-  Chip,
   Grid,
   CircularProgress,
-  Alert
+  Alert,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton as MuiIconButton
 } from '@mui/material';
 import {
   PlayArrow,
   Share,
   OpenInNew,
-  Download
+  Download,
+  Close
 } from '@mui/icons-material';
-import UniversalVideoPlayer from '../../design-system/components/UniversalVideoPlayer';
-import { getThumbnailUrl } from '../../utils/videoPlatforms';
+import { getThumbnailUrl, getYouTubeId, getVideoInfo } from '../../utils/videoPlatforms';
 import SectionHeader from '../SectionHeader';
 import AnimatedBackground from '../AnimatedBackground';
 import { useRecentVideos } from '../../hooks/useFirebaseData';
@@ -33,9 +36,6 @@ const RecentVideos = () => {
   // Use Firebase data
   const { videos: recentVideos, loading, error } = useRecentVideos(3);
   
-  console.log('RecentVideos component - recentVideos:', recentVideos);
-  console.log('RecentVideos component - loading:', loading);
-  console.log('RecentVideos component - error:', error);
 
   const handleVideoClick = useCallback((video) => {
     setSelectedVideo(video);
@@ -45,10 +45,9 @@ const RecentVideos = () => {
   const handleDirectPlay = useCallback((video, e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (video.sources && video.sources[0]) {
-      window.open(video.sources[0], '_blank');
-    } else if (video.url) {
-      window.open(video.url, '_blank');
+    const videoUrl = video?.url || (video?.sources && video.sources[0]);
+    if (videoUrl) {
+      window.open(videoUrl, '_blank');
     }
   }, []);
 
@@ -67,16 +66,17 @@ const RecentVideos = () => {
 
   const handleDownload = useCallback((video, e) => {
     e.stopPropagation();
-    const downloadUrl = video.sources?.[0] || video.url;
-    if (downloadUrl) {
+    const videoUrl = video?.url || (video?.sources && video.sources[0]);
+    if (videoUrl) {
       const link = document.createElement('a');
-      link.href = downloadUrl;
+      link.href = videoUrl;
       link.download = `${video.title || 'video'}.mp4`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
   }, []);
+
 
   const handleCloseVideo = useCallback(() => {
     setIsVideoModalOpen(false);
@@ -87,21 +87,22 @@ const RecentVideos = () => {
     navigate('/shorts');
   }, [navigate]);
 
-  const getPlatformIcon = (platform) => {
-    return '';
-    // switch (platform) {
-    //   case 'facebook':
-    //     return '📘';
-    //   case 'youtube':
-    //     return '📺';
-    //   case 'tiktok':
-    //     return '🎵';
-    //   default:
-    //     return '🎥';
-    // }
-  };
+  // Helper function to get thumbnail URL
+  const getVideoThumbnail = useCallback((video) => {
+    // First try existing thumbnail fields
+    if (video.thumb) return video.thumb;
+    if (video.thumbnail) return video.thumbnail;
+    
+    // Get video URL from either url field or sources array
+    const videoUrl = video?.url || (video?.sources && video.sources[0]);
+    if (!videoUrl) return null;
+    
+    // Extract video info and generate thumbnail
+    const { platform, videoId } = getVideoInfo(videoUrl);
+    return getThumbnailUrl(platform, videoId);
+  }, []);
 
-  const VideoCard = ({ video }) => (
+  const VideoCard = React.memo(({ video }) => (
     <Card 
       className="video-card"
       onClick={(e) => {
@@ -111,36 +112,17 @@ const RecentVideos = () => {
       }}
     >
       <Box className="video-thumbnail-container">
-        {(video.thumb || video.thumbnail || getThumbnailUrl(video.platform, video.url)) ? (
-          <CardMedia
-            component="img"
-            height="200"
-            image={video.thumb || video.thumbnail || getThumbnailUrl(video.platform, video.url)}
-            alt={video.title}
-            className="video-thumbnail"
-          />
-        ) : (
-          <Box 
-            className="video-thumbnail-placeholder"
-            sx={{
-              height: 200,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: video.platform === 'facebook' ? '#1877f2' : 
-                             video.platform === 'tiktok' ? '#000000' : 
-                             video.platform === 'youtube' ? '#ff0000' : '#666666',
-              color: 'white',
-              fontSize: '3rem'
-            }}
-          >
-            {getPlatformIcon(video.platform)}
-            <Typography variant="caption" sx={{ mt: 1, fontSize: '0.8rem' }}>
-              {video.platform?.toUpperCase()}
-            </Typography>
-          </Box>
-        )}
+        <CardMedia
+          component="img"
+          height="200"
+          image={getVideoThumbnail(video) || 'https://via.placeholder.com/400x200/f5f5f5/666666?text=No+Thumbnail'}
+          alt={video.title}
+          className="video-thumbnail"
+          sx={{
+            objectFit: 'cover',
+            width: '100%'
+          }}
+        />
         
         <Box className="play-button-overlay">
           <IconButton className="play-button" size="large">
@@ -148,21 +130,6 @@ const RecentVideos = () => {
           </IconButton>
         </Box>
 
-        <Chip
-          label="Video"
-          size="small"
-          className="duration-badge"
-          sx={{
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            color: 'white',
-            fontSize: '0.75rem',
-            fontWeight: 'bold'
-          }}
-        />
-
-        <Box className="platform-icon">
-          {getPlatformIcon(video.platform)}
-        </Box>
       </Box>
 
       <CardContent className="video-content">
@@ -238,17 +205,10 @@ const RecentVideos = () => {
             </IconButton>
           </Box>
           
-          <Box className="metadata-right">
-            <Box className="metadata-item">
-              <Typography variant="caption" sx={{ fontSize: '0.75rem' }}>
-                YouTube
-              </Typography>
-            </Box>
-          </Box>
         </Box>
       </CardContent>
     </Card>
-  );
+  ));
 
   if (loading) {
     return (
@@ -256,8 +216,8 @@ const RecentVideos = () => {
         <section className="recent-videos-section section-padding">
           <div className="container">
             <SectionHeader 
-              title="شارٹ ویڈیوز"
-              subtitle="تعلیم القرآن  کی تازہ ترین شارٹ ویڈیو تشریحات"
+              title="Short Videos"
+              subtitle="Latest short video explanations of Quranic teachings"
             />
             <Box display="flex" justifyContent="center" py={4}>
               <CircularProgress />
@@ -274,8 +234,8 @@ const RecentVideos = () => {
         <section className="recent-videos-section section-padding">
           <div className="container">
             <SectionHeader 
-              title="شارٹ ویڈیوز"
-              subtitle="تعلیم القرآن  کی تازہ ترین شارٹ ویڈیو تشریحات"
+              title="Short Videos"
+              subtitle="Latest short video explanations of Quranic teachings"
             />
             <Alert severity="error" sx={{ mt: 2 }}>
               Failed to load recent videos. Please try again later.
@@ -291,8 +251,8 @@ const RecentVideos = () => {
       <section className="recent-videos-section section-padding">
         <div className="container">
         <SectionHeader 
-          title="شارٹ ویڈیوز"
-          subtitle="تعلیم القرآن  کی تازہ ترین شارٹ ویڈیو تشریحات"
+          title="Short Videos"
+          subtitle="Latest short video explanations of Quranic teachings"
         />
 
         {/* Videos Grid */}
@@ -319,24 +279,145 @@ const RecentVideos = () => {
         {/* View All Button */}
         <div className="view-all-container">
           <button className="view-all-btn" onClick={handleShowMore}>
-            مزید دیکھیے
+            View More
           </button>
         </div>
-      </div>
+          </div>
 
-      {/* Video Modal */}
-      {isVideoModalOpen && selectedVideo && (
-        <UniversalVideoPlayer
-          video={selectedVideo}
-          isModal={true}
-          onClose={handleCloseVideo}
-          showDownload={true}
-          showShare={true}
-        />
-      )}
-    </section>
-    </AnimatedBackground>
-  );
-};
+          {/* Video Modal */}
+          {isVideoModalOpen && selectedVideo && (
+            <Dialog
+              open={isVideoModalOpen}
+              onClose={handleCloseVideo}
+              maxWidth="md"
+              fullWidth
+              sx={{
+                '& .MuiDialog-paper': {
+                  backgroundColor: '#000',
+                  borderRadius: 2,
+                  overflow: 'hidden'
+                }
+              }}
+            >
+              <DialogTitle sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                backgroundColor: '#000',
+                color: 'white',
+                borderBottom: '1px solid #333'
+              }}>
+                <Typography variant="h6" component="div">
+                  {selectedVideo.title}
+                </Typography>
+                <MuiIconButton
+                  aria-label="close"
+                  onClick={handleCloseVideo}
+                  sx={{ color: 'white' }}
+                >
+                  <Close />
+                </MuiIconButton>
+              </DialogTitle>
+              <DialogContent sx={{ p: 0, backgroundColor: '#000' }}>
+                <Box sx={{ position: 'relative', width: '100%', height: 0, paddingBottom: '56.25%' }}>
+                  {(() => {
+                    // Get video URL from either url field or sources array
+                    const videoUrl = selectedVideo?.url || (selectedVideo?.sources && selectedVideo.sources[0]);
+                    
+                    if (!videoUrl) {
+                      return (
+                        <Box sx={{ 
+                          position: 'absolute', 
+                          top: 0, 
+                          left: 0, 
+                          width: '100%', 
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                          textAlign: 'center',
+                          p: 2
+                        }}>
+                          <Typography variant="h6" gutterBottom>
+                            No Video URL Found
+                          </Typography>
+                          <Typography variant="body2" gutterBottom>
+                            The video data is missing both URL and sources fields.
+                          </Typography>
+                          <Typography variant="body2" gutterBottom>
+                            Video data: {JSON.stringify(selectedVideo, null, 2)}
+                          </Typography>
+                        </Box>
+                      );
+                    }
+                    
+                    const videoId = getYouTubeId(videoUrl);
+                    
+                    if (!videoId) {
+                      return (
+                        <Box sx={{ 
+                          position: 'absolute', 
+                          top: 0, 
+                          left: 0, 
+                          width: '100%', 
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                          textAlign: 'center',
+                          p: 2
+                        }}>
+                          <Typography variant="h6" gutterBottom>
+                            Invalid YouTube URL
+                          </Typography>
+                          <Typography variant="body2" gutterBottom>
+                            Could not extract video ID from: {selectedVideo.url}
+                          </Typography>
+                          <Typography variant="body2" sx={{ mt: 2 }}>
+                            <a 
+                              href={selectedVideo.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              style={{ color: '#1976d2', textDecoration: 'underline' }}
+                            >
+                              Open in YouTube
+                            </a>
+                          </Typography>
+                        </Box>
+                      );
+                    }
+                    
+                    return (
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={`https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&controls=1&showinfo=0&fs=1&cc_load_policy=0&iv_load_policy=3&start=0`}
+                        title={selectedVideo.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%'
+                        }}
+                      />
+                    );
+                  })()}
+                </Box>
+              </DialogContent>
+            </Dialog>
+          )}
 
-export default RecentVideos;
+        </section>
+        </AnimatedBackground>
+      );
+    };
+
+    export default RecentVideos;

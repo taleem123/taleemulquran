@@ -1,9 +1,10 @@
 // Custom hooks for Firebase data management
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   shortVideosService, 
   lessonsService, 
   recentVideosService, 
+  recentLessonsService,
   selectedSurahsService
 } from '../services/firebaseService';
 
@@ -61,36 +62,60 @@ export const useLessons = () => {
   return { lessons, loading, error, refetch: loadLessons };
 };
 
-// Hook for recent videos (gets most recent short videos)
+// Hook for recent videos (gets most recent short videos - optimized for homepage)
 export const useRecentVideos = (limit = 3) => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    loadRecentVideos();
-  }, [limit]);
-
-  const loadRecentVideos = async () => {
+  const loadRecentVideos = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      // Get recent short videos from shortVideos collection
-      const data = await shortVideosService.getAll();
-      console.log('All short videos from Firebase:', data);
-      // Filter active videos and limit to specified count
-      const activeVideos = data.filter(video => video.isActive).slice(0, limit);
-      console.log('Active videos for recent videos:', activeVideos);
-      setVideos(activeVideos);
+      // Get recent videos directly from shortVideos collection (optimized)
+      const data = await recentVideosService.getRecent(limit);
+      setVideos(data);
     } catch (err) {
       setError(err.message);
       console.error('Error loading recent videos:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [limit]);
+
+  useEffect(() => {
+    loadRecentVideos();
+  }, [loadRecentVideos]);
 
   return { videos, loading, error, refetch: loadRecentVideos };
+};
+
+// Hook for recent lessons (gets most recent lessons - optimized for homepage)
+export const useRecentLessons = (limit = 3) => {
+  const [lessons, setLessons] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadRecentLessons = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      // Get recent lessons directly from lessons collection (optimized)
+      const data = await recentLessonsService.getRecent(limit);
+      setLessons(data);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error loading recent lessons:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [limit]);
+
+  useEffect(() => {
+    loadRecentLessons();
+  }, [loadRecentLessons]);
+
+  return { lessons, loading, error, refetch: loadRecentLessons };
 };
 
 // Hook for selected surahs

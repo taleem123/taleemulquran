@@ -45,7 +45,7 @@
 
 .section-header__title-urdu {
   font-family: 'Amiri', 'Times New Roman', serif;
-  direction: rtl;
+  direction: ltr;
   text-align: inherit;
 }
 

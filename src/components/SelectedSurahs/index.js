@@ -104,8 +104,8 @@ const SelectedSurahs = memo(() => {
             <div className="row">
               <div className="col-12">
                 <SectionHeader 
-                  title="آڈیو تفسیر"
-                  subtitle="تعلیم القرآن کی مکمل سورتوں کو تفسیر سنیں"
+                  title="Audio Tafseer"
+                  subtitle="Listen to complete tafseer of surahs from Taleem Ul Quran"
                 />
               </div>
             </div>
@@ -125,8 +125,8 @@ const SelectedSurahs = memo(() => {
           <div className="row">
             <div className="col-12">
               <SectionHeader 
-                title="آڈیو تفسیر"
-                subtitle="تعلیم القرآن کی مکمل سورتوں کو تفسیر سنیں"
+                title="Audio Tafseer"
+                subtitle="تعلیم القرآن کی مکمل سورتوں کی تفسیر سنیں"
               />
             </div>
           </div>
@@ -151,7 +151,7 @@ const SelectedSurahs = memo(() => {
               className="view-all-btn"
               onClick={() => navigate('/tafseer/audios')}
             >
-              تمام سورتیں دیکھیں
+              View More         
             </button>
           </Box>
         </div>

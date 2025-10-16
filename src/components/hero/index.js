@@ -16,7 +16,7 @@ const Hero = (props) => {
                                     <span>آئیے قرآن کو جانئیے</span>
                                 </div>
                                 <div className="slide-title">
-                                    <h2 style={{fontFamily:'system-ui'}} >!پڑھو <br/> ،اپنے رب کے نام سے <br/> جس  نے تمہیں پیدا کیا</h2>
+                                    <h2 style={{fontFamily:'system-ui'}} >Read! <br/> In the name of your Lord <br/> who created you</h2>
                                 </div>
                                 <div className="slide-subtitle urdu-font">
                                     <p>اسلام کی حقیقی اور مستند تعلیمات کی روشنی میں قرآن مجید کی نا یاب تفسیر</p>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -7,22 +7,25 @@ import {
   Typography,
   Box,
   IconButton,
-  Chip,
   Grid,
   CircularProgress,
-  Alert
+  Alert,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton as MuiIconButton
 } from '@mui/material';
 import {
   PlayArrow,
   Share,
   OpenInNew,
-  Download
+  Download,
+  Close
 } from '@mui/icons-material';
-import UniversalVideoPlayer from '../../design-system/components/UniversalVideoPlayer';
-import { getThumbnailUrl } from '../../utils/videoPlatforms';
+import { getThumbnailUrl, getYouTubeId, getVideoInfo } from '../../utils/videoPlatforms';
 import SectionHeader from '../SectionHeader';
 import AnimatedBackground from '../AnimatedBackground';
-import { useLessons } from '../../hooks/useFirebaseData';
+import { useRecentLessons } from '../../hooks/useFirebaseData';
 import './style.css';
 
 const SelectedLessons = () => {
@@ -30,9 +33,8 @@ const SelectedLessons = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
-  // Use Firebase data - get only the 3 most recent lessons
-  const { lessons: allLessons, loading, error } = useLessons();
-  const selectedLessons = allLessons.slice(0, 3);
+  // Use Firebase data - get only the 3 most recent lessons (optimized)
+  const { lessons: selectedLessons, loading, error } = useRecentLessons(3);
 
   const handleVideoClick = useCallback((video) => {
     setSelectedVideo(video);
@@ -42,10 +44,9 @@ const SelectedLessons = () => {
   const handleDirectPlay = useCallback((video, e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (video.sources && video.sources[0]) {
-      window.open(video.sources[0], '_blank');
-    } else if (video.url) {
-      window.open(video.url, '_blank');
+    const videoUrl = video?.url || (video?.sources && video.sources[0]);
+    if (videoUrl) {
+      window.open(videoUrl, '_blank');
     }
   }, []);
 
@@ -64,16 +65,17 @@ const SelectedLessons = () => {
 
   const handleDownload = useCallback((video, e) => {
     e.stopPropagation();
-    const downloadUrl = video.sources?.[0] || video.url;
-    if (downloadUrl) {
+    const videoUrl = video?.url || (video?.sources && video.sources[0]);
+    if (videoUrl) {
       const link = document.createElement('a');
-      link.href = downloadUrl;
+      link.href = videoUrl;
       link.download = `${video.title || 'lesson'}.mp4`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
   }, []);
+
 
   const handleCloseVideo = useCallback(() => {
     setIsVideoModalOpen(false);
@@ -84,20 +86,22 @@ const SelectedLessons = () => {
     navigate('/lessons');
   }, [navigate]);
 
-  const getPlatformIcon = (platform) => {
-    switch (platform) {
-      case 'facebook':
-        return '📘';
-      case 'youtube':
-        return '📺';
-      case 'tiktok':
-        return '🎵';
-      default:
-        return '🎥';
-    }
-  };
+  // Helper function to get thumbnail URL
+  const getVideoThumbnail = useCallback((lesson) => {
+    // First try existing thumbnail fields
+    if (lesson.thumb) return lesson.thumb;
+    if (lesson.thumbnail) return lesson.thumbnail;
+    
+    // Get video URL from either url field or sources array
+    const videoUrl = lesson?.url || (lesson?.sources && lesson.sources[0]);
+    if (!videoUrl) return null;
+    
+    // Extract video info and generate thumbnail
+    const { platform, videoId } = getVideoInfo(videoUrl);
+    return getThumbnailUrl(platform, videoId);
+  }, []);
 
-  const LessonCard = ({ lesson }) => (
+  const LessonCard = React.memo(({ lesson }) => (
     <Card 
       className="video-card"
       onClick={(e) => {
@@ -107,36 +111,17 @@ const SelectedLessons = () => {
       }}
     >
       <Box className="video-thumbnail-container">
-        {(lesson.thumb || lesson.thumbnail || getThumbnailUrl(lesson.platform, lesson.url)) ? (
-          <CardMedia
-            component="img"
-            height="200"
-            image={lesson.thumb || lesson.thumbnail || getThumbnailUrl(lesson.platform, lesson.url)}
-            alt={lesson.title}
-            className="video-thumbnail"
-          />
-        ) : (
-          <Box 
-            className="video-thumbnail-placeholder"
-            sx={{
-              height: 200,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: lesson.platform === 'facebook' ? '#1877f2' : 
-                             lesson.platform === 'tiktok' ? '#000000' : 
-                             lesson.platform === 'youtube' ? '#ff0000' : '#666666',
-              color: 'white',
-              fontSize: '3rem'
-            }}
-          >
-            {getPlatformIcon(lesson.platform)}
-            <Typography variant="caption" sx={{ mt: 1, fontSize: '0.8rem' }}>
-              {lesson.platform?.toUpperCase()}
-            </Typography>
-          </Box>
-        )}
+        <CardMedia
+          component="img"
+          height="200"
+          image={getVideoThumbnail(lesson) || 'https://via.placeholder.com/400x200/f5f5f5/666666?text=No+Thumbnail'}
+          alt={lesson.title}
+          className="video-thumbnail"
+          sx={{
+            objectFit: 'cover',
+            width: '100%'
+          }}
+        />
         
         <Box className="play-button-overlay">
           <IconButton className="play-button" size="large">
@@ -144,21 +129,6 @@ const SelectedLessons = () => {
           </IconButton>
         </Box>
 
-        <Chip
-          label="Lesson"
-          size="small"
-          className="duration-badge"
-          sx={{
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            color: 'white',
-            fontSize: '0.75rem',
-            fontWeight: 'bold'
-          }}
-        />
-
-        <Box className="platform-icon">
-          {getPlatformIcon(lesson.platform)}
-        </Box>
       </Box>
 
       <CardContent className="video-content">
@@ -234,17 +204,10 @@ const SelectedLessons = () => {
             </IconButton>
           </Box>
           
-          <Box className="metadata-right">
-            <Box className="metadata-item">
-              <Typography variant="caption" sx={{ fontSize: '0.75rem' }}>
-                YouTube
-              </Typography>
-            </Box>
-          </Box>
         </Box>
       </CardContent>
     </Card>
-  );
+  ));
 
   // Loading state
   if (loading) {
@@ -253,8 +216,8 @@ const SelectedLessons = () => {
         <section className="selected-lessons-section section-padding">
           <div className="container">
             <SectionHeader 
-              title="منتخب اسباق"
-              subtitle="تعلیم القرآن کی تفصیلی تفسیر کے اسباق اور طویل لیکچرز"
+              title="Selected Lessons"
+              subtitle="Detailed Quranic interpretation lessons and comprehensive lectures"
             />
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
               <CircularProgress />
@@ -272,8 +235,8 @@ const SelectedLessons = () => {
         <section className="selected-lessons-section section-padding">
           <div className="container">
             <SectionHeader 
-              title="منتخب اسباق"
-              subtitle="تعلیم القرآن کی تفصیلی تفسیر کے اسباق اور طویل لیکچرز"
+              title="Selected Lessons"
+              subtitle="Detailed Quranic interpretation lessons and comprehensive lectures"
             />
             <Alert severity="error">
               Failed to load lessons. Please try again later.
@@ -289,8 +252,8 @@ const SelectedLessons = () => {
       <section className="selected-lessons-section section-padding">
         <div className="container">
         <SectionHeader 
-          title="منتخب اسباق"
-          subtitle="تعلیم القرآن کی تفصیلی تفسیر کے اسباق اور طویل لیکچرز"
+          title="Selected Lessons"
+          subtitle="تعلیم القرآن کی تفصیلی تفسیر میں سے لیے گے اسباق "
         />
 
         {/* Lessons Grid */}
@@ -307,24 +270,144 @@ const SelectedLessons = () => {
         {/* View All Button */}
         <div className="view-all-container">
           <button className="view-all-btn" onClick={handleShowMore}>
-            مزید دیکھیے
+            View More
           </button>
         </div>
-      </div>
+          </div>
 
-      {/* Video Modal */}
-      {isVideoModalOpen && selectedVideo && (
-        <UniversalVideoPlayer
-          video={selectedVideo}
-          isModal={true}
-          onClose={handleCloseVideo}
-          showDownload={true}
-          showShare={true}
-        />
-      )}
-    </section>
-    </AnimatedBackground>
-  );
-};
+          {/* Video Modal */}
+          {isVideoModalOpen && selectedVideo && (
+            <Dialog
+              open={isVideoModalOpen}
+              onClose={handleCloseVideo}
+              maxWidth="md"
+              fullWidth
+              sx={{
+                '& .MuiDialog-paper': {
+                  backgroundColor: '#000',
+                  borderRadius: 2,
+                  overflow: 'hidden'
+                }
+              }}
+            >
+              <DialogTitle sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                backgroundColor: '#000',
+                color: 'white',
+                borderBottom: '1px solid #333'
+              }}>
+                <Typography variant="h6" component="div">
+                  {selectedVideo.title}
+                </Typography>
+                <MuiIconButton
+                  aria-label="close"
+                  onClick={handleCloseVideo}
+                  sx={{ color: 'white' }}
+                >
+                  <Close />
+                </MuiIconButton>
+              </DialogTitle>
+              <DialogContent sx={{ p: 0, backgroundColor: '#000' }}>
+                <Box sx={{ position: 'relative', width: '100%', height: 0, paddingBottom: '56.25%' }}>
+                  {(() => {
+                    // Get video URL from either url field or sources array
+                    const videoUrl = selectedVideo?.url || (selectedVideo?.sources && selectedVideo.sources[0]);
+                    
+                    if (!videoUrl) {
+                      return (
+                        <Box sx={{ 
+                          position: 'absolute', 
+                          top: 0, 
+                          left: 0, 
+                          width: '100%', 
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                          textAlign: 'center',
+                          p: 2
+                        }}>
+                          <Typography variant="h6" gutterBottom>
+                            No Video URL Found
+                          </Typography>
+                          <Typography variant="body2" gutterBottom>
+                            The video data is missing both URL and sources fields.
+                          </Typography>
+                        </Box>
+                      );
+                    }
+                    
+                    const videoId = getYouTubeId(videoUrl);
+                    
+                    if (!videoId) {
+                      return (
+                        <Box sx={{ 
+                          position: 'absolute', 
+                          top: 0, 
+                          left: 0, 
+                          width: '100%', 
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                          textAlign: 'center',
+                          p: 2
+                        }}>
+                          <Typography variant="h6" gutterBottom>
+                            Invalid YouTube URL
+                          </Typography>
+                          <Typography variant="body2" gutterBottom>
+                            Could not extract video ID from: {videoUrl}
+                          </Typography>
+                          <Typography variant="body2" sx={{ mt: 2 }}>
+                            <a 
+                              href={videoUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              style={{ color: '#1976d2', textDecoration: 'underline' }}
+                            >
+                              Open in YouTube
+                            </a>
+                          </Typography>
+                        </Box>
+                      );
+                    }
+                    
+                    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&controls=1&showinfo=0&fs=1&cc_load_policy=0&iv_load_policy=3&start=0`;
+                    
+                    return (
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={embedUrl}
+                        title={selectedVideo.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%'
+                        }}
+                      />
+                    );
+                  })()}
+                </Box>
+              </DialogContent>
+            </Dialog>
+          )}
 
-export default SelectedLessons;
+        </section>
+        </AnimatedBackground>
+      );
+    };
+
+    export default SelectedLessons;

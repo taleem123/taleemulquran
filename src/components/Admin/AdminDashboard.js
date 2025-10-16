@@ -26,7 +26,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/firebase';
-import { addMultipleTestVideos, addTestLesson } from '../../utils/addTestData';
 
 const AdminDashboard = () => {
   const theme = useTheme();
@@ -80,18 +79,6 @@ const AdminDashboard = () => {
       console.error('Error loading stats:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleAddTestData = async () => {
-    try {
-      await addMultipleTestVideos();
-      await addTestLesson();
-      loadStats(); // Reload stats
-      alert('Test data added successfully!');
-    } catch (error) {
-      console.error('Error adding test data:', error);
-      alert('Error adding test data: ' + error.message);
     }
   };
 
@@ -258,15 +245,6 @@ const AdminDashboard = () => {
                 onClick={() => window.open('/', '_blank')}
               >
                 View Public Site
-              </Button>
-              <Button
-                variant="outlined"
-                fullWidth
-                onClick={handleAddTestData}
-                color="secondary"
-                sx={{ mt: 1 }}
-              >
-                Add Test Data
               </Button>
             </Box>
           </Paper>

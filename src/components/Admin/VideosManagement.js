@@ -23,7 +23,6 @@ import {
   Switch,
   FormControlLabel,
   CircularProgress,
-  Alert,
   Chip,
   Grid
 } from '@mui/material';
@@ -32,6 +31,7 @@ import { toast } from 'react-toastify';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
+import { validateVideoData, sanitizeInput } from '../../utils/validation';
 
 const VideosManagement = () => {
   const [videos, setVideos] = useState([]);
@@ -97,23 +97,28 @@ const VideosManagement = () => {
 
   const handleSave = async () => {
     try {
-      if (!formData.title.trim()) {
-        toast.error('Title is required');
-        return;
-      }
-      if (!formData.url.trim()) {
-        toast.error('Video URL is required');
+      // Sanitize input data
+      const sanitizedData = {
+        title: sanitizeInput(formData.title),
+        description: sanitizeInput(formData.description),
+        url: sanitizeInput(formData.url),
+        platform: formData.platform,
+        category: formData.category,
+        isActive: formData.isActive
+      };
+
+      // Validate data
+      const validation = validateVideoData(sanitizedData);
+      if (!validation.isValid) {
+        Object.values(validation.errors).forEach(error => {
+          toast.error(error);
+        });
         return;
       }
 
       const videoData = {
-        title: formData.title,
-        description: formData.description,
-        url: formData.url,
-        platform: formData.platform,
-        category: formData.category,
-        isActive: formData.isActive,
-        thumbnail: getThumbnailUrl(formData.platform, formData.url),
+        ...sanitizedData,
+        thumbnail: getThumbnailUrl(sanitizedData.platform, sanitizedData.url),
         updatedAt: new Date()
       };
 

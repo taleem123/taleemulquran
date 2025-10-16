@@ -60,7 +60,7 @@
 }
 
 .search-input {
-  direction: rtl;
+  direction: ltr;
 }
 
 .search-input .MuiInputBase-input {
@@ -224,7 +224,7 @@
   color: #1a365d !important;
   margin-bottom: 4px !important;
   line-height: 1.3 !important;
-  direction: rtl;
+  direction: ltr;
   text-align: right;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -238,7 +238,7 @@
   color: #666 !important;
   margin-bottom: 16px !important;
   line-height: 1.4 !important;
-  direction: rtl;
+  direction: ltr;
   text-align: right;
   display: -webkit-box;
   -webkit-line-clamp: 2;
