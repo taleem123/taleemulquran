@@ -27,8 +27,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set \"CI=false\" && react-scripts build",
-    "build:prod": "set \"CI=false\" && react-scripts build",
+    "build": "react-scripts build",
+    "build:prod": "react-scripts build",
     "test": "react-scripts test",
     "analyze": "npm run build && node scripts/simple-analyze.js",
     "analyze:simple": "npm run build && node scripts/simple-analyze.js",
