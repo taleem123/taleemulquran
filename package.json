@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "homepage": "/",
   "private": false,
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
   "license": "UNLICENSED",
   "dependencies": {
     "@emotion/react": "^11.14.0",
