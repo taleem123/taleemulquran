@@ -1,7 +1,7 @@
 {
   "name": "taleem-ul-quran",
   "version": "0.1.0",
-  "homepage": "http://taleemulquran.pk/",
+  "homepage": "https://taleemulquran.pk/",
   "private": false,
   "license": "UNLICENSED",
   "dependencies": {
