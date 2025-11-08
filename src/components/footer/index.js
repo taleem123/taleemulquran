@@ -122,8 +122,6 @@ const Footer = (props) => {
                     <h3>Learning Resources</h3>
                   </div>
                   <ul>
-                    <li><Link to="/coming-soon" onClick={ClickHandler}>Video Tafseer</Link></li>
-                    <li><Link to="/coming-soon" onClick={ClickHandler}>PDF Tafseer</Link></li>
                     <li><Link to="/tafseer/audios" onClick={ClickHandler}>Audio Tafseer</Link></li>
                     <li><Link to="/shorts" onClick={ClickHandler}>Short Videos</Link></li>
                     <li><Link to="/lessons" onClick={ClickHandler}>Lessons</Link></li>
