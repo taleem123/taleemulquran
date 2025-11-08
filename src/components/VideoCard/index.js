@@ -19,7 +19,7 @@ import {
   Close
 } from '@mui/icons-material';
 import { getThumbnailUrl, getYouTubeId, getVideoInfo } from '../../utils/videoPlatforms';
-import { downloadVideo, canDownloadDirectly } from '../../utils/videoDownload';
+import { downloadVideo } from '../../utils/videoDownload';
 import DownloadModal from '../DownloadModal';
 
 const VideoCard = ({ 
@@ -34,7 +34,6 @@ const VideoCard = ({
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
-  const [downloadInfo, setDownloadInfo] = useState(null);
 
   const handleVideoClick = useCallback((video) => {
     if (showModal) {
@@ -438,14 +437,12 @@ const VideoCard = ({
       )}
 
       {/* Download Modal */}
-      {isDownloadModalOpen && downloadInfo && (
+      {isDownloadModalOpen && (
         <DownloadModal
           open={isDownloadModalOpen}
           onClose={() => setIsDownloadModalOpen(false)}
-          video={downloadInfo.video}
-          platform={downloadInfo.platform}
-          videoId={downloadInfo.videoId}
-          videoUrl={downloadInfo.videoUrl}
+          video={video}
+          videoUrl={video?.url || (video?.sources && video.sources[0])}
         />
       )}
     </>

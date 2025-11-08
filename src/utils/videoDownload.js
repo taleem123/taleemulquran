@@ -80,45 +80,6 @@ const downloadViaFirebaseFunction = async (videoUrl, platform, title) => {
 };
 
 /**
- * Download YouTube video using yt-dlp or similar service
- * @param {string} videoId - YouTube video ID
- * @param {string} title - Video title
- * @returns {Promise<boolean>} - Success status
- */
-const downloadYouTubeVideo = async (videoId, title) => {
-  try {
-    // Option 1: Use a YouTube download service (like yt-dlp-web)
-    const downloadUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    
-    // For now, we'll show a message and open the video
-    // In a real implementation, you'd need a backend service with yt-dlp
-    const message = `
-YouTube videos cannot be downloaded directly due to platform restrictions.
-
-To download this video:
-1. Copy this link: ${downloadUrl}
-2. Use a YouTube downloader like:
-   - yt-dlp (command line)
-   - 4K Video Downloader
-   - Online YouTube downloaders
-
-Or click "Open in YouTube" to view the video.
-    `;
-    
-    alert(message);
-    
-    // Open the video in a new tab as fallback
-    window.open(downloadUrl, '_blank');
-    
-    return false; // Indicates we couldn't download directly
-    
-  } catch (error) {
-    console.error('YouTube download failed:', error);
-    throw error;
-  }
-};
-
-/**
  * Download video directly from URL
  * @param {string} url - Direct video URL
  * @param {string} title - Video title
