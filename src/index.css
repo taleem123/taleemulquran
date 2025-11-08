@@ -161,7 +161,7 @@ code {
 
 /* RTL Global Styles */
 * {
-  direction: inherit;
+  direction: ltr;
 }
 
 /* RTL Grid System */
@@ -171,13 +171,13 @@ code {
 
 [class*="col-"] {
   direction: ltr;
-  text-align: right;
+  text-align: left;
 }
 
 /* RTL Navigation */
 nav ul {
   direction: ltr;
-  text-align: right;
+  text-align: left;
 }
 
 nav li {
@@ -186,20 +186,20 @@ nav li {
 
 /* RTL Forms */
 form {
-  direction: ltr;
+  text-align: left;
 }
 
 input, textarea, select {
   text-align: right;
+  text-align: left;
 }
-
 /* RTL Buttons */
 button {
   direction: ltr;
 }
 
-/* RTL Lists */
 ul, ol {
+  text-align: left;
   direction: ltr;
   text-align: right;
 }

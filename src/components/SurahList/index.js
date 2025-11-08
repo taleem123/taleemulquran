@@ -96,10 +96,10 @@ const SurahList = (props) => {
   }, [debouncedSearchTerm, selectedFilter, bookmarkedSurahs]);
 
   const filterOptions = [
-    { value: 'all', label: 'تمام سورتیں', count: surahData.length },
-    { value: 'meccan', label: 'مکی', count: surahData.filter(s => s.revelationType === 'Meccan').length },
-    { value: 'medinan', label: 'مدنی', count: surahData.filter(s => s.revelationType === 'Medinan').length },
-    { value: 'bookmarked', label: 'بک مارک', count: bookmarkedSurahs.size }
+    { value: 'all', label: 'All Surahs', count: surahData.length },
+    { value: 'meccan', label: 'Makki', count: surahData.filter(s => s.revelationType === 'Meccan').length },
+    { value: 'medinan', label: 'Madani', count: surahData.filter(s => s.revelationType === 'Medinan').length },
+    { value: 'bookmarked', label: 'Bookmarked', count: bookmarkedSurahs.size }
   ];
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -129,8 +129,8 @@ const SurahList = (props) => {
       <section className="service-single-section section-padding">
         <div className="container">
           <div className="service-single-content">
-            <h2>{props.formate} تفسیر</h2>
-            <p>آپ کسی بھی وقت سن، ڈاؤن لوڈ اور شیئر کر سکتے ہیں۔</p>
+            <h2>{props.formate} Tafseer</h2>
+            <p>You can listen, download and share anytime.</p>
           </div>
           <LoadingSpinner message="Loading Surahs..." />
         </div>
@@ -144,15 +144,15 @@ const SurahList = (props) => {
         <section className="service-single-section section-padding">
           <div className="container">
           <div className="service-single-content">
-            <h2>{props.formate} تفسیر</h2>
-            <p>آپ کسی بھی وقت سن، ڈاؤن لوڈ اور شیئر کر سکتے ہیں۔</p>
+            <h2>{props.formate} Tafseer</h2>
+            <p>You can listen, download and share anytime.</p>
           </div>
 
           {/* Search and Filter Bar */}
           <div className="search-filter-container">
             <TextField
               fullWidth
-              placeholder="سورتوں کے نام یا ترجمہ سے تلاش کریں..."
+              placeholder="Search by surah name, translation or number..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               InputProps={{
@@ -179,7 +179,7 @@ const SurahList = (props) => {
           {/* Results Count */}
           <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
             <Typography variant="body2" color="text.secondary">
-              {filteredSurahs.length} میں سے {surahData.length} سورتیں دکھائی جا رہی ہیں
+              Showing {filteredSurahs.length} of {surahData.length} surahs
             </Typography>
           </Box>
 
@@ -188,8 +188,8 @@ const SurahList = (props) => {
             {filteredSurahs.length === 0 ? (
               <div className="empty-state">
                 <div className="empty-state-icon">🔍</div>
-                <h3>کوئی سورت نہیں ملی</h3>
-                <p>اپنی تلاش یا فلٹر کی شرائط کو تبدیل کرنے کی کوشش کریں</p>
+                <h3>No surahs found</h3>
+                <p>Try changing your search or filter criteria</p>
                 <Button
                   variant="outlined"
                   onClick={() => {
@@ -197,7 +197,7 @@ const SurahList = (props) => {
                     setSelectedFilter('all');
                   }}
                 >
-                  فلٹر صاف کریں
+                  Clear filters
                 </Button>
               </div>
             ) : (

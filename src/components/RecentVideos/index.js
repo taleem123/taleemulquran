@@ -279,7 +279,7 @@ const RecentVideos = () => {
         {/* View All Button */}
         <div className="view-all-container">
           <button className="view-all-btn" onClick={handleShowMore}>
-            View More
+            View All Shorts
           </button>
         </div>
           </div>

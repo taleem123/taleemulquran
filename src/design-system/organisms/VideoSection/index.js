@@ -16,7 +16,7 @@ const VideoSection = ({
   onDownload,
   onShare,
   onViewAll,
-  viewAllText = 'مزید دیکھیے',
+  viewAllText = 'View All',
   viewAllPath,
   variant = 'default',
   columns = { xs: 1, sm: 2, md: 3 },

@@ -74,6 +74,7 @@
   font-size: 0.85rem !important;
   color: #666 !important;
   margin-bottom: 8px !important;
+  text-align: left;
   line-height: 1.3 !important;
 }
 
@@ -85,13 +86,13 @@
   margin-bottom: 4px !important;
   line-height: 1.3 !important;
   direction: ltr;
-  text-align: right;
+  text-align: left;
 }
 
 .surah-ayat-count {
   font-size: 0.8rem !important;
   color: #666 !important;
-  text-align: right !important;
+  text-align: left !important;
   margin-top: auto !important;
 }
 
@@ -247,6 +248,10 @@
   transition: all 0.3s ease;
 }
 
+.search-input .MuiInputBase-input {
+  text-align: left;
+}
+
 .search-input:focus {
   outline: none;
   border-color: #00a7d5;
@@ -367,7 +372,6 @@
 .surah-english-translation {
   color: #666;
   font-size: 14px;
-  text-align: right;
 }
 
 /* Action Button */

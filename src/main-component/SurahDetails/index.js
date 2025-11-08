@@ -87,7 +87,7 @@ const SurahDetails = () => {
       <div className="soundcloud-container">
         {isLoading && (
           <Typography variant="body2" color="textSecondary">
-            پلے لسٹ لوڈ ہو رہی ہے...
+            Playlist is loading...
           </Typography>
         )}
         <iframe
@@ -153,10 +153,10 @@ const SurahDetails = () => {
                       </Typography>
                       <div className="surah-meta-arabic">
                         <Typography variant="body1" className="revelation-type-arabic">
-                          {surah.revelationType === 'Meccan' ? 'مکی' : 'مدنی'}
+                    {surah.revelationType === 'Meccan' ? 'Makki' : 'Madani'}
                         </Typography>
                         <Typography variant="body1" className="ayah-count-arabic">
-                          کل آیات: {surah.numberOfAyahs}
+                    Total Verses: {surah.numberOfAyahs}
                         </Typography>
                       </div>
                     </div>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useCallback, useMemo } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 import {
   Typography,
   Box,
@@ -46,11 +46,6 @@ const SelectedLessonsPage = () => {
         (lesson.description && lesson.description.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
-
-    // Apply category filter (removed since we don't have categories anymore)
-    // if (filterBy !== 'all') {
-    //   filtered = filtered.filter(lesson => lesson.category === filterBy);
-    // }
 
     // Apply sorting
     filtered.sort((a, b) => {
@@ -153,33 +148,33 @@ const SelectedLessonsPage = () => {
 
             <div className="filter-controls">
               <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>ترتیب</InputLabel>
+                  <InputLabel>Sort By</InputLabel>
                 <Select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  label="ترتیب"
+                    label="Sort By"
                 >
-                  <MenuItem value="newest">تازہ ترین</MenuItem>
-                  <MenuItem value="oldest">پرانی</MenuItem>
-                  <MenuItem value="most_viewed">زیادہ دیکھی گئی</MenuItem>
-                  <MenuItem value="longest">طویل</MenuItem>
-                  <MenuItem value="shortest">مختصر</MenuItem>
+                    <MenuItem value="newest">Newest</MenuItem>
+                    <MenuItem value="oldest">Oldest</MenuItem>
+                    <MenuItem value="most_viewed">Most Viewed</MenuItem>
+                    <MenuItem value="longest">Longest</MenuItem>
+                    <MenuItem value="shortest">Shortest</MenuItem>
                 </Select>
               </FormControl>
 
               <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>قسم</InputLabel>
+                <InputLabel>Category</InputLabel>
                 <Select
                   value={filterBy}
                   onChange={(e) => setFilterBy(e.target.value)}
-                  label="قسم"
+                  label="Category"
                 >
-                  <MenuItem value="all">تمام</MenuItem>
-                  <MenuItem value="tafseer">تفسیر</MenuItem>
-                  <MenuItem value="ethics">اخلاق</MenuItem>
-                  <MenuItem value="prayer">نماز</MenuItem>
-                  <MenuItem value="benefits">فوائد</MenuItem>
-                  <MenuItem value="family">خاندان</MenuItem>
+                  <MenuItem value="all">All</MenuItem>
+                  <MenuItem value="tafseer">Tafseer</MenuItem>
+                  <MenuItem value="ethics">Ethics</MenuItem>
+                  <MenuItem value="prayer">Prayer</MenuItem>
+                  <MenuItem value="benefits">Benefits</MenuItem>
+                  <MenuItem value="family">Family</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -188,7 +183,7 @@ const SelectedLessonsPage = () => {
           {/* Results Count */}
           <div className="results-count">
             <Typography variant="body2" color="text.secondary">
-              {filteredLessons.length} میں سے {allLessons.length} ویڈیوز دکھائی جا رہی ہیں
+              Showing {filteredLessons.length} of {allLessons.length} lessons
             </Typography>
           </div>
 
@@ -199,8 +194,8 @@ const SelectedLessonsPage = () => {
                 <Grid size={12}>
                   <div className="empty-state">
                     <div className="empty-state-icon">📚</div>
-                    <h3>کوئی سبق نہیں ملا</h3>
-                    <p>اپنی تلاش کی شرائط کو تبدیل کرنے کی کوشش کریں</p>
+                    <h3>No lessons found</h3>
+                    <p>Try changing your search or filter criteria</p>
                     <Button 
                       variant="outlined" 
                       onClick={() => {
@@ -209,7 +204,7 @@ const SelectedLessonsPage = () => {
                         setSortBy('newest');
                       }}
                     >
-                      فلٹر صاف کریں
+                      Clear filters
                     </Button>
                   </div>
                 </Grid>

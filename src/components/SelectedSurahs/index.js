@@ -29,9 +29,6 @@ const SelectedSurahs = memo(() => {
         surahData.find(s => s.number === 18),  // Al-Kahf (Al-Kahaf)
         surahData.find(s => s.number === 12),  // Yusuf (Yousuf)
         surahData.find(s => s.number === 67),  // Al-Mulk
-        surahData.find(s => s.number === 36),  // Yaseen
-        surahData.find(s => s.number === 33),  // Al-Ahzaab
-        surahData.find(s => s.number === 9),   // At-Tawba (At-Tauba)
       ].filter(Boolean);
 
   const handleSurahClick = useCallback((surah) => {
@@ -87,7 +84,7 @@ const SelectedSurahs = memo(() => {
                 component="div"
                 className="surah-ayat-count"
               >
-                کل آیات: {surah.numberOfAyahs}
+                Total Verses: {surah.numberOfAyahs}
               </Typography>
             </Box>
           </Box>
@@ -151,7 +148,7 @@ const SelectedSurahs = memo(() => {
               className="view-all-btn"
               onClick={() => navigate('/tafseer/audios')}
             >
-              View More         
+              View All Surahs         
             </button>
           </Box>
         </div>

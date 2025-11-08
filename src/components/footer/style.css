@@ -10,6 +10,9 @@
     font-size: 15px;
     padding-top: 80px;
     overflow: hidden;
+    /* force LTR inside footer to avoid inherited RTL on mobile */
+    direction: ltr;
+    text-align: left;
 }
 
 .wpo-site-footer::before {
@@ -218,6 +221,22 @@
 .wpo-site-footer .link-widget,
 .wpo-site-footer-2 .link-widget {
     overflow: hidden;
+}
+
+/* Ensure link lists are left-aligned and do not inherit RTL from page */
+.wpo-site-footer .link-widget ul,
+.wpo-site-footer .link-widget ul li,
+.wpo-site-footer .link-widget ul li a {
+    text-align: left;
+    direction: ltr;
+}
+
+/* Ensure contact info aligns left */
+.wpo-site-footer .contact-widget .contact-ft ul li,
+.wpo-site-footer .contact-widget .contact-ft ul li span,
+.wpo-site-footer .contact-widget .contact-ft ul li a {
+    text-align: left;
+    direction: ltr;
 }
 
 @media screen and (min-width: 1200px) {

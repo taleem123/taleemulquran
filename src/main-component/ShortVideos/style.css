@@ -64,7 +64,7 @@
 }
 
 .search-input .MuiInputBase-input {
-  text-align: right;
+  text-align: left;
 }
 
 .filter-controls {
@@ -213,6 +213,7 @@
   line-height: 1.3 !important;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+    line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -225,9 +226,10 @@
   margin-bottom: 4px !important;
   line-height: 1.3 !important;
   direction: ltr;
-  text-align: right;
+  text-align: left;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+    line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -239,9 +241,10 @@
   margin-bottom: 16px !important;
   line-height: 1.4 !important;
   direction: ltr;
-  text-align: right;
+  text-align: left;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+    line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex: 1;

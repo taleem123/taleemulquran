@@ -153,33 +153,33 @@ const ShortVideos = () => {
 
             <div className="filter-controls">
               <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>ترتیب</InputLabel>
+                  <InputLabel>Sort By</InputLabel>
                 <Select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  label="ترتیب"
+                    label="Sort By"
                 >
-                  <MenuItem value="newest">تازہ ترین</MenuItem>
-                  <MenuItem value="oldest">پرانی</MenuItem>
-                  <MenuItem value="most_viewed">زیادہ دیکھی گئی</MenuItem>
-                  <MenuItem value="longest">طویل</MenuItem>
-                  <MenuItem value="shortest">مختصر</MenuItem>
+                    <MenuItem value="newest">Newest</MenuItem>
+                    <MenuItem value="oldest">Oldest</MenuItem>
+                    <MenuItem value="most_viewed">Most Viewed</MenuItem>
+                    <MenuItem value="longest">Longest</MenuItem>
+                    <MenuItem value="shortest">Shortest</MenuItem>
                 </Select>
               </FormControl>
 
               <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>قسم</InputLabel>
+                <InputLabel>Category</InputLabel>
                 <Select
                   value={filterBy}
                   onChange={(e) => setFilterBy(e.target.value)}
-                  label="قسم"
+                  label="Category"
                 >
-                  <MenuItem value="all">تمام</MenuItem>
-                  <MenuItem value="tafseer">تفسیر</MenuItem>
-                  <MenuItem value="ethics">اخلاق</MenuItem>
-                  <MenuItem value="prayer">نماز</MenuItem>
-                  <MenuItem value="benefits">فوائد</MenuItem>
-                  <MenuItem value="family">خاندان</MenuItem>
+                  <MenuItem value="all">All</MenuItem>
+                  <MenuItem value="tafseer">Tafseer</MenuItem>
+                  <MenuItem value="ethics">Ethics</MenuItem>
+                  <MenuItem value="prayer">Prayer</MenuItem>
+                  <MenuItem value="benefits">Benefits</MenuItem>
+                  <MenuItem value="family">Family</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -188,7 +188,7 @@ const ShortVideos = () => {
           {/* Results Count */}
           <div className="results-count">
             <Typography variant="body2" color="text.secondary">
-              {filteredVideos.length} میں سے {allVideos.length} ویڈیوز دکھائی جا رہی ہیں
+              Showing {filteredVideos.length} of {allVideos.length} videos
             </Typography>
           </div>
 
@@ -197,10 +197,10 @@ const ShortVideos = () => {
             <Grid container spacing={2}>
               {filteredVideos.length === 0 ? (
                 <Grid size={12}>
-                  <div className="empty-state">
+                    <div className="empty-state">
                     <div className="empty-state-icon">🎥</div>
-                    <h3>کوئی ویڈیو نہیں ملی</h3>
-                    <p>اپنی تلاش کی شرائط کو تبدیل کرنے کی کوشش کریں</p>
+                    <h3>No videos found</h3>
+                    <p>Try changing your search or filter criteria</p>
                     <Button 
                       variant="outlined" 
                       onClick={() => {
@@ -209,7 +209,7 @@ const ShortVideos = () => {
                         setSortBy('newest');
                       }}
                     >
-                      فلٹر صاف کریں
+                      Clear filters
                     </Button>
                   </div>
                 </Grid>
