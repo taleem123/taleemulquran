@@ -24,7 +24,11 @@ import {
   FormControlLabel,
   CircularProgress,
   Chip,
-  Grid
+  Grid,
+  Fade,
+  Collapse,
+  Alert,
+  Backdrop
 } from '@mui/material';
 import { Add, Edit, Delete, Visibility, PlayArrow, Save, Cancel, Refresh, VideoLibrary } from '@mui/icons-material';
 import { toast } from 'react-toastify';
@@ -36,6 +40,9 @@ import { validateVideoData, sanitizeInput } from '../../utils/validation';
 const VideosManagement = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(null);
+  const [error, setError] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [editingVideo, setEditingVideo] = useState(null);
   const [formData, setFormData] = useState({
@@ -46,6 +53,8 @@ const VideosManagement = () => {
     category: 'tafseer',
     isActive: true
   });
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [videoToDelete, setVideoToDelete] = useState(null);
 
   useEffect(() => {
     loadVideos();
@@ -54,6 +63,7 @@ const VideosManagement = () => {
   const loadVideos = async () => {
     try {
       setLoading(true);
+      setError(null);
       const q = query(collection(db, 'shortVideos'), orderBy('createdAt', 'desc'));
       const querySnapshot = await getDocs(q);
       const videosData = querySnapshot.docs.map(doc => ({
@@ -63,6 +73,7 @@ const VideosManagement = () => {
       setVideos(videosData);
     } catch (error) {
       console.error('Error loading videos:', error);
+      setError('Failed to load videos. Please try again.');
       toast.error('Failed to load videos');
     } finally {
       setLoading(false);
@@ -116,6 +127,7 @@ const VideosManagement = () => {
         return;
       }
 
+      setSaving(true);
       const videoData = {
         ...sanitizedData,
         thumbnail: getThumbnailUrl(sanitizedData.platform, sanitizedData.url),
@@ -123,34 +135,65 @@ const VideosManagement = () => {
       };
 
       if (editingVideo) {
+        // Optimistic update
+        setVideos(prevVideos =>
+          prevVideos.map(v =>
+            v.id === editingVideo.id ? { ...v, ...videoData } : v
+          )
+        );
         await updateDoc(doc(db, 'shortVideos', editingVideo.id), videoData);
         toast.success('Video updated successfully');
       } else {
         videoData.createdAt = new Date();
         videoData.views = 0;
-        await addDoc(collection(db, 'shortVideos'), videoData);
+        // Optimistic update
+        const tempId = Date.now().toString();
+        setVideos(prevVideos => [{ id: tempId, ...videoData }, ...prevVideos]);
+        const docRef = await addDoc(collection(db, 'shortVideos'), videoData);
+        setVideos(prevVideos =>
+          prevVideos.map(v =>
+            v.id === tempId ? { ...v, id: docRef.id } : v
+          )
+        );
         toast.success('Video added successfully');
       }
 
       setOpenDialog(false);
-      loadVideos();
     } catch (error) {
       console.error('Error saving video:', error);
       toast.error('Failed to save video');
     }
   };
 
-  const handleDelete = async (video) => {
-    if (window.confirm(`Are you sure you want to delete "${video.title}"?`)) {
-      try {
-        await deleteDoc(doc(db, 'shortVideos', video.id));
-        toast.success('Video deleted successfully');
-        loadVideos();
-      } catch (error) {
-        console.error('Error deleting video:', error);
-        toast.error('Failed to delete video');
-      }
+  const handleDeleteClick = (video) => {
+    setVideoToDelete(video);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!videoToDelete) return;
+
+    try {
+      setDeleting(videoToDelete.id);
+      // Optimistic update
+      setVideos(prevVideos => prevVideos.filter(v => v.id !== videoToDelete.id));
+      await deleteDoc(doc(db, 'videos', videoToDelete.id));
+      toast.success('Video deleted successfully');
+    } catch (error) {
+      console.error('Error deleting video:', error);
+      toast.error('Failed to delete video');
+      // Revert optimistic update
+      loadVideos();
+    } finally {
+      setDeleting(null);
+      setDeleteDialogOpen(false);
+      setVideoToDelete(null);
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteDialogOpen(false);
+    setVideoToDelete(null);
   };
 
   if (loading) {
@@ -162,20 +205,37 @@ const VideosManagement = () => {
   }
 
   return (
-    <Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3} flexWrap="wrap" gap={2}>
-        <Typography variant="h4" component="h1">
-          Short Videos Management
-        </Typography>
-        <Box display="flex" gap={1}>
-          <Button variant="outlined" startIcon={<Refresh />} onClick={loadVideos}>
-            Refresh
-          </Button>
-          <Button variant="contained" startIcon={<Add />} onClick={handleAdd}>
-            Add Video
-          </Button>
+    <Fade in={true}>
+      <Box>
+        {error && (
+          <Collapse in={!!error}>
+            <Alert severity="error" onClose={() => setError(null)} sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          </Collapse>
+        )}
+
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={3} flexWrap="wrap" gap={2}>
+          <Typography variant="h4" component="h1">
+            Short Videos Management
+          </Typography>
+          <Box display="flex" gap={1}>
+            <Button 
+              variant="outlined" 
+              startIcon={<Refresh />} 
+              onClick={loadVideos}
+              disabled={loading}>
+              Refresh
+            </Button>
+            <Button 
+              variant="contained" 
+              startIcon={<Add />} 
+              onClick={handleAdd}
+              disabled={loading}>
+              Add Video
+            </Button>
+          </Box>
         </Box>
-      </Box>
 
       {videos.length === 0 ? (
         <Paper sx={{ p: 4, textAlign: 'center' }}>
@@ -251,8 +311,18 @@ const VideosManagement = () => {
                     <IconButton size="small" onClick={() => handleEdit(video)} title="Edit">
                       <Edit />
                     </IconButton>
-                    <IconButton size="small" onClick={() => handleDelete(video)} title="Delete" color="error">
-                      <Delete />
+                    <IconButton
+                      size="small"
+                      onClick={() => handleDeleteClick(video)}
+                      title="Delete"
+                      color="error"
+                      disabled={deleting === video.id}
+                    >
+                      {deleting === video.id ? (
+                        <CircularProgress size={20} />
+                      ) : (
+                        <Delete />
+                      )}
                     </IconButton>
                   </TableCell>
                 </TableRow>
@@ -263,22 +333,30 @@ const VideosManagement = () => {
       )}
 
       {/* Add/Edit Dialog */}
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)} maxWidth="md" fullWidth>
+      <Dialog 
+        open={openDialog} 
+        onClose={() => !saving && setOpenDialog(false)} 
+        maxWidth="md" 
+        fullWidth
+      >
         <DialogTitle>
           {editingVideo ? 'Edit Video' : 'Add New Video'}
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+            <Grid sx={{ gridColumn: 'span 12' }}>
               <TextField
                 fullWidth
                 label="Title"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 required
+                disabled={saving}
+                error={!formData.title.trim()}
+                helperText={!formData.title.trim() ? 'Title is required' : ''}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid sx={{ gridColumn: 'span 12' }}>
               <TextField
                 fullWidth
                 label="Description"
@@ -286,9 +364,10 @@ const VideosManagement = () => {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 multiline
                 rows={3}
+                disabled={saving}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
               <TextField
                 fullWidth
                 label="Video URL"
@@ -296,10 +375,13 @@ const VideosManagement = () => {
                 onChange={(e) => setFormData({ ...formData, url: e.target.value })}
                 required
                 placeholder="https://www.youtube.com/watch?v=..."
+                disabled={saving}
+                error={!formData.url.trim()}
+                helperText={!formData.url.trim() ? 'URL is required' : ''}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
+            <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
+              <FormControl fullWidth disabled={saving}>
                 <InputLabel>Platform</InputLabel>
                 <Select
                   value={formData.platform}
@@ -313,8 +395,8 @@ const VideosManagement = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
+            <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
+              <FormControl fullWidth disabled={saving}>
                 <InputLabel>Category</InputLabel>
                 <Select
                   value={formData.category}
@@ -329,12 +411,13 @@ const VideosManagement = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
               <FormControlLabel
                 control={
                   <Switch
                     checked={formData.isActive}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                    disabled={saving}
                   />
                 }
                 label="Active"
@@ -343,15 +426,63 @@ const VideosManagement = () => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenDialog(false)} startIcon={<Cancel />}>
+          <Button
+            onClick={() => setOpenDialog(false)}
+            startIcon={<Cancel />}
+            disabled={saving}
+          >
             Cancel
           </Button>
-          <Button onClick={handleSave} variant="contained" startIcon={<Save />}>
-            {editingVideo ? 'Update' : 'Add'}
+          <Button
+            onClick={handleSave}
+            variant="contained"
+            startIcon={saving ? <CircularProgress size={20} /> : <Save />}
+            disabled={saving || !formData.title.trim() || !formData.url.trim()}
+          >
+            {saving ? 'Saving...' : editingVideo ? 'Update' : 'Add'}
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={handleDeleteCancel}
+        maxWidth="xs"
+        fullWidth
+      >
+        <DialogTitle sx={{ pb: 1 }}>
+          Delete Video?
+        </DialogTitle>
+        <DialogContent sx={{ pb: 2 }}>
+          <Typography>
+            Are you sure you want to delete "{videoToDelete?.title}"? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleDeleteCancel}
+            disabled={deleting === videoToDelete?.id}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDeleteConfirm}
+            color="error"
+            variant="contained"
+            disabled={deleting === videoToDelete?.id}
+            startIcon={deleting === videoToDelete?.id ? <CircularProgress size={20} /> : <Delete />}
+          >
+            {deleting === videoToDelete?.id ? 'Deleting...' : 'Delete'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Backdrop open={loading} sx={{ zIndex: 9999 }}>
+        <CircularProgress color="primary" />
+      </Backdrop>
     </Box>
+    </Fade>
   );
 };
 
