@@ -15,7 +15,7 @@ export const downloadVideo = async (video) => {
       throw new Error('No video URL found');
     }
 
-    const { platform, videoId } = getVideoInfo(videoUrl);
+    const { platform } = getVideoInfo(videoUrl);
     
     // Check if we can download directly (for direct video files)
     if (canDownloadDirectly(videoUrl)) {

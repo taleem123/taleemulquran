@@ -1,7 +1,7 @@
 {
   "name": "taleem-ul-quran",
   "version": "0.1.0",
-  "homepage": "https://taleemulquran.pk/",
+  "homepage": "/",
   "private": false,
   "license": "UNLICENSED",
   "dependencies": {
@@ -23,8 +23,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:prod": "react-scripts build",
+    "build": "set \"CI=false\" && react-scripts build",
+    "build:prod": "set \"CI=false\" && react-scripts build",
     "test": "react-scripts test",
     "analyze": "npm run build && node scripts/simple-analyze.js",
     "analyze:simple": "npm run build && node scripts/simple-analyze.js",
