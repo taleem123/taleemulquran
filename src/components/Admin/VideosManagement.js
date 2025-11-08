@@ -35,9 +35,41 @@ import { toast } from 'react-toastify';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { getThumbnailUrl } from '../../utils/videoPlatforms';
-import { validateVideoData, sanitizeInput } from '../../utils/validation';
+import { sanitizeInput } from '../../utils/validation';
 
 const VideosManagement = () => {
+  const validateAndTransformUrl = (url) => {
+    try {
+      const urlObj = new URL(url);
+      let isValid = false;
+      let transformedUrl = url;
+
+      // Support youtube.com and youtu.be
+      if (urlObj.hostname.includes('youtube.com') || urlObj.hostname.includes('youtu.be')) {
+        isValid = true;
+        // Extract video ID and standardize URL
+        const videoId = urlObj.hostname.includes('youtu.be') 
+          ? urlObj.pathname.slice(1)
+          : urlObj.searchParams.get('v');
+        if (videoId) {
+          transformedUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        }
+      }
+
+      return {
+        isValid,
+        url: transformedUrl,
+        message: isValid ? '' : 'Please enter a valid YouTube URL'
+      };
+    } catch {
+      return {
+        isValid: false,
+        url: url,
+        message: 'Please enter a valid URL'
+      };
+    }
+  };
+
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -109,21 +141,26 @@ const VideosManagement = () => {
   const handleSave = async () => {
     try {
       // Sanitize input data
+      // Validate URL format and transform if needed
+      const urlValidation = validateAndTransformUrl(formData.url.trim());
+      if (!urlValidation.isValid) {
+        toast.error(urlValidation.message);
+        return;
+      }
+
+      // Sanitize input data
       const sanitizedData = {
         title: sanitizeInput(formData.title),
         description: sanitizeInput(formData.description),
-        url: sanitizeInput(formData.url),
+        url: sanitizeInput(urlValidation.url), // Use transformed URL
         platform: formData.platform,
         category: formData.category,
         isActive: formData.isActive
       };
 
       // Validate data
-      const validation = validateVideoData(sanitizedData);
-      if (!validation.isValid) {
-        Object.values(validation.errors).forEach(error => {
-          toast.error(error);
-        });
+      if (!sanitizedData.title.trim()) {
+        toast.error('Title is required');
         return;
       }
 
@@ -177,7 +214,7 @@ const VideosManagement = () => {
       setDeleting(videoToDelete.id);
       // Optimistic update
       setVideos(prevVideos => prevVideos.filter(v => v.id !== videoToDelete.id));
-      await deleteDoc(doc(db, 'videos', videoToDelete.id));
+      await deleteDoc(doc(db, 'shortVideos', videoToDelete.id));
       toast.success('Video deleted successfully');
     } catch (error) {
       console.error('Error deleting video:', error);
@@ -376,24 +413,19 @@ const VideosManagement = () => {
                 required
                 placeholder="https://www.youtube.com/watch?v=..."
                 disabled={saving}
-                error={!formData.url.trim()}
-                helperText={!formData.url.trim() ? 'URL is required' : ''}
+                error={!formData.url.trim() || !validateAndTransformUrl(formData.url, formData.platform).isValid}
+                helperText={
+                  !formData.url.trim() 
+                    ? 'URL is required' 
+                    : validateAndTransformUrl(formData.url, formData.platform).message
+                }
               />
             </Grid>
+            {/* Platform is fixed to YouTube */}
             <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
-              <FormControl fullWidth disabled={saving}>
-                <InputLabel>Platform</InputLabel>
-                <Select
-                  value={formData.platform}
-                  onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                  label="Platform"
-                >
-                  <MenuItem value="youtube">YouTube</MenuItem>
-                  <MenuItem value="facebook">Facebook</MenuItem>
-                  <MenuItem value="tiktok">TikTok</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </Select>
-              </FormControl>
+              <Typography variant="body2" color="textSecondary" sx={{ mt: 2, mb: 1 }}>
+                Platform: <Chip label="YouTube" size="small" color="primary" />
+              </Typography>
             </Grid>
             <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
               <FormControl fullWidth disabled={saving}>
@@ -437,7 +469,12 @@ const VideosManagement = () => {
             onClick={handleSave}
             variant="contained"
             startIcon={saving ? <CircularProgress size={20} /> : <Save />}
-            disabled={saving || !formData.title.trim() || !formData.url.trim()}
+            disabled={
+              saving || 
+              !formData.title.trim() || 
+              !formData.url.trim() || 
+              !validateAndTransformUrl(formData.url, formData.platform).isValid
+            }
           >
             {saving ? 'Saving...' : editingVideo ? 'Update' : 'Add'}
           </Button>

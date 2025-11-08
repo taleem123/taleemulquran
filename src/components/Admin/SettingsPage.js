@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Typography,
@@ -86,7 +85,10 @@ const SettingsPage = () => {
           Taleem Ul Quran Admin Portal v1.0
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-          Manage your Quranic content and lessons efficiently.
+          Developed by the Taleem Ul Quran Team.
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+          For support, contact Usama Aslam at uxamaaxlam7@gmail.com
         </Typography>
       </Paper>
     </Box>

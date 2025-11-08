@@ -105,21 +105,35 @@ const LessonsManagement = () => {
     setOpenDialog(true);
   };
 
-  const validateUrl = (url, platform) => {
+  const validateAndTransformUrl = (url) => {
     try {
       const urlObj = new URL(url);
-      switch (platform) {
-        case 'youtube':
-          return urlObj.hostname.includes('youtube.com') || urlObj.hostname.includes('youtu.be');
-        case 'facebook':
-          return urlObj.hostname.includes('facebook.com') || urlObj.hostname.includes('fb.watch');
-        case 'tiktok':
-          return urlObj.hostname.includes('tiktok.com');
-        default:
-          return true;
+      let isValid = false;
+      let transformedUrl = url;
+
+      // Support youtube.com and youtu.be
+      if (urlObj.hostname.includes('youtube.com') || urlObj.hostname.includes('youtu.be')) {
+        isValid = true;
+        // Extract video ID and standardize URL
+        const videoId = urlObj.hostname.includes('youtu.be') 
+          ? urlObj.pathname.slice(1)
+          : urlObj.searchParams.get('v');
+        if (videoId) {
+          transformedUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        }
       }
+
+      return {
+        isValid,
+        url: transformedUrl,
+        message: isValid ? '' : 'Please enter a valid YouTube URL'
+      };
     } catch {
-      return false;
+      return {
+        isValid: false,
+        url: url,
+        message: 'Please enter a valid URL'
+      };
     }
   };
 
@@ -134,10 +148,14 @@ const LessonsManagement = () => {
         return;
       }
       
-      if (!validateUrl(formData.url, formData.platform)) {
-        toast.error(`Please enter a valid ${formData.platform} URL`);
+      const urlValidation = validateAndTransformUrl(formData.url);
+      if (!urlValidation.isValid) {
+        toast.error(urlValidation.message);
         return;
       }
+
+      // Use the transformed URL
+      formData.url = urlValidation.url;
 
       setSaving(true);
       const lessonData = {
@@ -418,31 +436,19 @@ const LessonsManagement = () => {
                 required
                 placeholder="https://www.youtube.com/watch?v=..."
                 disabled={saving}
-                error={!formData.url.trim() || !validateUrl(formData.url, formData.platform)}
+                error={!formData.url.trim() || !validateAndTransformUrl(formData.url, formData.platform).isValid}
                 helperText={
                   !formData.url.trim() 
                     ? 'URL is required' 
-                    : !validateUrl(formData.url, formData.platform)
-                      ? `Please enter a valid ${formData.platform} URL`
-                      : ''
+                    : validateAndTransformUrl(formData.url, formData.platform).message
                 }
               />
             </Grid>
+            {/* Platform is fixed to YouTube */}
             <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
-              <FormControl fullWidth>
-                <InputLabel>Platform</InputLabel>
-                <Select
-                  value={formData.platform}
-                  onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                  label="Platform"
-                  disabled={saving}
-                >
-                  <MenuItem value="youtube">YouTube</MenuItem>
-                  <MenuItem value="facebook">Facebook</MenuItem>
-                  <MenuItem value="tiktok">TikTok</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </Select>
-              </FormControl>
+              <Typography variant="body2" color="textSecondary" sx={{ mt: 2, mb: 1 }}>
+                Platform: <Chip label="YouTube" size="small" color="primary" />
+              </Typography>
             </Grid>
             <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6' } }}>
               <FormControl fullWidth>
@@ -488,7 +494,12 @@ const LessonsManagement = () => {
             variant="contained" 
             startIcon={saving ? <CircularProgress size={20} /> : <Save />} 
             color="secondary"
-            disabled={saving || !formData.title.trim() || !formData.url.trim() || !validateUrl(formData.url, formData.platform)}
+            disabled={
+              saving || 
+              !formData.title.trim() || 
+              !formData.url.trim() || 
+              !validateAndTransformUrl(formData.url, formData.platform).isValid
+            }
           >
             {saving ? (editingLesson ? 'Updating...' : 'Adding...') : (editingLesson ? 'Update' : 'Add')}
           </Button>
