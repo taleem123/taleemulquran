@@ -64,16 +64,55 @@ const RecentVideos = () => {
     }
   }, []);
 
-  const handleDownload = useCallback((video, e) => {
-    e.stopPropagation();
+  
+
+  const handleDownload = useCallback(async (video, e) => {
+    // Prevent parent click handlers and default navigation
+    e.preventDefault && e.preventDefault();
+    e.stopPropagation && e.stopPropagation();
+
     const videoUrl = video?.url || (video?.sources && video.sources[0]);
-    if (videoUrl) {
+    if (!videoUrl) return;
+
+    // Detect common streaming platforms and YouTube by ID
+    const youtubeId = getYouTubeId(videoUrl);
+    const streamingDomains = [
+      'youtube.com',
+      'youtu.be',
+      'vimeo.com',
+      'soundcloud.com'
+    ];
+
+    const isStreamingPlatform = youtubeId || streamingDomains.some(d => videoUrl.includes(d));
+
+    if (isStreamingPlatform) {
+      // For streaming platforms we open in a new tab so user can use platform controls
+      window.open(videoUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    // For direct file URLs try to fetch and force a download. This may fail due to CORS.
+    try {
+      const extensionMatch = videoUrl.match(/\.([a-z0-9]{2,5})(?:\?|$)/i);
+      const extension = extensionMatch ? extensionMatch[1] : 'mp4';
+      const safeTitle = (video.title || 'video').replace(/[\\/:*?"<>|]/g, '').trim() || 'video';
+      const filename = `${safeTitle}.${extension}`;
+
+      const resp = await fetch(videoUrl);
+      if (!resp.ok) throw new Error('Network response was not ok');
+      const blob = await resp.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
       const link = document.createElement('a');
-      link.href = videoUrl;
-      link.download = `${video.title || 'video'}.mp4`;
+      link.href = blobUrl;
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      // If fetch fails (likely CORS) fallback to opening the URL in a new tab
+      window.open(videoUrl, '_blank', 'noopener,noreferrer');
     }
   }, []);
 
@@ -217,7 +256,7 @@ const RecentVideos = () => {
           <div className="container">
             <SectionHeader 
               title="Short Videos"
-              subtitle="Latest short video explanations of Quranic teachings"
+              subtitle="Latest short videos from the Taleem ul Quran Tafseer"
             />
             <Box display="flex" justifyContent="center" py={4}>
               <CircularProgress />
@@ -235,7 +274,7 @@ const RecentVideos = () => {
           <div className="container">
             <SectionHeader 
               title="Short Videos"
-              subtitle="Latest short video explanations of Quranic teachings"
+              subtitle="Latest short videos from the Taleem ul Quran Tafseer"
             />
             <Alert severity="error" sx={{ mt: 2 }}>
               Failed to load recent videos. Please try again later.
@@ -252,7 +291,7 @@ const RecentVideos = () => {
         <div className="container">
         <SectionHeader 
           title="Short Videos"
-          subtitle="Latest short video explanations of Quranic teachings"
+          subtitle="Latest short videos from the Taleem ul Quran Tafseer"
         />
 
         {/* Videos Grid */}
@@ -261,9 +300,9 @@ const RecentVideos = () => {
             {recentVideos.length === 0 ? (
               <Grid size={12}>
                 <Box textAlign="center" py={4}>
-                  <Typography variant="h6" color="text.secondary">
+                  {/* <Typography variant="h6" color="text.secondary">
                     No recent videos available
-                  </Typography>
+                  </Typography> */}
                 </Box>
               </Grid>
             ) : (

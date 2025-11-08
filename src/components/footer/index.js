@@ -15,11 +15,9 @@ const Footer = (props) => {
           <div className="container">
             <div className="row">
               {/* About Section */}
-              <div className="col col-lg-3 col-md-6 col-12">
+              <div className="col col-lg-4 col-md-6 col-12">
                 <div className="widget about-widget">
-                  <div className="col col-lg-3 col-md-6 col-12">
                     <h3>Taleem Ul Quran</h3>
-                  </div>
                   <p>
                     Your comprehensive platform for learning the Holy Quran with detailed tafseer,
                     video lessons, and short educational content. Join thousands of students
@@ -112,7 +110,7 @@ const Footer = (props) => {
                     <li><Link to="/" onClick={ClickHandler}>Home</Link></li>
                     <li><Link to="/about" onClick={ClickHandler}>About Us</Link></li>
                     <li><Link to="/contact" onClick={ClickHandler}>Contact</Link></li>
-                    <li><Link to="/admin" onClick={ClickHandler}>Admin</Link></li>
+                    <li><Link to="/admin" target='_blank' onClick={ClickHandler}>Admin</Link></li>
                   </ul>
                 </div>
               </div>
@@ -158,7 +156,7 @@ const Footer = (props) => {
         <div className="wpo-lower-footer">
           <div className="container">
             <div className="row">
-              <div className="col col-lg-6 col-md-6 col-12">
+              <div className="col-12">
                 <p className="copyright">
                   &copy; {currentYear} <b>Taleem Ul Quran</b>. All rights reserved
                 </p>

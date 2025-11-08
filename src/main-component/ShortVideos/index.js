@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useCallback, useMemo } from 'react';
+import { Fragment, useState, useMemo } from 'react';
 
 import {
   Typography,
@@ -90,7 +90,7 @@ const ShortVideos = () => {
             <div className="container">
               <SectionHeader 
               title="Short Videos"
-              subtitle="All video explanations and teachings of the Holy Quran"
+              subtitle="All short videos from the Taleem ul Quran Tafseer video lectures"
               />
               <Box display="flex" justifyContent="center" py={4}>
                 <CircularProgress />
@@ -113,7 +113,7 @@ const ShortVideos = () => {
             <div className="container">
               <SectionHeader 
               title="Short Videos"
-              subtitle="All video explanations and teachings of the Holy Quran"
+              subtitle="All short videos from the Taleem ul Quran Tafseer video lectures"
               />
               <Alert severity="error" sx={{ mt: 2 }}>
                 Failed to load videos. Please try again later.
@@ -135,7 +135,7 @@ const ShortVideos = () => {
         <div className="container">
           <SectionHeader 
               title="Short Videos"
-              subtitle="All video explanations and teachings of the Holy Quran"
+              subtitle="All short videos from the Taleem ul Quran Tafseer video lectures"
           />
 
           {/* Search and Filter Bar */}
